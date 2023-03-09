@@ -1,0 +1,49 @@
+local status_ok, neogen = pcall(require, "neogen")
+if not status_ok then
+	return
+end
+
+neogen.setup({
+	enabled = true,
+	languages = {
+		python = {
+			template = {
+				annotation_convention = "reST",
+			},
+		},
+	},
+})
+
+local opts = { noremap = true, silent = true }
+
+vim.keymap.set(
+	"n",
+	"<Leader>nc",
+	":lua require('neogen').generate({ type = 'class' })<CR>",
+	opts
+)
+
+vim.keymap.set(
+	"n",
+	"<Leader>nf",
+	":lua require('neogen').generate({ type = 'func' })<CR>",
+	opts
+)
+
+vim.keymap.set(
+	"n",
+	"<Leader>nn",
+	":lua require('neogen').generate({ type = 'file' })<CR>",
+	opts
+)
+
+vim.keymap.set(
+	"n",
+	"<Leader>nt",
+	":lua require('neogen').generate({ type = 'type' })<CR>",
+	opts
+)
+
+vim.keymap.set("i", "<C-l>", ":lua require('neogen').jump_next<CR>", opts)
+
+vim.keymap.set("i", "<C-h>", ":lua require('neogen').jump_prev<CR>", opts)

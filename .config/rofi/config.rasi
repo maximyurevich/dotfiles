@@ -1,0 +1,8 @@
+configuration {
+  modi: "window,drun,ssh,combi,filebrowser";
+  show-icons: true;
+  font: "JetBrainsMono NF 16";
+  combi-modi: "window,drun,ssh,filebrowser";
+  matching: "fuzzy";
+}
+@theme "gruvbox-light"

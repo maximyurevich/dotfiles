@@ -1,0 +1,109 @@
+icons_format = "{icon}"
+
+[theme]
+theme = "slick"
+[theme.overrides]
+info_bg = "#285577"
+
+[icons]
+icons = "material-nf"
+
+[[block]]
+block = "memory"
+format = " $icon $mem_used.eng(w:4) "
+format_alt = " $icon_swap $swap_used.eng(w:4) "
+
+[[block]]
+block = "focused_window"
+[block.format]
+full = " $title.str(max_w:50) |"
+short = " $title.str(max_w:32) |"
+
+[[block]]
+block = "custom"
+json = true
+command = "~/.local/bin/backlight.sh"
+interval = 1
+[[block.click]]
+button = "up"
+cmd = "xbacklight -inc 5"
+[[block.click]]
+button = "down"
+cmd = "xbacklight -dec 5"
+[[block.click]]
+button = "left"
+cmd = "xbacklight -set 100"
+[[block.click]]
+button = "right"
+cmd = "xbacklight -set 10"
+
+[[block]]
+block = "sound"
+driver = "pulseaudio"
+max_vol = 100
+[block.icons_overrides]
+volume = ["\U000f057f", "\U000f0580", "\U000f057e"]
+volume_muted = " \uf466"
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
+
+[[block]]
+block = "pomodoro"
+format = " $icon { $message |}"
+notify_cmd = "notify-send '{msg}'"
+blocking_cmd = true
+
+[[block]]
+block = "time"
+interval = 60
+[block.format]
+full = " $icon $timestamp.datetime(f:'%a %Y-%m-%d %R', l:ru_RU) "
+short = " $icon $timestamp.datetime(f:%R) "
+
+[[block]]
+block = "disk_space"
+
+[[block]]
+block = "notify"
+format = " $icon {($notification_count.eng(w:1)) |}"
+[block.icons_overrides]
+bell = ["\U000f009c"]
+bell-slash = ["\U000f009b"]
+
+[[block]]
+block = "custom"
+command = 'xkb-switch -p'
+interval = 1
+
+[[block]]
+block = "battery"
+[block.icons_overrides]
+bat = [
+  "\U000f007a",
+  "\U000f007b",
+  "\U000f007c",
+  "\U000f007d",
+  "\U000f007e",
+  "\U000f007f",
+  "\U000f0080",
+  "\U000f0081",
+  "\U000f0082",
+  "\U000f0079",
+]
+bat_charging = "\U000f0084"
+
+[[block]]
+block = "menu"
+text = " \uf011 "
+[[block.items]]
+display = " -&gt;   Sleep   &lt;-"
+cmd = "systemctl suspend"
+[[block.items]]
+display = " -&gt; Power Off &lt;-"
+cmd = "poweroff"
+confirm_msg = " Are you sure you want to power off? "
+[[block.items]]
+display = " -&gt;  Reboot   &lt;-"
+cmd = "reboot"
+confirm_msg = " Are you sure you want to reboot? "

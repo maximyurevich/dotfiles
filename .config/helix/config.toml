@@ -1,0 +1,43 @@
+theme = "gruvbox"
+
+[editor]
+line-number = "relative"
+idle-timeout = 0
+auto-pairs = {}
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.statusline]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+left = [
+  "mode",
+  "separator",
+  "file-name",
+  "separator",
+  "spacer",
+  "file-modification-indicator",
+]
+right = [
+  "diagnostics",
+  "file-type",
+  "file-line-ending",
+  "position",
+  "file-encoding",
+]
+separator = "\ue0b1"
+
+[editor.whitespace.render]
+space = "all"
+tab = "all"
+newline = "none"
+
+[editor.soft-wrap]
+enable = true
