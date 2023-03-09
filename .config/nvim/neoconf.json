@@ -1,0 +1,7 @@
+{
+  "lspconfig": {
+    "pyright": {
+      "python.analysis.typeCheckingMode": "off"
+    }
+  }
+}

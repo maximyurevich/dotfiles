@@ -1,0 +1,109 @@
+version: 2
+tools:
+  golines: &golines
+    format-command: golines
+    format-stdin: true
+  google-java-format: &google-java-format
+    format-command: google-java-format -
+    format-stdin: true
+  eslint_d_format: &eslint_d_format
+    format-command: eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}
+    format-stdin: true
+  fish_indent: &fish_indent
+    format-command: fish_indent
+    format-stdin: true
+  fish: &fish
+    lint-command: fish --no-execute ${INPUT}
+  sh-shellcheck: &sh-shellcheck
+    lint-command: shellcheck -f gcc -x
+    lint-source: shellcheck
+    lint-formats:
+      - '%f:%l:%c: %trror: %m'
+      - '%f:%l:%c: %tarning: %m'
+      - '%f:%l:%c: %tote: %m'
+  sh-shfmt: &sh-shfmt
+    format-command: shfmt -ci -s -bn
+    format-stdin: true
+  stylua: &stylua
+    format-command: stylua -
+    format-stdin: true
+    format-can-range: true
+    root-markers: [stylua.toml, .stylua.toml]
+  python-ruff: &python-ruff
+    format-command: ruff --fix -e -n --stdin-filename ${INPUT}
+    format-stdin: true
+    require-marker: true
+    root-markers: [ruff.toml, .ruff.toml, pyproject.toml]
+  python-mypy: &python-mypy
+    lint-command: mypy --show-column-numbers
+    lint-formats:
+      - '%f:%l:%c: %trror: %m'
+      - '%f:%l:%c: %tarning: %m'
+      - '%f:%l:%c: %tote: %m'
+    require-marker: true
+    root-markers: [mypy.ini, .mypy.ini, pyproject.toml]
+  gitcommit-gitlint: &gitcommit-gitlint
+    lint-command: gitlint --config /home/maxim/.gitlint
+    lint-stdin: true
+    lint-formats: ['%l: %m: "%r"', '%l: %m', '%f:%l:%c: %m']
+  pandoc-markdown-format: &pandoc-markdown-format
+    format-command: pandoc -f markdown -t gfm -sp --tab-stop=2
+    format-stdin: true
+  pandoc-rst-format: &pandoc-rst-format
+    format-command: pandoc -f rst -t rst -s --columns=79
+    format-stdin: true
+  prettier: &prettier
+    format-command: npx --no-install prettier --stdin --stdin-filepath ${INPUT}
+    format-stdin: true
+    root-markers:
+      - .prettierrc
+      - .prettierrc.json
+      - .prettierrc.js
+      - .prettierrc.yml
+      - .prettierrc.yaml
+      - .prettierrc.json5
+      - .prettierrc.mjs
+      - .prettierrc.cjs
+      - .prettierrc.toml
+  yamlfix: &yamlfix
+    format-command: yamlfix -
+    format-stdin: true
+  yaml-yamllint: &yaml-yamllint
+    lint-command: yamllint -f parsable -
+    lint-stdin: true
+languages:
+  go:
+    - <<: *golines
+  java:
+    - <<: *google-java-format
+  javascript:
+    - <<: *eslint_d_format
+  typescript:
+    - <<: *eslint_d_format
+  javascriptreact:
+    - <<: *eslint_d_format
+  typescriptreact:
+    - <<: *eslint_d_format
+  fish:
+    - <<: *fish_indent
+    - <<: *fish
+  astro:
+    - <<: *prettier
+    - <<: *eslint_d_format
+  sh:
+    - <<: *sh-shfmt
+    - <<: *sh-shellcheck
+  lua:
+    - <<: *stylua
+  python:
+    - <<: *python-ruff
+    - <<: *python-mypy
+  gitcommit:
+    - <<: *gitcommit-gitlint
+  markdown:
+    - <<: *pandoc-markdown-format
+  rst:
+    - <<: *pandoc-rst-format
+  yaml:
+    - <<: *yamlfix
+    - <<: *yaml-yamllint
