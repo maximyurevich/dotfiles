@@ -1,0 +1,80 @@
+[theme]
+theme = "slick"
+[theme.overrides]
+info_bg = "#285577"
+
+[icons]
+icons = "material-nf"
+
+[[block]]
+block = "music"
+format = " $icon $prev $combo.str(max_w:25,rot_interval:0.5) $play $next |"
+seek_step_secs = 5
+player = ["ncspot", "spotifyd"]
+[[block.click]]
+button = "up"
+action = "seek_forward"
+[[block.click]]
+button = "down"
+action = "seek_backward"
+[[block.click]]
+button = "left"
+action = "play_pause"
+
+[[block]]
+block = "memory"
+format = " $icon $mem_used.eng(w:1) "
+interval = 30
+warning_mem = 70
+critical_mem = 90
+
+[[block]]
+block = "sound"
+driver = "auto"
+max_vol = 100
+headphones_indicator = true
+
+[[block]]
+block = "backlight"
+missing_format = ""
+
+[[block]]
+block = "pomodoro"
+notify_cmd = "notify-send '{msg}'"
+blocking_cmd = false
+
+[[block]]
+block = "keyboard_layout"
+driver = "xkbswitch"
+interval = 1
+
+[[block]]
+block = "time"
+interval = 60
+[block.format]
+full = " $icon $timestamp.datetime(f:'%a %Y-%m-%d %R %Z', l:ru_RU) "
+short = " $timestamp.datetime(locale:'ru_RU') "
+
+[[block]]
+block = "battery"
+format = " $icon $percentage "
+driver = "upower"
+
+[[block]]
+block = "notify"
+format = " $icon {($notification_count.eng(w:1)) |}"
+
+[[block]]
+block = "menu"
+text = " \uf011 "
+[[block.items]]
+display = " -&gt;   Sleep   &lt;-"
+cmd = "systemctl suspend"
+[[block.items]]
+display = " -&gt; Power Off &lt;-"
+cmd = "poweroff"
+confirm_msg = "Are you sure you want to power off?"
+[[block.items]]
+display = " -&gt;  Reboot   &lt;-"
+cmd = "reboot"
+confirm_msg = "Are you sure you want to reboot?"
