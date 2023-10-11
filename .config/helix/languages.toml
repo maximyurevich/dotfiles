@@ -137,6 +137,16 @@ languages = { lua = [
   { formatCommand = "pandoc -f markdown -t gfm -sp --tab-stop=2 --columns=79", formatStdin = true },
 ], rst = [
   { formatCommand = "pandoc -f rst -t rst -s --columns=79", formatStdin = true },
+], vue = [
+  { formatCommand = "rustywind --stdin", formatStdin = true },
+  { formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}", formatStdin = true, requireMarker = true, rootMarkers = [
+    ".eslintrc",
+    ".eslintrc.js",
+    ".eslintrc.cjs",
+    ".eslintrc.yaml",
+    ".eslintrc.yml",
+    ".eslintrc.json",
+  ] },
 ] }
 documentFormatting = true
 
@@ -964,7 +974,19 @@ injection-regex = "vue"
 file-types = ["vue"]
 roots = ["vue.config.js", "vue.config.ts", "nuxt.config.js", "nuxt.config.ts"]
 indent = { tab-width = 2, unit = "  " }
-language-servers = ["vuels"]
+language-servers = [
+  "emmetls",
+  { name = "eslint", only-features = [
+    "diagnostics",
+    "inlay-hints",
+    "code-action",
+  ] },
+  { name = "efm-language-server", only-features = [
+    "format",
+  ] },
+  "tailwindcss",
+  "vuels",
+]
 
 [[grammar]]
 name = "vue"
