@@ -37,8 +37,6 @@ fish_add_path $HOME/.cargo/bin
 fish_add_path ~/.deno/bin/
 fish_add_path $HOME/go/bin
 fish_add_path $FLYCTL_INSTALL/bin
-fish_add_path $HOME/.rye/env
-fish_add_path $HOME/.rye/shims
 fish_add_path $HOME/.erg/bin
 fish_add_path $HOME/go/bin
 
