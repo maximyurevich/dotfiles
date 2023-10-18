@@ -61,10 +61,6 @@ vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts)
 vim.keymap.set("n", "<leader>fb", builtin.buffers, opts)
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, opts)
 
-vim.keymap.set("n", "<leader>f", function()
-	require("telescope").builtins.find_files()
-end)
-
 vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>", opts)
 
 vim.keymap.set(
