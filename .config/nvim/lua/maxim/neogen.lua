@@ -4,6 +4,7 @@ if not status_ok then
 end
 
 neogen.setup({
+	snippet_engine = "luasnip",
 	enabled = true,
 	languages = {
 		python = {
@@ -23,12 +24,7 @@ vim.keymap.set(
 	opts
 )
 
-vim.keymap.set(
-	"n",
-	"<Leader>nf",
-	":lua require('neogen').generate({ type = 'func' })<CR>",
-	opts
-)
+vim.g.doge_mapping = "<Leader>nf"
 
 vim.keymap.set(
 	"n",
@@ -43,7 +39,3 @@ vim.keymap.set(
 	":lua require('neogen').generate({ type = 'type' })<CR>",
 	opts
 )
-
-vim.keymap.set("i", "<C-l>", ":lua require('neogen').jump_next<CR>", opts)
-
-vim.keymap.set("i", "<C-h>", ":lua require('neogen').jump_prev<CR>", opts)

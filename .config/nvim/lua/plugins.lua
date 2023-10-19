@@ -295,6 +295,10 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{
+		"kkoomen/vim-doge",
+		build = ":call doge#install()",
+	},
+	{
 		"gbprod/yanky.nvim",
 		config = true,
 	},
