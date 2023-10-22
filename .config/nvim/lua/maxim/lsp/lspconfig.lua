@@ -32,7 +32,7 @@ if not lsp_signature_status_ok then
 end
 
 local clients =
-	{ "taplo", "stylelint_lsp", "gopls", "lemminx", "standardrb", "jsonls" }
+	{ "taplo", "stylelint_lsp", "gopls", "lemminx", "standardrb", "jsonls", "htmx" }
 
 local on_attach = function(client, bufnr)
 	for _, c in ipairs(clients) do
@@ -303,6 +303,7 @@ local servers = {
 	"unocss",
 	"vimls",
 	"standardrb",
+  "htmx"
 }
 
 local configs = require("lspconfig.configs")
