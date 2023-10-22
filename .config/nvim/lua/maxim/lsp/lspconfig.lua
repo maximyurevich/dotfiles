@@ -160,6 +160,12 @@ lspconfig.jsonls.setup({
 	},
 })
 
+lspconfig.sorbet.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	single_file_support = true,
+})
+
 lspconfig.solargraph.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
@@ -277,7 +283,7 @@ lspconfig.volar.setup({
 	}),
 	init_options = {
 		typescript = {
-			tsdk = "/usr/local/lib/node_modules/typescript/lib",
+			tsdk = os.getenv("HOME").."/.npm/lib/node_modules/typescript/lib",
 		},
 	},
 })
@@ -350,6 +356,8 @@ if not lspkind_status_ok then
 	return
 end
 
+local neogen = require("neogen")
+
 cmp.setup({
 	formatting = {
 		format = lspkind.cmp_format({
@@ -389,6 +397,8 @@ cmp.setup({
 				cmp.select_next_item()
 			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
+			elseif neogen.jumpable() then
+				neogen.jump_next()
 			else
 				fallback()
 			end
@@ -398,6 +408,8 @@ cmp.setup({
 				cmp.select_prev_item()
 			elseif luasnip.jumpable(-1) then
 				luasnip.jump(-1)
+			elseif neogen.jumpable(true) then
+				neogen.jump_prev()
 			else
 				fallback()
 			end

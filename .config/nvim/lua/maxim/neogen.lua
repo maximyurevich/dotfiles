@@ -4,7 +4,6 @@ if not status_ok then
 end
 
 neogen.setup({
-	snippet_engine = "luasnip",
 	enabled = true,
 	languages = {
 		python = {

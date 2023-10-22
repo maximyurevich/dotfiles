@@ -303,14 +303,6 @@ return {
 		config = true,
 	},
 	{
-		"gbprod/cutlass.nvim",
-		config = function()
-			require("cutlass").setup({
-				exclude = { "ns", "nS" },
-			})
-		end,
-	},
-	{
 		"AckslD/nvim-neoclip.lua",
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
@@ -332,9 +324,6 @@ return {
 	{
 		"kylechui/nvim-surround",
 		config = true,
-	},
-	{
-		"jbyuki/instant.nvim",
 	},
 	{
 		"mickael-menu/zk-nvim",

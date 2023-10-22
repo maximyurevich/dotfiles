@@ -21,6 +21,7 @@ vim.g.ale_fixers = {
 	html = { "rustywind" },
 	sql = { "sqlfluff" },
 	svelte = { "prettier", "rustywind" },
+	vue = { "prettier", "rustywind" }
 }
 
 vim.g.ale_linters = {
