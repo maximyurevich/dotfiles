@@ -46,6 +46,8 @@ set sponge_allow_previously_successful false
 status --is-interactive
 rbenv init - fish | source
 
+set -Ux FZF_DEFAULT_COMMAND "find . \! \( -type d -path ./.git -prune \) \! -type d -printf ''%P\n''"
+
 set -l color00 '#282828'
 set -l color01 '#3c3836'
 set -l color02 '#504945'
