@@ -303,6 +303,20 @@ return {
 		config = true,
 	},
 	{
+		"gbprod/cutlass.nvim",
+		config = function()
+			require("cutlass").setup({
+				cut_key = "m",
+				registers = {
+					select = "s",
+					delete = "d",
+					change = "c",
+				},
+				exclude = { "ns", "nS" },
+			})
+		end,
+	},
+	{
 		"AckslD/nvim-neoclip.lua",
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
