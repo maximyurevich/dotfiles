@@ -3,9 +3,19 @@
 
 [language-server]
 
+astro = { command = "astro-ls", args = [
+  "--stdio",
+], config = { typescript = { tsdk = "/home/maxim/.npm/lib/node_modules/typescript/lib" } } }
 awk-language-server = { command = "awk-language-server" }
 bash-language-server = { command = "bash-language-server", args = ["start"] }
+bufls = { command = "bufls", args = ["serve"] }
 clangd = { command = "clangd", args = ["background-index", "--clang-tidy"] }
+cssmodules-language-server = { command = "cssmodules-language-server" }
+graphql-language-service = { command = "graphql-lsp", args = [
+  "server",
+  "-m",
+  "stream",
+] }
 dart = { command = "dart", args = ["language-server", "--client-id=helix"] }
 docker-langserver = { command = "docker-langserver", args = ["--stdio"] }
 jdtls = { command = "jdtls" }
@@ -14,9 +24,15 @@ zk = { command = "zk", args = ["lsp"], config = {} }
 pyright = { command = "pyright-langserver", args = ["--stdio"], config = {} }
 ruff-lsp = { command = "ruff-lsp" }
 solargraph = { command = "solargraph", args = ["stdio"] }
+sorbet = { command = "bundle", args = ["exec", "srb", "tc", "--lsp"] }
 stylelint-lsp = { command = "stylelint-lsp", args = [
   "--stdio",
-], config = { stylelintplus = { autoFixOnFormat = true, autoFuxOnSave = true } } }
+], config = { stylelintplus = { autoFixOnFormat = true, autoFixOnSave = true } } }
+sql-language-server = { command = "sql-language-server", args = [
+  "up",
+  "--method",
+  "stdio",
+] }
 taplo = { command = "taplo", args = ["lsp", "stdio"], config = {} }
 emmetls = { command = "emmet-language-server", args = ["--stdio"], config = {} }
 vscode-css-language-server = { command = "vscode-css-language-server", args = [
@@ -30,7 +46,8 @@ vscode-json-language-server = { command = "vscode-json-language-server", args = 
 ], config = { provideFormatter = true } }
 vuels = { command = "vue-language-server", args = [
   "--stdio",
-], config = { typescript = { tsdk = "/usr/local/lib/node_modules/typescript/lib" } } }
+], config = { typescript = { tsdk = "/home/maxim/.npm/lib/node_modules/typescript/lib" } } }
+lemminx = { command = "lemminx" }
 yaml-language-server = { command = "yaml-language-server", args = ["--stdio"] }
 
 [language-server.tailwindcss]
@@ -139,6 +156,38 @@ languages = { lua = [
   { formatCommand = "pandoc -f rst -t rst -s --columns=79", formatStdin = true },
 ], vue = [
   { formatCommand = "rustywind --stdin", formatStdin = true },
+  { formatCommand = "npx --no-install prettier --stdin --stdin-filepath ${INPUT}", formatStdin = true, rootMarkers = [
+    ".prettierrc",
+    ".prettierrc.json",
+    ".prettierrc.js",
+    ".prettierrc.yml",
+    ".prettierrc.yaml",
+    ".prettierrc.json5",
+    ".prettierrc.mjs",
+    ".prettierrc.cjs",
+    ".prettierrc.toml",
+  ] },
+  { formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}", formatStdin = true, requireMarker = true, rootMarkers = [
+    ".eslintrc",
+    ".eslintrc.js",
+    ".eslintrc.cjs",
+    ".eslintrc.yaml",
+    ".eslintrc.yml",
+    ".eslintrc.json",
+  ] },
+], astro = [
+  { formatCommand = "rustywind --stdin", formatStdin = true },
+  { formatCommand = "npx --no-install prettier --stdin --stdin-filepath ${INPUT}", formatStdin = true, rootMarkers = [
+    ".prettierrc",
+    ".prettierrc.json",
+    ".prettierrc.js",
+    ".prettierrc.yml",
+    ".prettierrc.yaml",
+    ".prettierrc.json5",
+    ".prettierrc.mjs",
+    ".prettierrc.cjs",
+    ".prettierrc.toml",
+  ] },
   { formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}", formatStdin = true, requireMarker = true, rootMarkers = [
     ".eslintrc",
     ".eslintrc.js",
@@ -318,6 +367,20 @@ indent = { tab-width = 2, unit = "  " }
 [[grammar]]
 name = "awk"
 source = { git = "https://github.com/Beaglefoot/tree-sitter-awk", rev = "a799bc5da7c2a84bc9a06ba5f3540cf1191e4ee3" }
+
+[[language]]
+name = "protobuf"
+scope = "source.proto"
+injection-regex = "protobuf"
+file-types = ["proto"]
+language-servers = ["bufls", "pbkit"]
+roots = []
+comment-token = "//"
+indent = { tab-width = 2, unit = "  " }
+
+[[grammar]]
+name = "protobuf"
+source = { git = "https://github.com/yusdacra/tree-sitter-protobuf", rev = "19c211a01434d9f03efff99f85e19f967591b175" }
 
 [[language]]
 name = "fish"
@@ -619,6 +682,7 @@ language-servers = [
   ] },
   "tailwindcss",
   "typescript-language-server",
+  "cssmodules-language-server",
 ]
 indent = { tab-width = 2, unit = "  " }
 grammar = "javascript"
@@ -669,6 +733,7 @@ language-servers = [
   ] },
   "tailwindcss",
   "typescript-language-server",
+  "cssmodules-language-server",
 ]
 indent = { tab-width = 2, unit = "  " }
 auto-format = true
@@ -803,7 +868,7 @@ file-types = [
 shebangs = ["ruby"]
 roots = []
 comment-token = "#"
-language-servers = ["solargraph"]
+language-servers = ["solargraph", "sorbet"]
 indent = { tab-width = 2, unit = "  " }
 formatter = { command = "standardrb", args = [
   "--fix",
@@ -949,7 +1014,6 @@ file-types = ["svelte"]
 roots = [".git"]
 indent = { tab-width = 2, unit = "  " }
 language-servers = [
-  "emmetls",
   { name = "eslint", only-features = [
     "diagnostics",
     "inlay-hints",
@@ -962,6 +1026,12 @@ language-servers = [
   "svelteserver",
 ]
 auto-format = true
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
 
 [[grammar]]
 name = "svelte"
@@ -975,7 +1045,7 @@ file-types = ["vue"]
 roots = ["vue.config.js", "vue.config.ts", "nuxt.config.js", "nuxt.config.ts"]
 indent = { tab-width = 2, unit = "  " }
 language-servers = [
-  "emmetls",
+  "vuels",
   { name = "eslint", only-features = [
     "diagnostics",
     "inlay-hints",
@@ -985,8 +1055,14 @@ language-servers = [
     "format",
   ] },
   "tailwindcss",
-  "vuels",
 ]
+auto-format = true
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
 
 [[grammar]]
 name = "vue"
@@ -1193,6 +1269,19 @@ scope = "source.graphql"
 injection-regex = "graphql"
 file-types = ["gql", "graphql", "graphqls"]
 roots = []
+language-servers = ["graphql-language-service"]
+indent = { tab-width = 2, unit = "  " }
+
+[[grammar]]
+name = "graphql"
+source = { git = "https://github.com/bkegley/tree-sitter-graphql", rev = "5e66e961eee421786bdda8495ed1db045e06b5fe" }
+
+[[language]]
+name = "graphql"
+scope = "source.graphql"
+injection-regex = "graphql"
+file-types = ["gql", "graphql", "graphqls"]
+roots = []
 indent = { tab-width = 2, unit = "  " }
 
 [[grammar]]
@@ -1216,6 +1305,7 @@ roots = []
 comment-token = "--"
 indent = { tab-width = 4, unit = "    " }
 injection-regex = "sql"
+language-servers = ["sql-language-server"]
 
 [[grammar]]
 name = "sql"
@@ -1264,6 +1354,20 @@ injection-regex = "astro"
 file-types = ["astro"]
 roots = []
 indent = { tab-width = 2, unit = "  " }
+language-servers = [
+  "astro",
+  { name = "eslint", only-features = [
+    "diagnostics",
+    "inlay-hints",
+    "code-action",
+  ] },
+  { name = "efm-language-server", only-features = [
+    "format",
+  ] },
+  "tailwindcss",
+]
+auto-format = true
+
 
 [[grammar]]
 name = "astro"
@@ -1287,6 +1391,8 @@ file-types = [
 ]
 indent = { tab-width = 2, unit = "  " }
 roots = []
+language-servers = ["lemminx"]
+auto-format = true
 
 [language.auto-pairs]
 '(' = ')'
