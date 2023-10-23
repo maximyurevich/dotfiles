@@ -31,8 +31,15 @@ if not lsp_signature_status_ok then
 	return
 end
 
-local clients =
-	{ "taplo", "stylelint_lsp", "gopls", "lemminx", "standardrb", "jsonls", "htmx" }
+local clients = {
+	"taplo",
+	"stylelint_lsp",
+	"gopls",
+	"lemminx",
+	"standardrb",
+	"jsonls",
+	"htmx",
+}
 
 local on_attach = function(client, bufnr)
 	for _, c in ipairs(clients) do
@@ -283,7 +290,7 @@ lspconfig.volar.setup({
 	}),
 	init_options = {
 		typescript = {
-			tsdk = os.getenv("HOME").."/.npm/lib/node_modules/typescript/lib",
+			tsdk = os.getenv("HOME") .. "/.npm/lib/node_modules/typescript/lib",
 		},
 	},
 })
@@ -297,13 +304,15 @@ local servers = {
 	"esbonio",
 	"graphql",
 	"golangci_lint_ls",
+	"nginx_language_server",
 	"marksman",
 	"sqlls",
 	"svelte",
 	"unocss",
 	"vimls",
 	"standardrb",
-  "htmx"
+	"htmx",
+  "bufls"
 }
 
 local configs = require("lspconfig.configs")
@@ -318,11 +327,6 @@ configs.bunls = {
 		settings = {},
 	},
 }
-
-lspconfig.bunls.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
