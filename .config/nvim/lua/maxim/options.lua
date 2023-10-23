@@ -10,7 +10,6 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.o.background = "dark"
 vim.g.scrollview_excluded_filetypes = { "NvimTree" }
-vim.g.instant_username = "maximyurevich"
 vim.opt.conceallevel = 2
 vim.opt.concealcursor = "nc"
 vim.opt.shellslash = true
@@ -18,6 +17,5 @@ vim.opt.foldenable = false
 vim.opt.formatoptions:remove({ "c", "r", "o" })
 vim.o.sessionoptions =
 	"blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-vim.opt.showtabline = 0
 
 vim.cmd("au BufNewFile,BufRead PKGBUILD set filetype=PKGBUILD")
