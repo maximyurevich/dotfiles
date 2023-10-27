@@ -3,6 +3,9 @@ tools:
   vim-vint: &vim-vint
     lint-command: vint --enable-neovim --style-problem ${INPUT}
     lint-formats: ['%f:%l:%c: %m']
+  eslint_d_format: &eslint_d_format
+    format-command: eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}
+    format-stdin: true
   fish_indent: &fish_indent
     format-command: fish_indent
     format-stdin: true
@@ -71,6 +74,14 @@ tools:
     lint-command: yamllint -f parsable -
     lint-stdin: true
 languages:
+  javascript:
+    - <<: *eslint_d_format
+  typescript:
+    - <<: *eslint_d_format
+  javascriptreact:
+    - <<: *eslint_d_format
+  typescriptreact:
+    - <<: *eslint_d_format
   fish:
     - <<: *fish_indent
     - <<: *fish
