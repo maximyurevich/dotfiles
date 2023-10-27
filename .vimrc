@@ -831,7 +831,6 @@ let g:airline_extensions = [
     \   'po',
     \   'quickfix',
     \   'searchcount',
-    \   'vim9lsp',
     \   'wordcount'
     \ ]
 
