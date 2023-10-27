@@ -172,7 +172,7 @@ if executable('ruff-lsp')
         \   'name': 'ruff-lsp',
         \   'filetype': 'python',
         \   'path': 'ruff-lsp',
-        \   'args': ['--stdio'],
+        \   'args': [],
         \   'runIfSearch': ['.ruff.toml', 'ruff.toml']
         \ }])
 endif 
