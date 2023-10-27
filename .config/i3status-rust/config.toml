@@ -20,22 +20,7 @@ full = " $title.str(max_w:50) |"
 short = " $title.str(max_w:32) |"
 
 [[block]]
-block = "custom"
-json = true
-command = "~/.local/bin/backlight.sh"
-interval = 1
-[[block.click]]
-button = "up"
-cmd = "xbacklight -inc 5"
-[[block.click]]
-button = "down"
-cmd = "xbacklight -dec 5"
-[[block.click]]
-button = "left"
-cmd = "xbacklight -set 100"
-[[block.click]]
-button = "right"
-cmd = "xbacklight -set 10"
+block = "backlight"
 
 [[block]]
 block = "sound"
