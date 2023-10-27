@@ -196,7 +196,13 @@ languages = { lua = [
     ".eslintrc.yml",
     ".eslintrc.json",
   ] },
-] }
+], sh = [
+  { lintCommand = "shellcheck -f gcc -x", lintSource = "shellcheck", lintFormats = [
+    "%f:%l:%c: %trror: %m",
+    "%f:%l:%c: %tarning: %m",
+    "%f:%l:%c: %tote: %m",
+  ] },
+], yaml = { lintCommand = "yamllint -f parsable -", lintStdin = true } }
 documentFormatting = true
 
 
@@ -390,6 +396,11 @@ file-types = ["fish"]
 shebangs = ["fish"]
 roots = []
 comment-token = "#"
+language-servers = [
+  { name = "efm-language-server", only-features = [
+    "diagnostics",
+  ] },
+]
 indent = { tab-width = 4, unit = "    " }
 formatter = { command = "fish_indent" }
 auto-format = true
@@ -920,7 +931,13 @@ file-types = [
 shebangs = ["sh", "bash", "dash", "zsh"]
 roots = []
 comment-token = "#"
-language-servers = ["bash-language-server"]
+language-servers = [
+  "bash-language-server",
+  { name = "efm-language-server", only-features = [
+    "diagnostics",
+    "inlay-hints",
+  ] },
+]
 indent = { tab-width = 2, unit = "  " }
 formatter = { command = "shfmt", args = ["-ci", "-s", "-bn"] }
 auto-format = true
@@ -1075,7 +1092,13 @@ file-types = ["yml", "yaml"]
 roots = []
 comment-token = "#"
 indent = { tab-width = 2, unit = "  " }
-language-servers = ["yaml-language-server"]
+language-servers = [
+  "yaml-language-server",
+  { name = "efm-language-server", only-features = [
+    "diagnostics",
+    "inlay-hints",
+  ] },
+]
 injection-regex = "yml|yaml"
 formatter = { command = "yamlfix", args = ["-"] }
 auto-format = true
