@@ -65,7 +65,7 @@ dap.configurations.javascriptreact = {
 			return vim.fn.input("URI: ", "", "file")
 		end,
 		webRoot = "${workspaceFolder}",
-		runtimeExecutable = "/usr/bin/vivaldi",
+		runtimeExecutable = "/usr/bin/brave",
 	},
 	{
 		name = "Attach to Chrome",
@@ -73,7 +73,7 @@ dap.configurations.javascriptreact = {
 		request = "attach",
 		type = "pwa-chrome",
 		webRoot = "${workspaceFolder}",
-		runtimeExecutable = "/usr/bin/vivaldi",
+		runtimeExecutable = "/usr/bin/brave",
 	},
 }
 
