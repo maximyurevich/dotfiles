@@ -797,7 +797,7 @@ function! s:on_lsp_buffer_attached() abort
     nmap <buffer> <leader>co :LspOutgoingCalls<CR>
 
     augroup lsp_format
-      autocmd! BufWritePre *.py,*.sh,*.svelte,*.toml,*.vue,*.rb,*.html,*.json,*.yaml :LspFormat
+      autocmd! BufWritePre *.py,*.sh,*.svelte,*.toml,*.vue,*.rb,*.html,*.json,*.yaml,*.lua,*.css,*.js,*.jsx,*.ts,*.tsx,*.rs,*.go,*.dart,*.md,*.c,*.cpp :LspFormat
     augroup END
 endfunction
 
