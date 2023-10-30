@@ -845,6 +845,11 @@ let g:fzf_action = {
   \ 'ctrl-d': 'wall | bdelete'
   \ }
 
+nmap <silent><leader>ff :Files<CR>
+nmap <silent><leader>fg :Rg<CR>
+nmap <silent><leader>fb :Buffers<CR>
+nmap <silent><leader>fh :Helptags<CR>
+
 " Dirvish 
 
 augroup dirvish_config
