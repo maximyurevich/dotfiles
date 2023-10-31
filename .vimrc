@@ -755,6 +755,7 @@ augroup lsp_options
         \   'showInlayHints': v:false,
         \   'showSignature': v:true,
         \   'snippetSupport': v:true,
+        \   'vsnipSupport': v:true,
         \   'usePopupInCodeAction': v:false,
         \   'useQuickfixForLocations': v:false,
         \   'useBufferCompletion': v:true,
@@ -812,8 +813,8 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 let g:airline_powerline_fonts = 1
 
 let g:airline_extensions = [
-    \   'branch',
     \   'dirvish',
+    \   'branch',
     \   'fugitiveline',
     \   'fzf',
     \   'hunks',
