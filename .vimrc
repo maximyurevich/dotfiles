@@ -24,9 +24,6 @@ call plug#begin()
 
 Plug 'andlrc/lsp', { 'branch': 'sig-params-label-uint-uint' }
 
-Plug 'mattn/vim-lsp-settings'
-Plug 'normen/vim-lsp-settings-adapter'
-
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 
@@ -41,7 +38,6 @@ Plug 'vim-test/vim-test'
 Plug 'itchyny/lightline.vim'
 
 Plug 'junegunn/fzf.vim'
-Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 
 Plug 'tpope/vim-fugitive'
 
