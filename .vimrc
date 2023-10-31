@@ -14,6 +14,8 @@ set hlsearch
 set incsearch
 set undofile
 set noswapfile
+set laststatus=2
+set noshowmode
 setlocal tagfunc=lsp#lsp#TagFunc
 setlocal formatexpr=lsp#lsp#FormatExpr()
 
@@ -36,8 +38,7 @@ Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
 Plug 'vim-test/vim-test'
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 
 Plug 'junegunn/fzf.vim'
 Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
@@ -808,22 +809,16 @@ inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
-" Airline
+" Lightline
 
-let g:airline_powerline_fonts = 1
+let g:lightline = {
+    \       'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+    \       'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+    \   }
 
-let g:airline_extensions = [
-    \   'dirvish',
-    \   'branch',
-    \   'fugitiveline',
-    \   'fzf',
-    \   'hunks',
-    \   'keymap',
-    \   'po',
-    \   'quickfix',
-    \   'searchcount',
-    \   'wordcount'
-    \ ]
+if !has('gui_running')
+  set t_Co=256
+endif
 
 " FZF
 
