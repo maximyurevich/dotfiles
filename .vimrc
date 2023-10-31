@@ -50,6 +50,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'justinmk/vim-dirvish'
 Plug 'bounceme/remote-viewer'
 Plug 'roginfarrer/vim-dirvish-dovish', {'branch': 'main'}
+Plug 'kristijanhusak/vim-dirvish-git'
 
 Plug 'sheerun/vim-polyglot'
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
