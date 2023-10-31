@@ -167,16 +167,6 @@ if executable('graphql-lsp')
         \ }])
 endif
 
-if executable('ruff-lsp')
-    call lsp#lsp#AddServer([{
-        \   'name': 'ruff-lsp',
-        \   'filetype': 'python',
-        \   'path': 'ruff-lsp',
-        \   'args': [],
-        \   'runIfSearch': ['.ruff.toml', 'ruff.toml']
-        \ }])
-endif 
-
 if executable('bufls')
     call lsp#lsp#AddServer([{
         \   'name': 'bufls',
@@ -332,16 +322,6 @@ if executable('lua-language-server')
         \ }])
 endif
 
-if executable('ruff-lsp')
-    call lsp#lsp#AddServer([{
-        \   'name': 'ruff-lsp',
-        \   'filetype': 'python',
-        \   'path': 'ruff-lsp',
-        \   'args': ['--stdio'],
-        \   'runIfSearch': ['.ruff.toml', 'ruff.toml']
-        \ }])
-endif
-
 if executable('pyright-langserver')
     call lsp#lsp#AddServer([{
         \   'name': 'pyright',
@@ -355,6 +335,16 @@ if executable('pyright-langserver')
         \       }
         \   },
         \   'runIfSearch': ['pyproject.toml', 'requirements.txt', 'pyrightconfig.json']
+        \ }])
+endif
+
+if executable('ruff-lsp')
+    call lsp#lsp#AddServer([{
+        \   'name': 'ruff-lsp',
+        \   'filetype': 'python',
+        \   'path': 'ruff-lsp',
+        \   'args': [],
+        \   'runIfSearch': ['.ruff.toml', 'ruff.toml']
         \ }])
 endif
 
