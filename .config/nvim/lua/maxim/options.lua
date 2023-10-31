@@ -11,6 +11,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.o.background = "dark"
 vim.g.scrollview_excluded_filetypes = { "NvimTree" }
 vim.opt.conceallevel = 2
+vim.opt.showmode = false
 vim.opt.concealcursor = "nc"
 vim.opt.shellslash = true
 vim.opt.foldenable = false
