@@ -810,6 +810,10 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 " Lightline
 
 let g:lightline = {
+    \   'enable': {
+    \       'statusline': 1,
+    \       'tabline': 0
+    \   },
     \   'active': {
     \       'left': [ [ 'mode', 'paste' ],
     \                 [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -824,6 +828,36 @@ let g:lightline = {
 if !has('gui_running')
   set t_Co=256
 endif
+
+" Tabline
+
+nnoremap <silent><leader>1 <Cmd>tabfirst<CR>
+nnoremap <silent><leader>2 <Cmd>tabn 2<CR>
+nnoremap <silent><leader>3 <Cmd>tabn 3<CR>
+nnoremap <silent><leader>4 <Cmd>tabn 4<CR>
+nnoremap <silent><leader>5 <Cmd>tabn 5<CR>
+nnoremap <silent><leader>6 <Cmd>tabn 6<CR>
+nnoremap <silent><leader>7 <Cmd>tabn 7<CR>
+nnoremap <silent><leader>8 <Cmd>tabn 8<CR>
+nnoremap <silent><leader>9 <Cmd>tabn 9<CR>
+nnoremap <silent><leader>$ <Cmd>tablast<CR>
+
+nnoremap <silent>[b :tabnext<CR>
+nnoremap <silent>b] :tabprevious<CR>
+
+nnoremap <silent>td1 <Cmd>tabc 1<CR>
+nnoremap <silent>td2 <Cmd>tabc 2<CR>
+nnoremap <silent>td3 <Cmd>tabc 3<CR>
+nnoremap <silent>td4 <Cmd>tabc 4<CR>
+nnoremap <silent>td5 <Cmd>tabc 5<CR>
+nnoremap <silent>td6 <Cmd>tabc 6<CR>
+nnoremap <silent>td7 <Cmd>tabc 7<CR>
+nnoremap <silent>td8 <Cmd>tabc 8<CR>
+nnoremap <silent>td9 <Cmd>tabc 9<CR>
+nnoremap <silent>td$ <Cmd>tabc $<CR>
+
+nnoremap <silent>td :tabc<CR>
+nnoremap <silent>to :tabo<CR>
 
 " FZF
 
