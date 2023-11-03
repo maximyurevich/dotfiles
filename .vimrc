@@ -43,10 +43,11 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'airblade/vim-gitgutter'
 
-Plug 'justinmk/vim-dirvish'
-Plug 'bounceme/remote-viewer'
-Plug 'roginfarrer/vim-dirvish-dovish', {'branch': 'main'}
-Plug 'kristijanhusak/vim-dirvish-git'
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+Plug 'PhilRunninger/nerdtree-buffer-ops'
+Plug 'PhilRunninger/nerdtree-visual-selection'
 
 Plug 'sheerun/vim-polyglot'
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
@@ -840,20 +841,12 @@ nmap <silent><leader>fg :Rg<CR>
 nmap <silent><leader>fb :Buffers<CR>
 nmap <silent><leader>fh :Helptags<CR>
 
-" Dirvish 
+" NERDTree 
 
-augroup dirvish_config
-  autocmd!
-
-  " Map `gr` to reload.
-  autocmd FileType dirvish nnoremap <silent><buffer>
-    \ gr :<C-U>Dirvish<CR>
-
-  " Map `gh` to hide dot-prefixed files.  Press `R` to "toggle" (reload).
-  autocmd FileType dirvish nnoremap <silent><buffer>
-    \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>:setl cole=3<cr>
-augroup END
-
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
 " Debug
 
