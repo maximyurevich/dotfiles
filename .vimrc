@@ -100,7 +100,7 @@ call plug#end()
 " LSP
 
 if executable('awk-language-server')
-    call lsp#lsp#AddServer([{'name': 'awkls',
+    silent! call lsp#lsp#AddServer([{'name': 'awkls',
         \   'filetype': 'awk',
         \   'path': 'awk-language-server',
         \   'args': []
@@ -108,7 +108,7 @@ if executable('awk-language-server')
 endif
 
 if executable('astro-ls')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'astro-ls',
         \   'filetype': ['astro'],
         \   'path': 'astro-ls',
@@ -123,7 +123,7 @@ if executable('astro-ls')
 endif 
 
 if executable('vue-language-server')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'volar',
         \   'filetype': ['vue', 'typescript', 'javascript'],
         \   'path': 'vue-language-server',
@@ -143,7 +143,7 @@ if executable('vue-language-server')
 endif 
 
 if executable('graphql-lsp')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'graphql-lsp',
         \   'filetype': ['graphql', 'typescriptreact', 'javascriptreact'],
         \   'path': 'graphql-lsp',
@@ -167,7 +167,7 @@ if executable('graphql-lsp')
 endif
 
 if executable('bufls')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'bufls',
         \   'filetype': 'proto',
         \   'path': 'bufls',
@@ -176,7 +176,7 @@ if executable('bufls')
 endif
 
 if executable('clangd')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'clangd',
         \   'filetype': ['c', 'cpp'],
         \   'path': 'clangd',
@@ -185,7 +185,7 @@ if executable('clangd')
 endif
 
 if executable($HOME.'/flutter/bin/dart')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'dart',
         \   'filetype': ['dart'],
         \   'path': $HOME.'/flutter/bin/dart',
@@ -194,7 +194,7 @@ if executable($HOME.'/flutter/bin/dart')
 endif
 
 if executable('emmet-language-server')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'emmet',
         \   'filetype': ['html'],
         \   'path': 'emmet-language-server',
@@ -203,7 +203,7 @@ if executable('emmet-language-server')
 endif
 
 if executable('docker-compose-langserver')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'docker-compose-langserver',
         \   'filetype': ['yaml.docker-compose'],
         \   'path': 'docker-compose-langserver',
@@ -212,7 +212,7 @@ if executable('docker-compose-langserver')
 endif
 
 if executable('docker-langserver')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'docker-langserver',
         \   'filetype': ['dockerfile'],
         \   'path': 'docker-langserver',
@@ -221,7 +221,7 @@ if executable('docker-langserver')
 endif
 
 if executable('yaml-language-server')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'yaml-language-server',
         \   'filetype': ['yaml'],
         \   'path': 'yaml-language-server',
@@ -241,7 +241,7 @@ endif
 
 if executable('ansible-language-server')
 
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'ansible-language-server',
         \   'filetype': 'yaml.ansible',
         \   'path': 'ansible-language-server',
@@ -255,7 +255,7 @@ if executable('ansible-language-server')
 endif
 
 if executable('marksman')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'marksman',
         \   'filetype': ['markdown'],
         \   'path': 'marksman',
@@ -265,7 +265,7 @@ if executable('marksman')
 endif
 
 if executable('zk')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'zk',
         \   'filetype': ['markdown'],
         \   'path': 'zk',
@@ -275,7 +275,7 @@ if executable('zk')
 endif
 
 if executable('nginx-language-server')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'nginx-language-server',
         \   'filetype': ['nginx'],
         \   'path': 'nginx-language-server',
@@ -283,7 +283,7 @@ if executable('nginx-language-server')
         \ }])
 endif
 
-call lsp#lsp#AddServer([{
+silent! call lsp#lsp#AddServer([{
     \   'name': 'gopls',
     \   'filetype': 'go',
     \   'path': 'gopls',
@@ -304,7 +304,7 @@ call lsp#lsp#AddServer([{
     \ }])
 
 if executable('lua-language-server')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'luals',
         \   'filetype': 'lua',
         \   'path': 'lua-language-server',
@@ -322,7 +322,7 @@ if executable('lua-language-server')
 endif
 
 if executable('pyright-langserver')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'pyright',
         \   'filetype': 'python',
         \   'path': 'pyright-langserver',
@@ -338,7 +338,7 @@ if executable('pyright-langserver')
 endif
 
 if executable('ruff-lsp')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'ruff-lsp',
         \   'filetype': 'python',
         \   'path': 'ruff-lsp',
@@ -348,7 +348,7 @@ if executable('ruff-lsp')
 endif
 
 if executable('rust-analyzer')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'rustanalyzer',
         \   'filetype': ['rust'],
         \   'path': 'rust-analyzer',
@@ -368,7 +368,7 @@ if executable('rust-analyzer')
 endif
 
 if executable('solargraph')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'solargraph',
         \   'filetype': ['ruby'],
         \   'path': 'solargraph',
@@ -377,7 +377,7 @@ if executable('solargraph')
 endif
 
 if executable('bin/tapioca')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'sorbet',
         \   'filetype': ['ruby'],
         \   'path': 'bundle',
@@ -386,7 +386,7 @@ if executable('bin/tapioca')
 endif
 
 if executable('standardrb')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'standardrb',
         \   'filetype': ['ruby'],
         \   'path': 'standardrb',
@@ -395,7 +395,7 @@ if executable('standardrb')
 endif
 
 if executable('bunx') && executable('typescript-language-server')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'bun-tsserver',
         \   'filetype': [
         \       'javascript', 
@@ -416,7 +416,7 @@ if executable('bunx') && executable('typescript-language-server')
 endif
 
 if executable('typescript-language-server')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'tsserver',
         \   'filetype': [
         \       'javascript', 
@@ -436,27 +436,8 @@ if executable('typescript-language-server')
         \ }])
 endif
 
-if executable('deno')
-    call lsp#lsp#AddServer([{
-        \   'name': 'deno',
-        \   'filetype': [
-        \       'javascript', 
-        \       'typescript',
-        \       'javascriptreact',
-        \       'typescriptreact'
-        \   ],
-        \   'path': 'deno',
-        \   'args': ['lsp'],
-        \   'initializationOptions': {
-        \       'enable': v:true,
-        \       'lint': v:true
-        \   },
-        \   'runIfSearch': ['deno.json', 'deno.jsonc']
-        \ }])
-endif 
-
 if executable('cssmodules-language-server')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'cssmodules-language-server',
         \   'filetype': [
         \       'javascriptreact',
@@ -468,7 +449,7 @@ if executable('cssmodules-language-server')
 endif 
 
 if executable('lemminx')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'lemminx',
         \   'filetype': [
         \       'xml', 'xsd', 'xsl', 'xslt', 'svg'
@@ -479,7 +460,7 @@ if executable('lemminx')
 endif
 
 if executable('vim-language-server')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'vimls',
         \   'filetype': 'vim',
         \   'path': 'vim-language-server',
@@ -488,7 +469,7 @@ if executable('vim-language-server')
 endif
 
 if executable('sql-language-server')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'vimls',
         \   'filetype': ['sql', 'mysql'],
         \   'path': 'sql-language-server',
@@ -497,7 +478,7 @@ if executable('sql-language-server')
 endif
 
 if executable('vscode-css-language-server')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'vscode-css-language-server',
         \   'filetype': ['css', 'sass', 'scss', 'less'],
         \   'path': 'vscode-css-language-server',
@@ -511,7 +492,7 @@ if executable('vscode-css-language-server')
 endif 
 
 if executable('stylelint-lsp')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'stylelint-lsp',
         \   'filetype': [
         \       'css', 
@@ -535,7 +516,7 @@ if executable('stylelint-lsp')
 endif
 
 if executable($HOME.'/.npm/lib/node_modules/@tailwindcss/language-server/bin/tailwindcss-language-server')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': $HOME.'/.npm/lib/node_modules/@tailwindcss/language-server/bin/tailwindcss-language-server',
         \   'filetype': [
         \       'astro',
@@ -572,7 +553,7 @@ if executable($HOME.'/.npm/lib/node_modules/@tailwindcss/language-server/bin/tai
 endif
 
 if executable('unocss-language-server')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'unocss-language-server',
         \   'filetype': [
         \       'html', 
@@ -593,7 +574,7 @@ if executable('unocss-language-server')
 endif
 
 if executable('vscode-eslint-language-server')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'vscode-eslint-language-server',
         \   'filetype': [
         \       'javascript',
@@ -631,7 +612,7 @@ if executable('vscode-eslint-language-server')
 endif
 
 if executable('vscode-html-language-server')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'vscode-html-language-server',
         \   'filetype': ['html'],
         \   'path': 'vscode-html-language-server',
@@ -648,7 +629,7 @@ if executable('vscode-html-language-server')
 endif
 
 if executable('vscode-json-language-server')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'vscode-json-language-server',
         \   'filetype': ['json', 'jsonc'],
         \   'path': 'vscode-json-language-server',
@@ -658,7 +639,7 @@ if executable('vscode-json-language-server')
 endif
 
 if executable('efm-langserver')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'efm',
         \   'filetype': [
         \       'javascript',
@@ -689,7 +670,7 @@ if executable('efm-langserver')
 endif
 
 if executable('svelteserver')
-    call lsp#lsp#AddServer([{
+    silent! call lsp#lsp#AddServer([{
         \   'name': 'svelteserver',
         \   'filetype': ['svelte'],
         \   'path': 'svelteserver',
@@ -700,7 +681,7 @@ endif
 
 
 augroup lsp_options
-    autocmd VimEnter * call LspOptionsSet({
+    autocmd VimEnter * silent! call LspOptionsSet({
         \   'autoComplete': v:true,
         \   'autoHiglight': v:false,
         \   'autoHigightDiags': v:true,
@@ -986,4 +967,4 @@ let &t_ut=''
 
 " Colorscheme
 
-colorscheme gruvbox-material
+silent! colorscheme gruvbox-material
