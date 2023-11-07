@@ -200,7 +200,7 @@ bar {
 
 # wallpaper
 
-exec --no-startup-id feh --bg-scale /usr/share/backgrounds/linuxmint-vera/pfore_mount_baker.jpg
+exec --no-startup-id feh --bg-scale /home/maxim/Pictures/programmer-girl-II.jpg
 
 # redshift
 
