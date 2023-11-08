@@ -642,7 +642,7 @@ injection-regex = "(js|javascript)"
 language-id = "javascript"
 file-types = ["js", "mjs", "cjs"]
 shebangs = ["node"]
-roots = []
+roots = ["yarn.lock", "package-lock.json"]
 comment-token = "//"
 language-servers = [
   { name = "eslint", only-features = [
@@ -706,7 +706,7 @@ injection-regex = "(ts|typescript)"
 file-types = ["ts", "mts", "cts"]
 language-id = "typescript"
 shebangs = []
-roots = []
+roots = ["yarn.lock", "package-lock.json"]
 language-servers = [
   { name = "eslint", only-features = [
     "diagnostics",
