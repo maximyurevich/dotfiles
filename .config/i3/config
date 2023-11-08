@@ -228,10 +228,6 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
 
 bindsym Print exec --no-startup-id gnome-screenshot --window
 
-# xmodmap
-
-exec --no-startup-id xmodmap ~/.Xmodmap
-
 # mpdris2-rs
 
 exec --no-startup-id mpdris2-rs
@@ -244,6 +240,10 @@ bindsym Mod1+l exec --no-startup-id i3lock-fancy
 
 bindsym $mod+m bar mode toggle
 
-# language
+# xmodmap
 
-exec --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle
+exec --no-startup-id xmodmap ~/.Xmodmap
+
+# notifications
+
+exec --no-startup-id dunstctl set-paused true
