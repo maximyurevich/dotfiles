@@ -242,6 +242,30 @@ inlayHints.lifetimeElisionHints.enable = "skip_trivial"
 inlayHints.typeHints.hideClosureInitialization = false
 
 
+[language-server.bun-language-server]
+command = "bunx"
+args = ["--bun", "typescript-language-server", "--stdio"]
+config.hostInfo = "helix"
+
+[language-server.bun-language-server.config.typescript.inlayHints]
+includeInlayEnumMemberValueHints = true
+includeInlayFunctionLikeReturnTypeHints = true
+includeInlayFunctionParameterTypeHints = true
+includeInlayParameterNameHints = "all"
+includeInlayParameterNameHintsWhenArgumentMatchesName = true
+includeInlayPropertyDeclarationTypeHints = true
+includeInlayVariableTypeHints = true
+
+[language-server.bun-language-server.config.javascript.inlayHints]
+includeInlayEnumMemberValueHints = true
+includeInlayFunctionLikeReturnTypeHints = true
+includeInlayFunctionParameterTypeHints = true
+includeInlayParameterNameHints = "all"
+includeInlayParameterNameHintsWhenArgumentMatchesName = true
+includeInlayPropertyDeclarationTypeHints = true
+includeInlayVariableTypeHints = true
+
+
 [language-server.typescript-language-server]
 command = "typescript-language-server"
 args = ["--stdio"]
@@ -658,6 +682,31 @@ language-servers = [
 indent = { tab-width = 2, unit = "  " }
 auto-format = true
 
+
+[[language]]
+name = "javascript"
+scope = "source.js"
+injection-regex = "(js|javascript)"
+language-id = "javascript"
+file-types = ["js", "mjs", "cjs"]
+shebangs = ["node"]
+roots = ["bun.lockb"]
+comment-token = "//"
+language-servers = [
+  { name = "eslint", only-features = [
+    "diagnostics",
+    "inlay-hints",
+    "code-action",
+  ] },
+  { name = "efm-language-server", only-features = [
+    "format",
+  ] },
+  "bun-language-server",
+]
+indent = { tab-width = 2, unit = "  " }
+auto-format = true
+
+
 [language.debugger]
 name = "node-debug2-adapter"
 command = "node-debug2-adapter"
@@ -699,6 +748,33 @@ indent = { tab-width = 2, unit = "  " }
 grammar = "javascript"
 auto-format = true
 
+
+[[language]]
+name = "jsx"
+scope = "source.jsx"
+injection-regex = "jsx"
+language-id = "javascriptreact"
+file-types = ["jsx"]
+roots = ["bun.lockb"]
+comment-token = "//"
+language-servers = [
+  { name = "eslint", only-features = [
+    "diagnostics",
+    "inlay-hints",
+    "code-action",
+  ] },
+  { name = "efm-language-server", only-features = [
+    "format",
+  ] },
+  "tailwindcss",
+  "bun-language-server",
+  "cssmodules-language-server",
+]
+indent = { tab-width = 2, unit = "  " }
+grammar = "javascript"
+auto-format = true
+
+
 [[language]]
 name = "typescript"
 scope = "source.ts"
@@ -717,6 +793,29 @@ language-servers = [
     "format",
   ] },
   "typescript-language-server",
+]
+indent = { tab-width = 2, unit = "  " }
+auto-format = true
+
+
+[[language]]
+name = "typescript"
+scope = "source.ts"
+injection-regex = "(ts|typescript)"
+file-types = ["ts", "mts", "cts"]
+language-id = "typescript"
+shebangs = []
+roots = ["bun.lockb"]
+language-servers = [
+  { name = "eslint", only-features = [
+    "diagnostics",
+    "inlay-hints",
+    "code-action",
+  ] },
+  { name = "efm-language-server", only-features = [
+    "format",
+  ] },
+  "bun-language-server",
 ]
 indent = { tab-width = 2, unit = "  " }
 auto-format = true
@@ -748,6 +847,31 @@ language-servers = [
 ]
 indent = { tab-width = 2, unit = "  " }
 auto-format = true
+
+
+[[language]]
+name = "tsx"
+scope = "source.tsx"
+injection-regex = "(tsx)" # |typescript
+language-id = "typescriptreact"
+file-types = ["tsx"]
+roots = ["bun.lockb"]
+language-servers = [
+  { name = "eslint", only-features = [
+    "diagnostics",
+    "inlay-hints",
+    "code-action",
+  ] },
+  { name = "efm-language-server", only-features = [
+    "format",
+  ] },
+  "tailwindcss",
+  "bun-language-server",
+  "cssmodules-language-server",
+]
+indent = { tab-width = 2, unit = "  " }
+auto-format = true
+
 
 [[grammar]]
 name = "tsx"
