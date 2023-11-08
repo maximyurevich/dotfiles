@@ -134,8 +134,6 @@ if executable('vue-language-server')
         \       }
         \   },
         \   'runIfSearch': [
-        \       'vite.config.js', 
-        \       'vite.config.ts',
         \       'nuxt.config.js',
         \       'nuxt.config.ts'
         \   ]
@@ -396,7 +394,7 @@ endif
 
 if executable('bunx') && executable('typescript-language-server')
     silent! call lsp#lsp#AddServer([{
-        \   'name': 'bun-tsserver',
+        \   'name': 'bun-typescript-language-server',
         \   'filetype': [
         \       'javascript', 
         \       'typescript',
@@ -407,8 +405,6 @@ if executable('bunx') && executable('typescript-language-server')
         \   'args': ['--bun', 'typescript-language-server', '--stdio'],
         \   'runIfSearch': ['bun.lockb'],
         \   'runUnlessSearch': [
-        \       'vite.config.js', 
-        \       'vite.config.ts',
         \       'nuxt.config.js',
         \       'nuxt.config.ts'
         \   ]
@@ -428,8 +424,6 @@ if executable('typescript-language-server')
         \   'args': ['--stdio'],
         \   'runIfSearch': ['yarn.lock', 'package-lock.json'],
         \   'runUnlessSearch': [
-        \       'vite.config.js', 
-        \       'vite.config.ts',
         \       'nuxt.config.js',
         \       'nuxt.config.ts'
         \   ]
@@ -576,6 +570,14 @@ endif
 if executable('vscode-eslint-language-server')
     silent! call lsp#lsp#AddServer([{
         \   'name': 'vscode-eslint-language-server',
+        \   'runIfSearch': [
+        \       '.eslintrc',
+        \       '.eslintrc.js',
+        \       '.eslintrc.cjs',
+        \       '.eslintrc.yaml',
+        \       '.eslintrc.yml',
+        \       '.eslintrc.json',
+        \   ],
         \   'filetype': [
         \       'javascript',
         \       'javascriptreact',
