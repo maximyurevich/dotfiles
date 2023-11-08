@@ -23,6 +23,7 @@ set -Ux GLFW_IM_MODULE none
 set -Ux TMUX_FZF_OPTIONS "-p -w 60% -h 50% -m"
 set -Ux PAGER "less -R"
 set -Ux YAMLFIX_EXPLICIT_START false
+set -Ux BUN_INSTALL_CACHE_DIR $HOME/.bun/install/cache/
 
 fish_add_path $HOME/.local/share/nvim/mason/bin
 fish_add_path $GEM_HOME/bin
