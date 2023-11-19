@@ -681,7 +681,7 @@ augroup lsp_options
         \   'autoHigightDiags': v:true,
         \   'autoPopulateDiags': v:false,
         \   'completionMatcher': 'case',
-        \   'completionTextEdit': v:true,
+        \   'completionTextEdit': v:false,
         \   'completionKinds': {
         \       'Text':                    '󰉿',
         \       'Method':                  '󰆧',
