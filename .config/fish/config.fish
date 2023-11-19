@@ -6,7 +6,7 @@ alias icat "kitty +kitten icat"
 
 set -Ux TOKENIZERS_PARALLELISM false
 set -Ux LD_LIBRARY_PATH /opt/cuda/lib64
-set -Ux VISUAL nvim
+set -Ux VISUAL vim
 set -Ux SDL_VIDEODRIVER x11
 set -Ux CHROME_EXECUTABLE /usr/bin/brave
 set -Ux JAVA_HOME /usr/lib/jvm/java-17-openjdk
