@@ -404,10 +404,6 @@ if executable('bunx') && executable('typescript-language-server')
         \   'path': 'bunx',
         \   'args': ['--bun', 'typescript-language-server', '--stdio'],
         \   'runIfSearch': ['bun.lockb'],
-        \   'runUnlessSearch': [
-        \       'nuxt.config.js',
-        \       'nuxt.config.ts'
-        \   ]
         \ }])
 endif
 
@@ -423,10 +419,6 @@ if executable('typescript-language-server')
         \   'path': 'typescript-language-server',
         \   'args': ['--stdio'],
         \   'runIfSearch': ['yarn.lock', 'package-lock.json'],
-        \   'runUnlessSearch': [
-        \       'nuxt.config.js',
-        \       'nuxt.config.ts'
-        \   ]
         \ }])
 endif
 
