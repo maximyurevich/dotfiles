@@ -38,20 +38,6 @@ dap.configurations.javascript = {
 		restart = true,
 		port = 9229,
 	},
-	{
-		type = "pwa-node",
-		request = "launch",
-		name = "Launch Deno",
-		runtimeExecutable = "deno",
-		runtimeArgs = {
-			"run",
-			"--inspect-wait",
-			"--allow-all",
-		},
-		program = "${file}",
-		cwd = "${workspaceFolder}",
-		attachSimplePort = 9229,
-	},
 }
 
 dap.configurations.typescript = dap.configurations.javascript
@@ -65,7 +51,7 @@ dap.configurations.javascriptreact = {
 			return vim.fn.input("URI: ", "", "file")
 		end,
 		webRoot = "${workspaceFolder}",
-		runtimeExecutable = "/usr/bin/brave",
+		runtimeExecutable = "/usr/bin/google-chrome-stable",
 	},
 	{
 		name = "Attach to Chrome",
@@ -73,7 +59,7 @@ dap.configurations.javascriptreact = {
 		request = "attach",
 		type = "pwa-chrome",
 		webRoot = "${workspaceFolder}",
-		runtimeExecutable = "/usr/bin/brave",
+		runtimeExecutable = "/usr/bin/google-chrome-stable",
 	},
 }
 
