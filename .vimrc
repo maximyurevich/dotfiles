@@ -1,3 +1,6 @@
+set guifont=JetBrainsMono\ NFM\ 12
+set guioptions -=m 
+set guioptions -=T
 set encoding=utf-8
 scriptencoding utf-8
 set mouse=a
