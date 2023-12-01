@@ -32,6 +32,8 @@ Plug 'hrsh7th/vim-vsnip-integ'
 
 Plug 'rafamadriz/friendly-snippets'
 
+Plug 'dense-analysis/ale'
+
 Plug 'puremourning/vimspector'
 
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
@@ -185,11 +187,11 @@ if executable('clangd')
         \ }])
 endif
 
-if executable($HOME.'/flutter/bin/dart')
+if executable($HOME.'/.flutter/bin/dart')
     silent! call lsp#lsp#AddServer([{
         \   'name': 'dart',
         \   'filetype': ['dart'],
-        \   'path': $HOME.'/flutter/bin/dart',
+        \   'path': $HOME.'/.flutter/bin/dart',
         \   'args': ['language-server', '--client-id', 'vim']
         \ }])
 endif
@@ -679,6 +681,7 @@ endif
 
 augroup lsp_options
     autocmd VimEnter * silent! call LspOptionsSet({
+        \   'aleSupport': v:true,
         \   'autoComplete': v:true,
         \   'autoHiglight': v:false,
         \   'autoHigightDiags': v:true,
@@ -784,6 +787,16 @@ augroup END
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+
+" ALE
+
+let g:ale_fixers = {
+    \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \   'javascript': ['eslint'],
+    \   'typescript': ['eslint'],
+    \   'javascriptreact': ['eslint'],
+    \   'typescriptreact': ['eslint'],
+    \ }
 
 " Lightline
 
