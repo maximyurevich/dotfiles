@@ -8,16 +8,14 @@ set -Ux TOKENIZERS_PARALLELISM false
 set -Ux LD_LIBRARY_PATH /opt/cuda/lib64
 set -Ux VISUAL vim
 set -Ux SDL_VIDEODRIVER x11
-set -Ux CHROME_EXECUTABLE /usr/bin/brave
-set -Ux JAVA_HOME /usr/lib/jvm/java-17-openjdk
+set -Ux CHROME_EXECUTABLE /usr/bin/google-chrome-stable
+set -Ux JAVA_HOME /usr/lib/jvm/java-21-openjdk
 set -Ux ANDROID_SDK_ROOT /opt/android-sdk
 set -Ux BAT_THEME gruvbox-dark
 set -Ux QT_QPA_PLATFORMTHEME gtk3
 set -Ux TDESKTOP_I_KNOW_ABOUT_GTK_INCOMPATIBILITY 1
-set -Ux FLYCTL_INSTALL ~/.fly
 set -Ux PYDEVD_WARN_SLOW_RESOLVE_TIMEOUT 0
 set -Ux PYTHONWARNINGS ignore
-set -Ux ERG_PATH $HOME/.erg
 set -Ux GOPATH $HOME/go/bin
 set -Ux GLFW_IM_MODULE none
 set -Ux TMUX_FZF_OPTIONS "-p -w 60% -h 50% -m"
@@ -27,7 +25,7 @@ set -Ux BUN_INSTALL_CACHE_DIR $HOME/.bun/install/cache/
 
 fish_add_path $HOME/.local/share/nvim/mason/bin
 fish_add_path $GEM_HOME/bin
-fish_add_path $HOME/flutter/bin
+fish_add_path $HOME/.flutter/bin
 fish_add_path $JAVA_HOME/bin
 fish_add_path $ANDROID_SDK_ROOT/platform-tools/
 fish_add_path $ANDROID_SDK_ROOT/tools/bin/
@@ -36,9 +34,6 @@ fish_add_path $ANDROID_SDK_ROOT/tools/
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.cargo/bin
 fish_add_path ~/.deno/bin/
-fish_add_path $HOME/go/bin
-fish_add_path $FLYCTL_INSTALL/bin
-fish_add_path $HOME/.erg/bin
 fish_add_path $HOME/go/bin
 
 set sponge_successful_exit_codes 0 127
