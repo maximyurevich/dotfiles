@@ -116,6 +116,7 @@ return {
 			require("maxim.lsp.efm-ls")
 		end,
 	},
+	{ "j-hui/fidget.nvim", config = true },
 	{
 		"mfussenegger/nvim-jdtls",
 	},
