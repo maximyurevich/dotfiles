@@ -22,6 +22,9 @@ set -Ux TMUX_FZF_OPTIONS "-p -w 60% -h 50% -m"
 set -Ux PAGER "less -R"
 set -Ux YAMLFIX_EXPLICIT_START false
 set -Ux BUN_INSTALL_CACHE_DIR $HOME/.bun/install/cache/
+set -Ux PYENV_ROOT $HOME/.pyenv
+fish_add_path $PYENV_ROOT/bin
+pyenv init - | source
 
 fish_add_path $HOME/.local/share/nvim/mason/bin
 fish_add_path $GEM_HOME/bin
@@ -41,8 +44,6 @@ set sponge_allow_previously_successful false
 
 status --is-interactive
 rbenv init - fish | source
-
-set -Ux FZF_DEFAULT_COMMAND "find . \! \( -type d -path ./.git -prune \) \! -type d -printf ''%P\n''"
 
 set -l color00 '#282828'
 set -l color01 '#3c3836'
