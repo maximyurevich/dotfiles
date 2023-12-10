@@ -1,4 +1,4 @@
-set guifont=JetBrainsMono\ NFM\ 12
+set guifont=JetBrainsMono\ NFM\ 13
 set guioptions -=m 
 set guioptions -=T
 set encoding=utf-8
