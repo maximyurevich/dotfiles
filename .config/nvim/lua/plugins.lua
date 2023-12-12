@@ -59,6 +59,14 @@ return {
 		end,
 	},
 	{
+		"akinsho/bufferline.nvim",
+		version = "*",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		config = function()
+			require("maxim.bufferline")
+		end,
+	},
+	{
 		"nvim-treesitter/nvim-treesitter",
 		config = function()
 			require("maxim.treesitter")
