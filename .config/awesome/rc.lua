@@ -280,8 +280,8 @@ awful.keyboard.append_global_keybindings({
 		awful.spawn(terminal)
 	end, { description = "open a terminal", group = "launcher" }),
 	awful.key({ modkey }, "r", function()
-		awful.screen.focused().mypromptbox:run()
-	end, { description = "run prompt", group = "launcher" }),
+		awful.util.spawn("rofi -combi-modi window,drun -show combi", false)
+	end, { description = "run rofi", group = "launcher" }),
 	awful.key({ modkey }, "p", function()
 		menubar.show()
 	end, { description = "show the menubar", group = "launcher" }),
