@@ -101,6 +101,8 @@ Plug 'mbbill/undotree'
 
 Plug 'sainnhe/gruvbox-material'
 
+Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
+
 call plug#end()
 
 " LSP
@@ -925,6 +927,14 @@ let g:go_gopls_enabled = 0
 " Motion
 
 let g:sneak#label = 1
+
+" Pydocstring
+
+let g:pydocstring_doq_path = $HOME.'/.local/bin/doq'
+
+let g:pydocstring_enable_mapping = 0
+
+nmap <silent> <leader>nn <Plug>(pydocstring)
 
 " Kitty
 
