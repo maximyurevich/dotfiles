@@ -936,6 +936,12 @@ let g:pydocstring_enable_mapping = 0
 
 nmap <silent> <leader>nn <Plug>(pydocstring)
 
+" Tabline 
+
+nmap <silent> <Space>l :tabprevious<CR>
+nmap <silent> <Space>r :tabnext<CR>
+nmap <silent> <Space>d :tabclose<CR>
+
 " Kitty
 
 " Mouse support
