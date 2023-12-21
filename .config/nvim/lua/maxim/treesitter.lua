@@ -19,7 +19,7 @@ require("nvim-treesitter.configs").setup({
 	endwise = {
 		enable = true,
 	},
-	context_commentstring = {
+	ts_context_commentstring = {
 		enable = true,
 		enable_autocmd = false,
 	},
