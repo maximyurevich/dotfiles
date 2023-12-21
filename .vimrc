@@ -18,7 +18,7 @@ set incsearch
 set undofile
 set noswapfile
 set laststatus=2
-set showtabline=1
+set showtabline=2
 set noshowmode
 setlocal tagfunc=lsp#lsp#TagFunc
 setlocal formatexpr=lsp#lsp#FormatExpr()
