@@ -4,7 +4,7 @@ theme = "gruvbox"
 line-number = "relative"
 idle-timeout = 0
 auto-pairs = {}
-bufferline = "multiple"
+bufferline = "always"
 
 [editor.cursor-shape]
 insert = "bar"
