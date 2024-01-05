@@ -529,7 +529,6 @@ if executable($HOME.'/.npm/lib/node_modules/@tailwindcss/language-server/bin/tai
         \       'javascriptreact', 
         \       'typescriptreact', 
         \       'vue', 
-        \       'svelte'
         \   ],
         \   'path': 'tailwindcss-language-server',
         \   'args': ['--stdio'],
