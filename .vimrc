@@ -26,14 +26,12 @@ setlocal formatexpr=lsp#lsp#FormatExpr()
 
 call plug#begin()
 
-Plug 'andlrc/lsp', { 'branch': 'sig-params-label-uint-uint' }
+Plug 'yegappan/lsp'
 
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 
 Plug 'rafamadriz/friendly-snippets'
-
-Plug 'dense-analysis/ale'
 
 Plug 'puremourning/vimspector'
 
@@ -514,8 +512,6 @@ if executable($HOME.'/.npm/lib/node_modules/@tailwindcss/language-server/bin/tai
         \   'name': $HOME.'/.npm/lib/node_modules/@tailwindcss/language-server/bin/tailwindcss-language-server',
         \   'filetype': [
         \       'astro',
-        \       'erb',
-        \       'eruby',
         \       'gohtml',
         \       'gohtmltmpl',
         \       'liquid',
@@ -683,7 +679,7 @@ endif
 
 augroup lsp_options
     autocmd VimEnter * silent! call LspOptionsSet({
-        \   'aleSupport': v:true,
+        \   'aleSupport': v:false,
         \   'autoComplete': v:true,
         \   'autoHiglight': v:false,
         \   'autoHigightDiags': v:true,
@@ -780,26 +776,16 @@ augroup lsp_attach
     au User LspAttached set completeopt-=noselect
 augroup END
 
- augroup LspCustom
-	au!
-	au CursorMoved * silent! LspDiag! current
- augroup END
+augroup LspCustom
+    au!
+    au CursorMoved * silent! LspDiag! current
+augroup END
 
 " Completion
 
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-
-" ALE
-
-let g:ale_fixers = {
-    \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-    \   'javascript': ['eslint'],
-    \   'typescript': ['eslint'],
-    \   'javascriptreact': ['eslint'],
-    \   'typescriptreact': ['eslint'],
-    \ }
 
 " Lightline
 
