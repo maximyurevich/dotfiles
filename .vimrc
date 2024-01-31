@@ -773,7 +773,6 @@ endfunction
 augroup lsp_attach
     au!
     au User LspAttached call s:on_lsp_buffer_attached()
-    au User LspAttached set completeopt-=noselect
 augroup END
 
 augroup LspCustom
