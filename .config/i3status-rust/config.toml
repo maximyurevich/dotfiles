@@ -14,12 +14,6 @@ format = " $icon $mem_used.eng(w:4) "
 format_alt = " $icon_swap $swap_used.eng(w:4) "
 
 [[block]]
-block = "focused_window"
-[block.format]
-full = " $title.str(max_w:50) |"
-short = " $title.str(max_w:32) |"
-
-[[block]]
 block = "custom"
 command = "backlight.sh"
 interval = 0.2
