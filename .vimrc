@@ -1,6 +1,8 @@
 set guifont=JetBrainsMono\ NFM\ 13
-set guioptions -=m 
-set guioptions -=T
+if has("gui_running")
+    set guioptions -=m 
+    set guioptions -=T
+endif
 set encoding=utf-8
 scriptencoding utf-8
 set mouse=a
@@ -47,11 +49,12 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'airblade/vim-gitgutter'
 
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'ryanoasis/vim-devicons'
-Plug 'PhilRunninger/nerdtree-buffer-ops'
-Plug 'PhilRunninger/nerdtree-visual-selection'
+Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/fern-hijack.vim'
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+Plug 'lambdalisue/fern-git-status.vim'
+
+Plug 'lambdalisue/nerdfont.vim'
 
 Plug 'sheerun/vim-polyglot'
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
@@ -854,12 +857,12 @@ nmap <silent><leader>fg :Rg<CR>
 nmap <silent><leader>fb :Buffers<CR>
 nmap <silent><leader>fh :Helptags<CR>
 
-" NERDTree 
+" Fern 
 
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+let g:fern#renderer = "nerdfont"
+
+nnoremap <C-t> :Fern %:h -drawer -toggle -width=40<CR>
+nnoremap <C-f> :Fern . -drawer -toggle -width=40 -reveal=%<CR>
 
 " Debug
 
