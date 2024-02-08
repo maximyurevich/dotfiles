@@ -22,6 +22,7 @@ set noswapfile
 set laststatus=2
 set showtabline=2
 set noshowmode
+set hidden
 setlocal tagfunc=lsp#lsp#TagFunc
 setlocal formatexpr=lsp#lsp#FormatExpr()
 
@@ -863,6 +864,36 @@ let g:fern#renderer = "nerdfont"
 
 nnoremap <C-t> :Fern %:h -drawer -toggle -width=40<CR>
 nnoremap <C-f> :Fern . -drawer -toggle -width=40 -reveal=%<CR>
+
+augroup FernGroup
+    autocmd! *
+    autocmd FileType fern call s:init_fern()
+augroup END
+
+function! s:init_fern() abort
+    nmap <buffer> o <Plug>(fern-action-open:edit)
+    nmap <buffer> go <Plug>(fern-action-open:edit)<C-w>p
+    nmap <buffer> t <Plug>(fern-action-open:tabedit)
+    nmap <buffer> T <Plug>(fern-action-open:tabedit)gT
+    nmap <buffer> i <Plug>(fern-action-open:split)
+    nmap <buffer> gi <Plug>(fern-action-open:split)<C-w>p
+    nmap <buffer> s <Plug>(fern-action-open:vsplit)
+    nmap <buffer> gs <Plug>(fern-action-open:vsplit)<C-w>p
+    nmap <buffer> ma <Plug>(fern-action-new-path)
+    nmap <buffer> P gg
+
+    nmap <buffer> C <Plug>(fern-action-enter)
+    nmap <buffer> u <Plug>(fern-action-leave)
+    nmap <buffer> r <Plug>(fern-action-reload)
+    nmap <buffer> R gg<Plug>(fern-action-reload)<C-o>
+    nmap <buffer> cd <Plug>(fern-action-cd)
+    nmap <buffer> CD gg<Plug>(fern-action-cd)<C-o>
+
+
+    nmap <buffer> q :<C-u>quit<CR>
+
+    nmap <buffer> <LeftRelease> <Plug>(fern-action-open-or-expand)
+endfunction
 
 " Debug
 
