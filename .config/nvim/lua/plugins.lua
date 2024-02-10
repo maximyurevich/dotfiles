@@ -389,8 +389,6 @@ return {
 	"tpope/vim-rails",
 	"tpope/vim-bundler",
 	"tpope/vim-rake",
-	"jlcrochet/vim-ruby",
-	"jlcrochet/vim-rbs",
 	{
 		"ivanesmantovich/xkbswitch.nvim",
 		config = true,
