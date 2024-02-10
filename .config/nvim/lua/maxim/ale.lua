@@ -12,7 +12,6 @@ vim.g.ale_fixers = {
 	sh = { "shfmt" },
 	fish = { "fish_indent" },
 	go = { "golines" },
-	eruby = { "erblint" },
 	python = { "black", "ruff", "isort" },
 	javascriptreact = { "rustywind" },
 	typescriptreact = { "rustywind" },
@@ -21,7 +20,7 @@ vim.g.ale_fixers = {
 	html = { "rustywind" },
 	sql = { "sqlfluff" },
 	svelte = { "prettier", "rustywind" },
-	vue = { "prettier", "rustywind" }
+	vue = { "prettier", "rustywind" },
 }
 
 vim.g.ale_linters = {
@@ -30,7 +29,6 @@ vim.g.ale_linters = {
 	fish = { "fish" },
 	sh = { "shellcheck" },
 	python = { "ruff", "mypy", "flake8" },
-	eruby = { "erblint" },
 	sql = { "sqlfluff" },
 	yaml = { "yamllint" },
 }
