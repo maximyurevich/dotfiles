@@ -1153,7 +1153,6 @@ scope = "source.svelte"
 injection-regex = "svelte"
 file-types = ["svelte"]
 roots = [".git"]
-indent = { tab-width = 2, unit = "  " }
 language-servers = [
   { name = "eslint", only-features = [
     "diagnostics",
