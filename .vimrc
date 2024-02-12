@@ -673,7 +673,8 @@ if executable('svelteserver')
         \   'name': 'svelteserver',
         \   'filetype': ['svelte'],
         \   'path': 'svelteserver',
-        \   'args': ['--stdio']
+        \   'args': ['--stdio'],
+        \   'syncInit': v:true
         \ }])
 endif
 
