@@ -31,6 +31,9 @@ call plug#begin()
 
 Plug 'yegappan/lsp'
 
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 Plug 'puremourning/vimspector'
 
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
@@ -733,7 +736,7 @@ augroup lsp_options
         \   'showSignature': v:true,
         \   'snippetSupport': v:true,
         \   'vsnipSupport': v:false,
-        \   'ultisnipsSupport': v:false,
+        \   'ultisnipsSupport': v:true,
         \   'usePopupInCodeAction': v:false,
         \   'useQuickfixForLocations': v:false,
         \   'useBufferCompletion': v:true,
