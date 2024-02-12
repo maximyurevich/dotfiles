@@ -41,6 +41,8 @@ Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 Plug 'vim-test/vim-test'
 
 Plug 'itchyny/lightline.vim'
+Plug 'sangdol/mintabline.vim'
+Plug 'ryanoasis/vim-devicons'
 
 Plug 'junegunn/fzf.vim'
 
@@ -864,8 +866,8 @@ nmap <silent><leader>fh :Helptags<CR>
 
 let g:fern#renderer = "nerdfont"
 
-nnoremap <C-t> :Fern %:h -drawer -toggle -width=40<CR>
-nnoremap <C-f> :Fern . -drawer -toggle -width=40 -reveal=%<CR>
+nnoremap <silent><C-t> :Fern %:h -drawer -toggle -width=40<CR>
+nnoremap <silent><C-f> :Fern . -drawer -toggle -width=40 -reveal=%<CR>
 
 augroup FernGroup
     autocmd! *
