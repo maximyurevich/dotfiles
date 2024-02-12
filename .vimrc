@@ -31,11 +31,6 @@ call plug#begin()
 
 Plug 'yegappan/lsp'
 
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
-
-Plug 'rafamadriz/friendly-snippets'
-
 Plug 'puremourning/vimspector'
 
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
@@ -737,7 +732,8 @@ augroup lsp_options
         \   'showInlayHints': v:false,
         \   'showSignature': v:true,
         \   'snippetSupport': v:true,
-        \   'vsnipSupport': v:true,
+        \   'vsnipSupport': v:false,
+        \   'ultisnipsSupport': v:false,
         \   'usePopupInCodeAction': v:false,
         \   'useQuickfixForLocations': v:false,
         \   'useBufferCompletion': v:true,
@@ -789,6 +785,8 @@ augroup END
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+
+let g:UltiSnipsExpandTrigger="<CR>"
 
 " Lightline
 
