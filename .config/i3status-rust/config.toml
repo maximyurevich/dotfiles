@@ -14,22 +14,28 @@ format = " $icon $mem_used.eng(w:4) "
 format_alt = " $icon_swap $swap_used.eng(w:4) "
 
 [[block]]
-block = "custom"
-command = "backlight.sh"
-interval = 0.2
-json = true
-[[block.click]]
-button = "left"
-cmd = "xbacklight -set 100"
-[[block.click]]
-button = "right"
-cmd = "xbacklight -set 5"
+block = "music"
+format = " $icon {$prev $combo.str(max_w:20) $play $next |}"
+player = "spotify"
+seek_step_secs = 10
 [[block.click]]
 button = "up"
-cmd = "xbacklight -inc 5"
+action = "volume_up"
 [[block.click]]
 button = "down"
-cmd = "xbacklight -dec 5"
+action = "volume_down"
+[[block.click]]
+button = "forward"
+action = "seek_forward"
+[[block.click]]
+button = "back"
+action = "seek_backward"
+[[block.click]]
+button = "left"
+action = "play_pause"
+
+[[block]]
+block = "backlight"
 
 [[block]]
 block = "sound"
