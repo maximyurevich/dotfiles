@@ -51,19 +51,19 @@ return {
 		end,
 	},
 	{
-		"stevearc/oil.nvim",
-		opts = {},
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function()
-			require("maxim.oil")
-		end,
-	},
-	{
 		"akinsho/bufferline.nvim",
 		version = "*",
 		dependencies = "nvim-tree/nvim-web-devicons",
 		config = function()
 			require("maxim.bufferline")
+		end,
+	},
+	{
+		"stevearc/oil.nvim",
+		opts = {},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("maxim.oil")
 		end,
 	},
 	{
@@ -109,12 +109,6 @@ return {
 		},
 		config = function()
 			require("maxim.lsp.lspconfig")
-		end,
-	},
-	{
-		"dense-analysis/ale",
-		config = function()
-			require("maxim.ale")
 		end,
 	},
 	{
@@ -227,15 +221,6 @@ return {
 	{
 		"NeogitOrg/neogit",
 		dependencies = "nvim-lua/plenary.nvim",
-		config = true,
-	},
-	{
-		"pwntester/octo.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-			"nvim-tree/nvim-web-devicons",
-		},
 		config = true,
 	},
 	{
