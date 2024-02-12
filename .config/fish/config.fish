@@ -2,6 +2,7 @@ set -U fish_greeting ""
 
 fish_vi_key_bindings
 
+alias vi "nvim"
 alias icat "kitty +kitten icat"
 
 set -Ux TOKENIZERS_PARALLELISM false
