@@ -189,15 +189,6 @@ if executable('clangd')
         \ }])
 endif
 
-if executable($HOME.'/.flutter/bin/dart')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'dart',
-        \   'filetype': ['dart'],
-        \   'path': $HOME.'/.flutter/bin/dart',
-        \   'args': ['language-server', '--client-id', 'vim']
-        \ }])
-endif
-
 if executable('emmet-language-server')
     silent! call lsp#lsp#AddServer([{
         \   'name': 'emmet',

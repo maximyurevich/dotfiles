@@ -132,16 +132,6 @@ return {
 		end,
 	},
 	{
-		"akinsho/flutter-tools.nvim",
-		lazy = false,
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		config = function()
-			require("maxim.flutter-tools")
-		end,
-	},
-	{
 		"p00f/clangd_extensions.nvim",
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
