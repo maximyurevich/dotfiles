@@ -31,9 +31,6 @@ call plug#begin()
 
 Plug 'yegappan/lsp'
 
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
 Plug 'puremourning/vimspector'
 
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
@@ -739,7 +736,7 @@ augroup lsp_options
         \   'showSignature': v:true,
         \   'snippetSupport': v:true,
         \   'vsnipSupport': v:false,
-        \   'ultisnipsSupport': v:true,
+        \   'ultisnipsSupport': v:false,
         \   'usePopupInCodeAction': v:false,
         \   'useQuickfixForLocations': v:false,
         \   'useBufferCompletion': v:true,
@@ -791,8 +788,6 @@ augroup END
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-
-let g:UltiSnipsExpandTrigger="<CR>"
 
 " Lightline
 
