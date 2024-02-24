@@ -27,7 +27,6 @@ set -Ux _JAVA_OPTIONS "-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAnd
 
 fish_add_path $HOME/.local/share/nvim/mason/bin
 fish_add_path $GEM_HOME/bin
-fish_add_path $HOME/.flutter/bin
 fish_add_path $JAVA_HOME/bin
 fish_add_path $ANDROID_SDK_ROOT/platform-tools/
 fish_add_path $ANDROID_SDK_ROOT/tools/bin/
