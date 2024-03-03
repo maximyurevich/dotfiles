@@ -59,11 +59,10 @@ return {
 		end,
 	},
 	{
-		"stevearc/oil.nvim",
-		opts = {},
+		"nvim-tree/nvim-tree.lua",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			require("maxim.oil")
+			require("maxim.nvim-tree")
 		end,
 	},
 	{
