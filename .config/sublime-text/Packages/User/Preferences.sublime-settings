@@ -1,0 +1,11 @@
+{
+	"font_face": "JetBrainsMonoNL Nerd Font",
+	"font_size": 12,
+	"theme": "Adaptive.sublime-theme",
+	"ignored_packages": [
+		"Vintage",
+	],
+	"index_files": false,
+	"update_check": false,
+	"color_scheme": "Mariana.sublime-color-scheme",
+}
