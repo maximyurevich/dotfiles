@@ -290,11 +290,6 @@ return {
 		config = function()
 			require("cutlass").setup({
 				cut_key = "m",
-				registers = {
-					select = "s",
-					delete = "d",
-					change = "c",
-				},
 				exclude = { "ns", "nS" },
 			})
 		end,
