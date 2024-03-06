@@ -23,7 +23,12 @@ vim.keymap.set(
 	opts
 )
 
-vim.g.doge_mapping = "<Leader>nf"
+vim.keymap.set(
+	"n",
+	"<Leader>nf",
+	":lua require('neogen').generate({ type = 'func' })<CR>",
+	opts
+)
 
 vim.keymap.set(
 	"n",

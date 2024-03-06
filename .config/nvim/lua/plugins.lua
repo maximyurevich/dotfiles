@@ -278,10 +278,6 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{
-		"kkoomen/vim-doge",
-		build = ":call doge#install()",
-	},
-	{
 		"gbprod/yanky.nvim",
 		config = true,
 	},
@@ -323,6 +319,19 @@ return {
 			require("maxim.zk-nvim")
 		end,
 	},
+	{
+		"nvim-neorg/neorg",
+		build = ":Neorg sync-parsers",
+		lazy = false,
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("maxim.neorg")
+		end,
+	},
+	{
+		"folke/zen-mode.nvim",
+	},
+	{ "dhruvasagar/vim-table-mode" },
 	{
 		"dstein64/nvim-scrollview",
 		config = true,

@@ -312,7 +312,7 @@ local servers = {
 	"vimls",
 	"standardrb",
 	"htmx",
-  "bufls"
+	"bufls",
 }
 
 local configs = require("lspconfig.configs")
@@ -361,7 +361,10 @@ if not lspkind_status_ok then
 	return
 end
 
-local neogen = require("neogen")
+local status_ok, neogen = pcall(require, "neogen")
+if not status_ok then
+	return
+end
 
 cmp.setup({
 	formatting = {
@@ -423,5 +426,6 @@ cmp.setup({
 	sources = {
 		{ name = "nvim_lsp", trigger_characters = { "-" } },
 		{ name = "luasnip" },
+		{ name = "neorg" },
 	},
 })
