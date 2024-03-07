@@ -25,8 +25,6 @@ local languages = {
 	},
 	python = {
 		require("efmls-configs.linters.mypy"),
-		require("efmls-configs.formatters.ruff"),
-		require("efmls-configs.formatters.black"),
 	},
 	lua = { require("efmls-configs.formatters.stylua") },
 	yaml = {

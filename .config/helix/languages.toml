@@ -92,11 +92,6 @@ languages = { lua = [
     ".mypy.ini",
     "pyproject.toml",
   ] },
-  { formatCommand = "ruff --fix -e -n --stdin-filename ${INPUT}", formatStdin = true, requireMarker = true, rootMarkers = [
-    "ruff.toml",
-    ".ruff.toml",
-    "pyproject.toml",
-  ] },
 ], javascript = [
   { formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}", formatStdin = true, requireMarker = true, rootMarkers = [
     ".eslintrc",

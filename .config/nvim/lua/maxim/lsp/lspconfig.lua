@@ -39,6 +39,7 @@ local clients = {
 	"standardrb",
 	"jsonls",
 	"htmx",
+	"ruff",
 }
 
 local on_attach = function(client, bufnr)
@@ -46,6 +47,9 @@ local on_attach = function(client, bufnr)
 		if client.name == c then
 			require("maxim.lsp.formatting").formatting(client, bufnr)
 		end
+	end
+	if client.name == "ruff_lsp" then
+		client.server_capabilities.hoverProvider = false
 	end
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
@@ -95,8 +99,12 @@ lspconfig.pyright.setup({
 	on_attach = on_attach,
 	capabilities = pyright_capabilities,
 	settings = {
+		pyright = {
+			disableOrganizeImports = true,
+		},
 		python = {
 			analysis = {
+				ignore = { "*" },
 				typeCheckingMode = "off",
 			},
 		},
