@@ -27,6 +27,7 @@ set -Ux _JAVA_OPTIONS "-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAnd
 set -Ux PYENV_ROOT $HOME/.pyenv
 fish_add_path $PYENV_ROOT/bin
 pyenv init - | source
+fish_add_path $HOME/.flutter/bin
 
 fish_add_path $HOME/.local/share/nvim/mason/bin
 fish_add_path $GEM_HOME/bin
