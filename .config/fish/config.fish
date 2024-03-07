@@ -2,7 +2,7 @@ set -U fish_greeting ""
 
 fish_vi_key_bindings
 
-alias vi "nvim"
+alias vi nvim
 alias icat "kitty +kitten icat"
 
 set -Ux TOKENIZERS_PARALLELISM false
@@ -24,6 +24,9 @@ set -Ux PAGER "less -R"
 set -Ux YAMLFIX_EXPLICIT_START false
 set -Ux BUN_INSTALL_CACHE_DIR $HOME/.bun/install/cache/
 set -Ux _JAVA_OPTIONS "-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+set -Ux PYENV_ROOT $HOME/.pyenv
+fish_add_path $PYENV_ROOT/bin
+pyenv init - | source
 
 fish_add_path $HOME/.local/share/nvim/mason/bin
 fish_add_path $GEM_HOME/bin
