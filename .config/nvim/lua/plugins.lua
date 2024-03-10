@@ -238,7 +238,14 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		tag = "release",
-		config = true,
+		config = function()
+			require("gitsigns").setup({
+				current_line_blame = true,
+				yadm = {
+					enable = true,
+				},
+			})
+		end,
 	},
 	{
 		"nvim-neotest/neotest",
