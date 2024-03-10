@@ -31,11 +31,6 @@ tools:
     format-stdin: true
     require-marker: true
     root-markers: [ruff.toml, .ruff.toml, pyproject.toml]
-  python-black: &python-black
-    format-command: black --quiet -
-    format-stdin: true
-    require-marker: true
-    root-markers: [pyproject.toml]
   python-mypy: &python-mypy
     lint-command: mypy --show-column-numbers
     lint-formats:
@@ -94,7 +89,6 @@ languages:
     - <<: *stylua
   python:
     - <<: *python-ruff
-    - <<: *python-black
     - <<: *python-mypy
   gitcommit:
     - <<: *gitcommit-gitlint
