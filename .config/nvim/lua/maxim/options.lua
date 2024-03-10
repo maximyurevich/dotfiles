@@ -1,4 +1,4 @@
-vim.opt.guifont = "JetBrainsMonoNL Nerd Font Mono:h14"
+vim.opt.guifont = "JetBrainsMonoNL Nerd Font Mono:h12"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.swapfile = false
