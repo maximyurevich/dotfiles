@@ -383,4 +383,11 @@ return {
 	},
 	"dstein64/vim-startuptime",
 	"pearofducks/ansible-vim",
+	{
+		"otavioschwanck/arrow.nvim",
+		opts = {
+			show_icons = true,
+			leader_key = ";",
+		},
+	},
 }
