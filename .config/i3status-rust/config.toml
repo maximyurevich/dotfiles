@@ -14,25 +14,10 @@ format = " $icon $mem_used.eng(w:4) "
 format_alt = " $icon_swap $swap_used.eng(w:4) "
 
 [[block]]
-block = "music"
-format = " $icon {$prev $combo.str(max_w:20) $play $next |}"
-player = "spotify"
-seek_step_secs = 10
-[[block.click]]
-button = "up"
-action = "volume_up"
-[[block.click]]
-button = "down"
-action = "volume_down"
-[[block.click]]
-button = "forward"
-action = "seek_forward"
-[[block.click]]
-button = "back"
-action = "seek_backward"
-[[block.click]]
-button = "left"
-action = "play_pause"
+block = "focused_window"
+[block.format]
+full = " $title.str(max_w:50) |"
+short = " $title.str(max_w:32) |"
 
 [[block]]
 block = "backlight"
