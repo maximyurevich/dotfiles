@@ -1,8 +1,5 @@
 version: 2
 tools:
-  vim-vint: &vim-vint
-    lint-command: vint --enable-neovim --style-problem ${INPUT}
-    lint-formats: ['%f:%l:%c: %m']
   eslint_d_format: &eslint_d_format
     format-command: eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}
     format-stdin: true
@@ -80,8 +77,6 @@ languages:
   fish:
     - <<: *fish_indent
     - <<: *fish
-  vim:
-    - <<: *vim-vint
   sh:
     - <<: *sh-shfmt
     - <<: *sh-shellcheck
