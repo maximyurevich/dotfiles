@@ -1,6 +1,7 @@
+vim9script
 set guifont=JetBrainsMono\ NFM\ 13
 if has("gui_running")
-    set guioptions -=m 
+    set guioptions -=m
     set guioptions -=T
 endif
 set encoding=utf-8
@@ -26,10 +27,19 @@ set hidden
 setlocal tagfunc=lsp#lsp#TagFunc
 setlocal formatexpr=lsp#lsp#FormatExpr()
 
-
-call plug#begin()
+plug#begin()
 
 Plug 'yegappan/lsp'
+
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'rafamadriz/friendly-snippets'
+
+Plug '00dani/SchemaStore.vim'
+
+Plug 'girishji/autosuggest.vim'
+
+Plug 'EgZvor/vim-ostroga'
 
 Plug 'puremourning/vimspector'
 
@@ -102,156 +112,168 @@ Plug 'sainnhe/gruvbox-material'
 
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 
-call plug#end()
+plug#end()
 
-" LSP
+# LSP
+
+if executable('vim-language-server')
+    lsp#lsp#AddServer([{
+        name: 'vimls',
+        filetype: 'vim',
+        path: 'vim-language-server',
+        args: ['--stdio'],
+        features: { 'diagnostics': v:false }
+    }])
+endif
 
 if executable('awk-language-server')
-    silent! call lsp#lsp#AddServer([{'name': 'awkls',
-        \   'filetype': 'awk',
-        \   'path': 'awk-language-server',
-        \   'args': []
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'awkls',
+        filetype: 'awk',
+        path: 'awk-language-server',
+        args: []
+    }])
 endif
 
 if executable('astro-ls')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'astro-ls',
-        \   'filetype': ['astro'],
-        \   'path': 'astro-ls',
-        \   'args': ['--stdio'],
-        \   'initializationOptions': {
-        \       'typescript': {
-        \           'tsdk': $HOME.'/.npm/lib/node_modules/typescript/lib'
-        \       }
-        \   },
-        \   'syncInit': v:true
-        \ }])
-endif 
+    lsp#lsp#AddServer([{
+        name: 'astro-ls',
+        filetype: ['astro'],
+        path: 'astro-ls',
+        args: ['--stdio'],
+        initializationOptions: {
+            'typescript': {
+                'tsdk': $HOME .. '/.npm/lib/node_modules/typescript/lib'
+            }
+        },
+        syncInit: v:true
+    }])
+endif
 
 if executable('vue-language-server')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'volar',
-        \   'filetype': ['vue', 'typescript', 'javascript'],
-        \   'path': 'vue-language-server',
-        \   'args': ['--stdio'],
-        \   'initializationOptions': {
-        \       'typescript': {
-        \           'tsdk': $HOME.'/.npm/lib/node_modules/typescript/lib'
-        \       }
-        \   },
-        \   'runIfSearch': [
-        \       'nuxt.config.js',
-        \       'nuxt.config.ts'
-        \   ]
-        \ }])
-endif 
+    lsp#lsp#AddServer([{
+        name: 'volar',
+        filetype: ['vue', 'typescript', 'javascript'],
+        path: 'vue-language-server',
+        args: ['--stdio'],
+        initializationOptions: {
+            'typescript': {
+                'tsdk': $HOME .. '/.npm/lib/node_modules/typescript/lib'
+            }
+        },
+        runIfSearch: [
+            'nuxt.config.js',
+            'nuxt.config.ts'
+        ]
+    }])
+endif
 
 if executable('graphql-lsp')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'graphql-lsp',
-        \   'filetype': ['graphql', 'typescriptreact', 'javascriptreact'],
-        \   'path': 'graphql-lsp',
-        \   'args': ['server', '-m', 'stream'],
-        \   'runIfSearch': [
-        \       'graphql.config.json',
-        \       'graphql.config.js',
-        \       'graphql.config.cjs',
-        \       'graphql.config.ts',
-        \       'graphql.config.toml',
-        \       'graphql.config.yaml',
-        \       'graphql.config.yml',
-        \       '.graphqlrc.json',
-        \       '.graphqlrc.toml',
-        \       '.graphqlrc.yaml',
-        \       '.graphqlrc.yml',
-        \       '.graphqlrc.js',
-        \       '.graphqlrc.ts'
-        \ ]
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'graphql-lsp',
+        filetype: ['graphql', 'typescriptreact', 'javascriptreact'],
+        path: 'graphql-lsp',
+        args: ['server', '-m', 'stream'],
+        runIfSearch: [
+            'graphql.config.json',
+            'graphql.config.js',
+            'graphql.config.cjs',
+            'graphql.config.ts',
+            'graphql.config.toml',
+            'graphql.config.yaml',
+            'graphql.config.yml',
+            '.graphqlrc.json',
+            '.graphqlrc.toml',
+            '.graphqlrc.yaml',
+            '.graphqlrc.yml',
+            '.graphqlrc.js',
+            '.graphqlrc.ts'
+        ]
+    }])
 endif
 
 if executable('bufls')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'bufls',
-        \   'filetype': 'proto',
-        \   'path': 'bufls',
-        \   'args': ['serve'],
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'bufls',
+        filetype: 'proto',
+        path: 'bufls',
+        args: ['serve'],
+    }])
 endif
 
 if executable('clangd')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'clangd',
-        \   'filetype': ['c', 'cpp'],
-        \   'path': 'clangd',
-        \   'args': ['--background-index', '--clang-tidy']
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'clangd',
+        filetype: ['c', 'cpp'],
+        path: 'clangd',
+        args: ['--background-index', '--clang-tidy']
+    }])
 endif
 
 if executable('dart')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'dart',
-        \   'filetype': ['dart'],
-        \   'path': 'dart',
-        \   'args': ['language-server', '--client-id', 'vim']
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'dart',
+        filetype: ['dart'],
+        path: 'dart',
+        args: ['language-server', '--client-id', 'vim']
+    }])
 endif
 
 if executable('emmet-language-server')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'emmet',
-        \   'filetype': ['html'],
-        \   'path': 'emmet-language-server',
-        \   'args': ['--stdio'],
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'emmet',
+        filetype: ['html'],
+        path: 'emmet-language-server',
+        args: ['--stdio'],
+    }])
 endif
 
 if executable('docker-compose-langserver')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'docker-compose-langserver',
-        \   'filetype': ['yaml.docker-compose'],
-        \   'path': 'docker-compose-langserver',
-        \   'args': ['--stdio'],
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'docker-compose-langserver',
+        filetype: ['yaml.docker-compose'],
+        path: 'docker-compose-langserver',
+        args: ['--stdio'],
+    }])
 endif
 
 if executable('docker-langserver')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'docker-langserver',
-        \   'filetype': ['dockerfile'],
-        \   'path': 'docker-langserver',
-        \   'args': ['--stdio'],
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'docker-langserver',
+        filetype: ['dockerfile'],
+        path: 'docker-langserver',
+        args: ['--stdio'],
+    }])
 endif
 
 if executable('yaml-language-server')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'yaml-language-server',
-        \   'filetype': ['yaml'],
-        \   'path': 'yaml-language-server',
-        \   'args': ['--stdio'],
-        \   'workspaceConfig': {
-        \       'yaml': {
-        \           'schemas': {
-        \               'https://json.schemastore.org/github-workflow.json': '/.github/workflows/*'
-        \           }
-        \       },
-        \       'redhat': { 
-        \           'enabled': v:false 
-        \       } 
-        \   }
-        \ }])
-endif 
+    lsp#lsp#AddServer([{
+        name: 'yaml-language-server',
+        filetype: ['yaml'],
+        path: 'yaml-language-server',
+        args: ['--stdio'],
+        workspaceConfig: {
+            'yaml': {
+                'schemas': {
+                    'https://json.schemastore.org/github-workflow.json': '/.github/workflows/*'
+                }
+            },
+            'redhat': {
+                'enabled': v:false
+            }
+        }
+    }])
+endif
+
 
 if executable('ansible-language-server')
 
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'ansible-language-server',
-        \   'filetype': 'yaml.ansible',
-        \   'path': 'ansible-language-server',
-        \   'args': ['--stdio']
-        \ }]) 
+    lsp#lsp#AddServer([{
+        name: 'ansible-language-server',
+        filetype: 'yaml.ansible',
+        path: 'ansible-language-server',
+        args: ['--stdio']
+    }])
 
     augroup buffer_ansible
         au BufRead,BufNewFile */playbooks/*.yml set filetype=yaml.ansible
@@ -260,428 +282,429 @@ if executable('ansible-language-server')
 endif
 
 if executable('marksman')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'marksman',
-        \   'filetype': ['markdown'],
-        \   'path': 'marksman',
-        \   'args': ['server'],
-        \   'syncInit': v:true
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'marksman',
+        filetype: ['markdown'],
+        path: 'marksman',
+        args: ['server'],
+        syncInit: v:true
+    }])
 endif
 
 if executable('zk')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'zk',
-        \   'filetype': ['markdown'],
-        \   'path': 'zk',
-        \   'args': ['lsp'],
-        \   'runIfSearch': ['.zk/']
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'zk',
+        filetype: ['markdown'],
+        path: 'zk',
+        args: ['lsp'],
+        runIfSearch: ['.zk/']
+    }])
 endif
 
 if executable('nginx-language-server')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'nginx-language-server',
-        \   'filetype': ['nginx'],
-        \   'path': 'nginx-language-server',
-        \   'args': [],
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'nginx-language-server',
+        filetype: ['nginx'],
+        path: 'nginx-language-server',
+        args: [],
+    }])
 endif
 
-silent! call lsp#lsp#AddServer([{
-    \   'name': 'gopls',
-    \   'filetype': 'go',
-    \   'path': 'gopls',
-    \   'args': ['serve'],
-    \   'workspaceConfig': {
-    \       'gopls': {
-    \           'hints': {
-    \               'assignVariableTypes': v:true,
-    \               'compositeLiteralFields': v:true,
-    \               'compositeLiteralTypes': v:true,
-    \               'constantValues': v:true,
-    \               'functionTypeParameters': v:true,
-    \               'parameterNames': v:true,
-    \               'rangeVariableTypes': v:true
-    \           }
-    \       }
-    \   }
-    \ }])
+if executable('gopls')
+    lsp#lsp#AddServer([{
+        name: 'gopls',
+        filetype: 'go',
+        path: 'gopls',
+        args: ['serve'],
+        workspaceConfig: {
+            'gopls': {
+                'hints': {
+                    'assignVariableTypes': v:true,
+                    'compositeLiteralFields': v:true,
+                    'compositeLiteralTypes': v:true,
+                    'constantValues': v:true,
+                    'functionTypeParameters': v:true,
+                    'parameterNames': v:true,
+                    'rangeVariableTypes': v:true
+                }
+            }
+        }
+    }])
+endif
 
 if executable('lua-language-server')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'luals',
-        \   'filetype': 'lua',
-        \   'path': 'lua-language-server',
-        \   'args': ['--stdio'],
-        \   'runIfSearch': [
-        \       '.luarc.json',
-        \       '.luarc.jsonc',
-        \        '.luacheckrc',
-        \       '.stylua.toml',
-        \       'stylua.toml',
-        \       'selene.toml',
-        \       'selene.yml'
-        \ ]
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'luals',
+        filetype: 'lua',
+        path: 'lua-language-server',
+        args: ['--stdio'],
+        runIfSearch: [
+            '.luarc.json',
+            '.luarc.jsonc',
+            '.luacheckrc',
+            '.stylua.toml',
+            'stylua.toml',
+            'selene.toml',
+            'selene.yml'
+        ]
+    }])
 endif
 
 if executable('ruff-lsp')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'ruff-lsp',
-        \   'filetype': 'python',
-        \   'path': 'ruff-lsp',
-        \   'args': [],
-        \   'runIfSearch': ['.ruff.toml', 'ruff.toml']
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'ruff-lsp',
+        filetype: 'python',
+        path: 'ruff-lsp',
+        args: [],
+        runIfSearch: ['.ruff.toml', 'ruff.toml']
+    }])
 endif
 
 if executable('pyright-langserver')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'pyright',
-        \   'filetype': 'python',
-        \   'path': 'pyright-langserver',
-        \   'args': ['--stdio'],
-        \   'workspaceConfig': {
-        \       'pyright': {
-        \          'disableOrganizeImports': v:true,
-        \       },
-        \       'python': {
-        \           'ignore': ['*'],
-        \       }
-        \   },
-        \   'features': { 'documentFormatting': v:false, 'diagnostics': v:false },
-        \   'runIfSearch': ['pyproject.toml', 'requirements.txt', 'pyrightconfig.json'],
-        \   'syncInit': v:true
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'pyright',
+        filetype: 'python',
+        path: 'pyright-langserver',
+        args: ['--stdio'],
+        workspaceConfig: {
+            'pyright': {
+               'disableOrganizeImports': v:true,
+            },
+            'python': {
+                'ignore': ['*'],
+            }
+        },
+        features: { 'documentFormatting': v:false, 'diagnostics': v:false },
+        runIfSearch: ['pyproject.toml', 'requirements.txt', 'pyrightconfig.json'],
+        syncInit: v:true
+    }])
 endif
 
 if executable('rust-analyzer')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'rustanalyzer',
-        \   'filetype': ['rust'],
-        \   'path': 'rust-analyzer',
-        \   'args': [],
-        \   'syncInit': v:true,
-        \   'initializationOptions': {
-        \       'inlayHints': {
-        \           'typeHints': {
-        \               'enable': v:true
-        \           },
-        \           'parameterHints': {
-        \               'enable': v:true
-        \           }
-        \      },
-        \  },
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'rustanalyzer',
+        filetype: ['rust'],
+        path: 'rust-analyzer',
+        args: [],
+        syncInit: v:true,
+        initializationOptions: {
+            'inlayHints': {
+               'typeHints': {
+                   'enable': v:true
+               },
+               'parameterHints': {
+                   'enable': v:true
+               }
+            },
+        },
+    }])
 endif
 
 if executable('solargraph')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'solargraph',
-        \   'filetype': ['ruby'],
-        \   'path': 'solargraph',
-        \   'args': ['stdio'],
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'solargraph',
+        filetype: ['ruby'],
+        path: 'solargraph',
+        args: ['stdio'],
+    }])
 endif
 
 if executable('bin/tapioca')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'sorbet',
-        \   'filetype': ['ruby'],
-        \   'path': 'bundle',
-        \   'args': ['exec', 'srb', 'tc', '--lsp'],
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'sorbet',
+        filetype: ['ruby'],
+        path: 'bundle',
+        args: ['exec', 'srb', 'tc', '--lsp'],
+    }])
 endif
 
 if executable('standardrb')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'standardrb',
-        \   'filetype': ['ruby'],
-        \   'path': 'standardrb',
-        \   'args': ['standardrb', '--lsp'],
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'standardrb',
+        filetype: ['ruby'],
+        path: 'standardrb',
+        args: ['standardrb', '--lsp'],
+    }])
 endif
 
 if executable('bunx') && executable('typescript-language-server')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'bun-typescript-language-server',
-        \   'filetype': [
-        \       'javascript', 
-        \       'typescript',
-        \       'javascriptreact',
-        \       'typescriptreact'
-        \   ],
-        \   'path': 'bunx',
-        \   'args': ['--bun', 'typescript-language-server', '--stdio'],
-        \   'runIfSearch': ['bun.lockb'],
-        \ }])
+    lsp#lsp#AddServer([{
+          name: 'bun-typescript-language-server',
+          filetype: [
+              'javascript',
+              'typescript',
+              'javascriptreact',
+              'typescriptreact'
+          ],
+          path: 'bunx',
+          args: ['--bun', 'typescript-language-server', '--stdio'],
+          runIfSearch: ['bun.lockb'],
+    }])
 endif
 
 if executable('typescript-language-server')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'tsserver',
-        \   'filetype': [
-        \       'javascript', 
-        \       'typescript',
-        \       'javascriptreact',
-        \       'typescriptreact'
-        \   ],
-        \   'path': 'typescript-language-server',
-        \   'args': ['--stdio'],
-        \   'runIfSearch': ['yarn.lock', 'package-lock.json'],
-        \ }])
+    lsp#lsp#AddServer([{
+          name: 'tsserver',
+          filetype: [
+              'javascript',
+              'typescript',
+              'javascriptreact',
+              'typescriptreact'
+          ],
+          path: 'typescript-language-server',
+          args: ['--stdio'],
+          runIfSearch: ['yarn.lock', 'package-lock.json'],
+        }])
 endif
 
 if executable('cssmodules-language-server')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'cssmodules-language-server',
-        \   'filetype': [
-        \       'javascriptreact',
-        \       'typescriptreact'
-        \   ],
-        \   'path': 'cssmodules-language-server',
-        \   'args': [],
-        \ }])
-endif 
-
-if executable('lemminx')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'lemminx',
-        \   'filetype': [
-        \       'xml', 'xsd', 'xsl', 'xslt', 'svg'
-        \   ],
-        \   'path': 'lemminx',
-        \   'args': [],
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'cssmodules-language-server',
+        filetype: [
+            'javascriptreact',
+            'typescriptreact'
+        ],
+        path: 'cssmodules-language-server',
+        args: [],
+    }])
 endif
 
-if executable('vim-language-server')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'vimls',
-        \   'filetype': 'vim',
-        \   'path': 'vim-language-server',
-        \   'args': ['--stdio']
-        \ }])
+if executable('lemminx')
+    lsp#lsp#AddServer([{
+        name: 'lemminx',
+        filetype: [
+            'xml', 'xsd', 'xsl', 'xslt', 'svg'
+        ],
+        path: 'lemminx',
+        args: [],
+    }])
 endif
 
 if executable('sql-language-server')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'vimls',
-        \   'filetype': ['sql', 'mysql'],
-        \   'path': 'sql-language-server',
-        \   'args': ['up', '--method', 'stdio']
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'sql-language-server',
+        filetype: ['sql', 'mysql'],
+        path: 'sql-language-server',
+        args: ['up', '--method', 'stdio']
+    }])
 endif
 
 if executable('vscode-css-language-server')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'vscode-css-language-server',
-        \   'filetype': ['css', 'sass', 'scss', 'less'],
-        \   'path': 'vscode-css-language-server',
-        \   'args': ['--stdio'],
-        \   'workspaceConfig': {
-        \       'css': { 'validate': v:false },
-        \       'scss': { 'validate': v:false },
-        \       'less': { 'validate': v:false },
-        \   }
-        \ }])
-endif 
+    lsp#lsp#AddServer([{
+        name: 'vscode-css-language-server',
+        filetype: ['css', 'sass', 'scss', 'less'],
+        path: 'vscode-css-language-server',
+        args: ['--stdio'],
+        workspaceConfig: {
+            css: { 'validate': v:false },
+            scss: { 'validate': v:false },
+            less: { 'validate': v:false },
+        }
+    }])
+endif
 
 if executable('stylelint-lsp')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'stylelint-lsp',
-        \   'filetype': [
-        \       'css', 
-        \       'sass', 
-        \       'scss', 
-        \       'less', 
-        \       'vue', 
-        \       'svelte', 
-        \       'javascriptreact', 
-        \       'typescriptreact'
-        \   ],
-        \   'path': 'stylelint-lsp',
-        \   'args': ['--stdio'],
-        \   'workspaceConfig': {
-        \       'stylelintplus': { 
-        \           'autoFixOnFormat': v:true, 
-        \           'autoFixOnSave': v:true 
-        \       },
-        \   }
-        \ }])
-endif
-
-if executable($HOME.'/.npm/lib/node_modules/@tailwindcss/language-server/bin/tailwindcss-language-server')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': $HOME.'/.npm/lib/node_modules/@tailwindcss/language-server/bin/tailwindcss-language-server',
-        \   'filetype': [
-        \       'astro',
-        \       'gohtml',
-        \       'gohtmltmpl',
-        \       'liquid',
-        \       'mdx',
-        \       'css',
-        \       'less',
-        \       'postcss',
-        \       'sass',
-        \       'scss',
-        \       'html', 
-        \       'javascriptreact', 
-        \       'typescriptreact', 
-        \       'vue', 
-        \   ],
-        \   'path': 'tailwindcss-language-server',
-        \   'args': ['--stdio'],
-        \   'runIfSearch': [
-        \       'tailwind.config.js', 
-        \       'tailwind.config.ts', 
-        \       'tailwind.config.cjs', 
-        \       'tailwind.config.mjs',
-        \       'postcss.config.js', 
-        \       'postcss.config.cjs', 
-        \       'postcss.config.mjs', 
-        \       'postcss.config.ts'
-        \   ]
-        \ }])
-endif
-
-if executable('unocss-language-server')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'unocss-language-server',
-        \   'filetype': [
-        \       'html', 
-        \       'javascriptreact', 
-        \       'typescriptreact', 
-        \       'vue', 
-        \       'svelte'
-        \   ],
-        \   'path': 'unocss-language-server',
-        \   'args': ['--stdio'],
-        \   'runIfSearch': [
-        \       'unocss.config.js', 
-        \       'unocss.config.ts', 
-        \       'uno.config.js', 
-        \       'uno.config.ts'
-        \   ]
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'stylelint-lsp',
+        filetype: [
+            'css',
+            'sass',
+            'scss',
+            'less',
+            'vue',
+            'svelte',
+            'javascriptreact',
+            'typescriptreact'
+        ],
+        path: 'stylelint-lsp',
+        args: ['--stdio'],
+        workspaceConfig: {
+            'stylelintplus': {
+                'autoFixOnFormat': v:true,
+                'autoFixOnSave': v:true
+            },
+        }
+    }])
 endif
 
 if executable('vscode-eslint-language-server')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'vscode-eslint-language-server',
-        \   'runIfSearch': [
-        \       '.eslintrc',
-        \       '.eslintrc.js',
-        \       '.eslintrc.cjs',
-        \       '.eslintrc.yaml',
-        \       '.eslintrc.yml',
-        \       '.eslintrc.json',
-        \   ],
-        \   'filetype': [
-        \       'javascript',
-        \       'javascriptreact',
-        \       'typescript',
-        \       'typescriptreact',
-        \       'svelte',
-        \       'vue'
-        \   ],
-        \   'path': 'vscode-eslint-language-server',
-        \   'args': ['--stdio'],
-        \   'workspaceConfig': {
-        \   'nodePath': '',
-        \   'onIgnoredFiles': 'off',
-        \   'packageManager': 'npm',
-        \   'rulesCustomizations': [],
-        \   'run': 'onSave',
-        \   'useESLintClass': v:false,
-        \   'validate': 'on',
-        \   'codeAction': { 
-        \       'disableRuleComment': { 
-        \           'enable': v:true, 
-        \           'location': 'separateLine'
-        \       }, 
-        \       'showDocumentation': { 
-        \           'enable': v:true 
-        \       } 
-        \   },
-        \   'codeActionOnSave': { 'mode': 'all' },
-        \   'experimental': {},
-        \   'problems': { 'shortenToSingleLine': v:false },
-        \   'workingDirectory': { 'mode': 'auto' }
-        \   }
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'vscode-eslint-language-server',
+        runIfSearch: [
+            '.eslintrc',
+            '.eslintrc.js',
+            '.eslintrc.cjs',
+            '.eslintrc.yaml',
+            '.eslintrc.yml',
+            '.eslintrc.json',
+        ],
+        filetype: [
+            'javascript',
+            'javascriptreact',
+            'typescript',
+            'typescriptreact',
+            'svelte',
+            'vue'
+        ],
+        path: 'vscode-eslint-language-server',
+        args: ['--stdio'],
+        workspaceConfig: {
+            nodePath: '',
+            onIgnoredFiles: 'off',
+            packageManager: 'npm',
+            rulesCustomizations: [],
+            run: 'onSave',
+            useESLintClass: v:false,
+            validate: 'on',
+            codeAction: {
+               'disableRuleComment': {
+                   'enable': v:true,
+                   'location': 'separateLine'
+               },
+               'showDocumentation': {
+                   'enable': v:true
+               }
+            },
+            codeActionOnSave: { 'mode': 'all' },
+            experimental: {},
+            problems: { 'shortenToSingleLine': v:false },
+            workingDirectory: { 'mode': 'auto' }
+        }
+    }])
 endif
 
 if executable('vscode-html-language-server')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'vscode-html-language-server',
-        \   'filetype': ['html'],
-        \   'path': 'vscode-html-language-server',
-        \   'args': ['--stdio'],
-        \   'initializationOptions': {
-        \       'provideFormatter': v:true,
-        \       'embeddedLanguages': { 
-        \           'css': v:true, 
-        \           'javascript': v:true 
-        \       },
-        \       'configurationSection': [ 'html', 'css', 'javascript' ]
-        \   }
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'vscode-html-language-server',
+        filetype: ['html'],
+        path: 'vscode-html-language-server',
+        args: ['--stdio'],
+        initializationOptions: {
+            'provideFormatter': v:true,
+            'embeddedLanguages': {
+                'css': v:true,
+                'javascript': v:true
+            },
+            'configurationSection': [ 'html', 'css', 'javascript' ]
+        }
+    }])
 endif
 
+if executable('unocss-language-server')
+    lsp#lsp#AddServer([{
+        name: 'unocss-language-server',
+        filetype: [
+            'html',
+            'javascriptreact',
+            'typescriptreact',
+            'vue',
+            'svelte'
+        ],
+        path: 'unocss-language-server',
+        args: ['--stdio'],
+        runIfSearch: [
+            'unocss.config.js',
+            'unocss.config.ts',
+            'uno.config.js',
+            'uno.config.ts'
+        ]
+    }])
+endif
+
+import "SchemaStore.vim"
+const schemata = SchemaStore.schemata
+const schemas  = SchemaStore.schemas
+
 if executable('vscode-json-language-server')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'vscode-json-language-server',
-        \   'filetype': ['json', 'jsonc'],
-        \   'path': 'vscode-json-language-server',
-        \   'args': ['--stdio'],
-        \   'initializationOptions': { 'provideFormatter': v:true }
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'vscode-json-language-server',
+        filetype: ['json', 'jsonc'],
+        path: 'vscode-json-language-server',
+        args: ['--stdio'],
+        initializationOptions: { 'provideFormatter': v:true },
+        workspaceConfig: {
+            json: {
+                format: { enable: true },
+                validate: { enable: true },
+                schemas: g:SchemaStore#Schemata(),
+            }
+        },
+    }])
 endif
 
 if executable('efm-langserver')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'efm',
-        \   'filetype': [
-        \       'javascript',
-        \       'javascriptreact',
-        \       'typescript',
-        \       'typescriptreact',
-        \       'fish',
-        \       'gitcommit',
-        \       'lua',
-        \       'python',
-        \       'vim',
-        \       'vue',
-        \       'sh',
-        \       'svelte',
-        \       'markdown',
-        \       'rst',
-        \       'yaml'
-        \   ],
-        \   'path': 'efm-langserver',
-        \   'args': [],
-        \   'initializationOptions': {
-        \   	'documentFormatting': v:true
-        \   },
-        \   'features': {
-        \   	'documentFormatting': v:true
-        \   }
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'efm',
+        filetype: [
+            'javascript',
+            'javascriptreact',
+            'typescript',
+            'typescriptreact',
+            'fish',
+            'gitcommit',
+            'lua',
+            'python',
+            'vue',
+            'sh',
+            'svelte',
+            'markdown',
+            'rst',
+            'yaml'
+        ],
+        path: 'efm-langserver',
+        args: [],
+        initializationOptions: {
+            'documentFormatting': v:true
+        },
+        features: {
+            'documentFormatting': v:true
+        }
+    }])
 endif
 
 if executable('svelteserver')
-    silent! call lsp#lsp#AddServer([{
-        \   'name': 'svelteserver',
-        \   'filetype': ['svelte'],
-        \   'path': 'svelteserver',
-        \   'args': ['--stdio'],
-        \   'syncInit': v:true
-        \ }])
+    lsp#lsp#AddServer([{
+        name: 'svelteserver',
+        filetype: ['svelte'],
+        path: 'svelteserver',
+        args: ['--stdio'],
+        syncInit: v:true
+    }])
 endif
 
-
+if executable($HOME .. '/.npm/lib/node_modules/@tailwindcss/language-server/bin/tailwindcss-language-server')
+    lsp#lsp#AddServer([{
+        name: $HOME .. '/.npm/lib/node_modules/@tailwindcss/language-server/bin/tailwindcss-language-server',
+        filetype: [
+            'astro',
+            'gohtml',
+            'gohtmltmpl',
+            'liquid',
+            'mdx',
+            'css',
+            'less',
+            'postcss',
+            'sass',
+            'scss',
+            'html',
+            'javascriptreact',
+            'typescriptreact',
+            'vue',
+        ],
+        path: 'tailwindcss-language-server',
+        args: ['--stdio'],
+        runIfSearch: [
+            'tailwind.config.js',
+            'tailwind.config.ts',
+            'tailwind.config.cjs',
+            'tailwind.config.mjs',
+            'postcss.config.js',
+            'postcss.config.cjs',
+            'postcss.config.mjs',
+            'postcss.config.ts'
+        ]
+    }])
+endif
 
 augroup lsp_options
     autocmd VimEnter * silent! call LspOptionsSet({
@@ -739,7 +762,7 @@ augroup lsp_options
         \   'showInlayHints': v:false,
         \   'showSignature': v:true,
         \   'snippetSupport': v:true,
-        \   'vsnipSupport': v:false,
+        \   'vsnipSupport': v:true,
         \   'ultisnipsSupport': v:false,
         \   'usePopupInCodeAction': v:false,
         \   'useQuickfixForLocations': v:false,
@@ -747,7 +770,7 @@ augroup lsp_options
         \ })
 augroup END
 
-function! s:on_lsp_buffer_attached() abort
+def OnLspBufferAttached()
     nmap <buffer> ca :LspCodeAction<CR>
     vmap <buffer> ca :LspCodeAction<CR>
     nmap <buffer> gr :LspRename<CR>
@@ -775,47 +798,47 @@ function! s:on_lsp_buffer_attached() abort
     augroup lsp_format
       autocmd! BufWritePre *.py,*.sh,*.svelte,*.toml,*.vue,*.rb,*.html,*.json,*.yaml,*.lua,*.css,*.js,*.jsx,*.ts,*.tsx,*.rs,*.go,*.dart,*.md,*.c,*.cpp :LspFormat
     augroup END
-endfunction
+enddef
 
 augroup lsp_attach
     au!
-    au User LspAttached call s:on_lsp_buffer_attached()
+    au User LspAttached call s:OnLspBufferAttached()
 augroup END
 
-augroup LspCustom
+augroup lsp_show_under_curso
     au!
     au CursorMoved * silent! LspDiag! current
 augroup END
 
-" Completion
+# Completion
 
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
-" Lightline
+# Lightline
 
-let g:lightline = {
-    \   'enable': {
-    \       'statusline': 1,
-    \       'tabline': 0
-    \   },
-    \   'active': {
-    \       'left': [ [ 'mode', 'paste' ],
-    \                 [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-    \   },
-    \   'component_function': {
-    \       'gitbranch': 'FugitiveHead'
-    \   },
-    \   'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-    \   'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
-    \ }
+g:lightline = {
+      enable: {
+          'statusline': 1,
+          'tabline': 0
+      },
+      active: {
+          'left': [ [ 'mode', 'paste' ],
+                    [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      },
+      component_function: {
+          'gitbranch': 'FugitiveHead'
+      },
+      separator: { 'left': "\ue0b0", 'right': "\ue0b2" },
+      subseparator: { 'left': "\ue0b1", 'right': "\ue0b3" },
+}
 
 if !has('gui_running')
   set t_Co=256
 endif
 
-" Tabline
+# Tabline
 
 nnoremap <silent><leader>1 <Cmd>tabfirst<CR>
 nnoremap <silent><leader>2 <Cmd>tabn 2<CR>
@@ -845,35 +868,35 @@ nnoremap <silent>td$ <Cmd>tabc $<CR>
 nnoremap <silent>td :tabc<CR>
 nnoremap <silent>to :tabo<CR>
 
-" FZF
+# FZF
 
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit',
-  \ 'ctrl-d': 'wall | bdelete'
-  \ }
+g:fzf_action = {
+    'ctrl-t': 'tab split',
+    'ctrl-x': 'split',
+    'ctrl-v': 'vsplit',
+    'ctrl-d': 'wall | bdelete'
+}
 
 nmap <silent><leader>ff :Files<CR>
 nmap <silent><leader>fg :Rg<CR>
 nmap <silent><leader>fb :Buffers<CR>
 nmap <silent><leader>fh :Helptags<CR>
 
-" Fern 
+# Fern
 
-let g:fern#renderer = "nerdfont"
+g:fern#renderer = "nerdfont"
 
 nnoremap <silent><C-t> :Fern %:h -drawer -toggle -width=40<CR>
 nnoremap <silent><C-f> :Fern . -drawer -toggle -width=40 -reveal=%<CR>
 
 augroup FernGroup
     autocmd! *
-    autocmd FileType fern call s:init_fern()
+    autocmd FileType fern InitFern()
 augroup END
 
-function! s:init_fern() abort
+def InitFern()
     nmap <buffer> o <Plug>(fern-action-open:edit)
     nmap <buffer> go <Plug>(fern-action-open:edit)<C-w>p
     nmap <buffer> t <Plug>(fern-action-open:tabedit)
@@ -896,15 +919,15 @@ function! s:init_fern() abort
     nmap <buffer> q :<C-u>quit<CR>
 
     nmap <buffer> <LeftRelease> <Plug>(fern-action-open-or-expand)
-endfunction
+enddef
 
-" Debug
+# Debug
 
-let g:vimspector_enable_mappings = 'HUMAN'
+g:vimspector_enable_mappings = 'HUMAN'
 
-" Test
+# Test
 
-let test#strategy = 'kitty'
+g:test#strategy = 'kitty'
 
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
@@ -912,7 +935,7 @@ nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
-" Cutlass
+# Cutlass
 
 nnoremap m d
 xnoremap m d
@@ -920,9 +943,9 @@ xnoremap m d
 nnoremap mm dd
 nnoremap M D
 
-" Yoink
+# Yoink
 
-let g:yoinkIncludeDeleteOperations = 1
+g:yoinkIncludeDeleteOperations = 1
 
 nmap <c-n> <plug>(YoinkPostPasteSwapBack)
 nmap <c-p> <plug>(YoinkPostPasteSwapForward)
@@ -930,7 +953,8 @@ nmap <c-p> <plug>(YoinkPostPasteSwapForward)
 nmap p <plug>(YoinkPaste_p)
 nmap P <plug>(YoinkPaste_P)
 
-" Also replace the default gp with yoink paste so we can toggle paste in this case too
+# Also replace the default gp with yoink paste so we can toggle paste in this case too
+
 nmap gp <plug>(YoinkPaste_gp)
 nmap gP <plug>(YoinkPaste_gP)
 
@@ -942,78 +966,99 @@ nmap <c-=> <plug>(YoinkPostPasteToggleFormat)
 nmap y <plug>(YoinkYankPreserveCursorPosition)
 xmap y <plug>(YoinkYankPreserveCursorPosition)
 
-" Golang
+# Golang
 
-let g:go_gopls_enabled = 0
+g:go_gopls_enabled = 0
 
-" Motion
+# Motion
 
-let g:sneak#label = 1
+g:sneak#label = 1
 
-" Pydocstring
+# Pydocstring
 
-let g:pydocstring_doq_path = $HOME.'/.local/bin/doq'
+g:pydocstring_doq_path = $HOME .. '/.local/bin/doq'
 
-let g:pydocstring_enable_mapping = 0
+g:pydocstring_enable_mapping = 0
 
 nmap <silent> <leader>nn <Plug>(pydocstring)
 
-" Tabline 
+# Tabline
 
 nmap <silent> <Space>l :tabprevious<CR>
 nmap <silent> <Space>r :tabnext<CR>
 nmap <silent> <Space>d :tabclose<CR>
 
-" Kitty
+# Ostroga
 
-" Mouse support
+nnoremap <leader>' <cmd>OstrogaJump<cr>
+
+# Kitty
+
+# Mouse support
+
 set mouse=a
 set ttymouse=sgr
 set balloonevalterm
-" Styled and colored underline support
-let &t_AU = "\e[58:5:%dm"
-let &t_8u = "\e[58:2:%lu:%lu:%lum"
-let &t_Us = "\e[4:2m"
-let &t_Cs = "\e[4:3m"
-let &t_ds = "\e[4:4m"
-let &t_Ds = "\e[4:5m"
-let &t_Ce = "\e[4:0m"
-" Strikethrough
-let &t_Ts = "\e[9m"
-let &t_Te = "\e[29m"
-" Truecolor support
-let &t_8f = "\e[38:2:%lu:%lu:%lum"
-let &t_8b = "\e[48:2:%lu:%lu:%lum"
-let &t_RF = "\e]10;?\e\\"
-let &t_RB = "\e]11;?\e\\"
-" Bracketed paste
-let &t_BE = "\e[?2004h"
-let &t_BD = "\e[?2004l"
-let &t_PS = "\e[200~"
-let &t_PE = "\e[201~"
-" Cursor control
-let &t_RC = "\e[?12$p"
-let &t_SH = "\e[%d q"
-let &t_RS = "\eP$q q\e\\"
-let &t_SI = "\e[5 q"
-let &t_SR = "\e[3 q"
-let &t_EI = "\e[1 q"
-let &t_VS = "\e[?12l"
-" Focus tracking
-let &t_fe = "\e[?1004h"
-let &t_fd = "\e[?1004l"
+
+# Styled and colored underline support
+
+&t_AU = "\e[58:5:%dm"
+&t_8u = "\e[58:2:%lu:%lu:%lum"
+&t_Us = "\e[4:2m"
+&t_Cs = "\e[4:3m"
+&t_ds = "\e[4:4m"
+&t_Ds = "\e[4:5m"
+&t_Ce = "\e[4:0m"
+
+# Strikethrough
+
+&t_Ts = "\e[9m"
+&t_Te = "\e[29m"
+
+# Truecolor support
+
+&t_8f = "\e[38:2:%lu:%lu:%lum"
+&t_8b = "\e[48:2:%lu:%lu:%lum"
+&t_RF = "\e]10;?\e\\"
+&t_RB = "\e]11;?\e\\"
+
+# Bracketed paste
+
+&t_BE = "\e[?2004h"
+&t_BD = "\e[?2004l"
+&t_PS = "\e[200~"
+&t_PE = "\e[201~"
+
+# Cursor control
+
+&t_RC = "\e[?12$p"
+&t_SH = "\e[%d q"
+&t_RS = "\eP$q q\e\\"
+&t_SI = "\e[5 q"
+&t_SR = "\e[3 q"
+&t_EI = "\e[1 q"
+&t_VS = "\e[?12l"
+
+# Focus tracking
+
+&t_fe = "\e[?1004h"
+&t_fd = "\e[?1004l"
+
 execute "set <FocusGained>=\<Esc>[I"
 execute "set <FocusLost>=\<Esc>[O"
-" Window title
-let &t_ST = "\e[22;2t"
-let &t_RT = "\e[23;2t"
 
-" vim hardcodes background color erase even if the terminfo file does
-" not contain bce. This causes incorrect background rendering when
-" using a color theme with a background color in terminals such as
-" kitty that do not support background color erase.
-let &t_ut=''
+# Window title
 
-" Colorscheme
+&t_ST = "\e[22;2t"
+&t_RT = "\e[23;2t"
+
+# vim hardcodes background color erase even if the terminfo file does
+# not contain bce. This causes incorrect background rendering when
+# using a color theme with a background color in terminals such as
+# kitty that do not support background color erase.
+
+&t_ut = ''
+
+# Colorscheme
 
 silent! colorscheme gruvbox-material
