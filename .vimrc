@@ -658,7 +658,8 @@ if executable('efm-langserver')
         },
         features: {
             'documentFormatting': v:true
-        }
+        },
+        syncInit: v:true
     }])
 endif
 
@@ -714,7 +715,7 @@ augroup lsp_options
         \   'autoHigightDiags': v:true,
         \   'autoPopulateDiags': v:false,
         \   'completionMatcher': 'case',
-        \   'completionTextEdit': v:true,
+        \   'completionTextEdit': v:false,
         \   'completionKinds': {
         \       'Text':                    '󰉿',
         \       'Method':                  '󰆧',
@@ -769,6 +770,7 @@ augroup lsp_options
         \   'useBufferCompletion': v:true,
         \ })
 augroup END
+
 
 def OnLspBufferAttached()
     nmap <buffer> ca :LspCodeAction<CR>
