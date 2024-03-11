@@ -675,40 +675,6 @@ if executable('svelteserver')
     }])
 endif
 
-if executable($HOME .. '/.npm/lib/node_modules/@tailwindcss/language-server/bin/tailwindcss-language-server')
-    lsp#lsp#AddServer([{
-        name: $HOME .. '/.npm/lib/node_modules/@tailwindcss/language-server/bin/tailwindcss-language-server',
-        filetype: [
-            'astro',
-            'gohtml',
-            'gohtmltmpl',
-            'liquid',
-            'mdx',
-            'css',
-            'less',
-            'postcss',
-            'sass',
-            'scss',
-            'html',
-            'javascriptreact',
-            'typescriptreact',
-            'vue',
-        ],
-        path: 'tailwindcss-language-server',
-        args: ['--stdio'],
-        runIfSearch: [
-            'tailwind.config.js',
-            'tailwind.config.ts',
-            'tailwind.config.cjs',
-            'tailwind.config.mjs',
-            'postcss.config.js',
-            'postcss.config.cjs',
-            'postcss.config.mjs',
-            'postcss.config.ts'
-        ]
-    }])
-endif
-
 augroup lsp_options
     autocmd VimEnter * silent! call LspOptionsSet({
         \   'aleSupport': v:false,
