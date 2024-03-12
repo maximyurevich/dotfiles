@@ -118,6 +118,32 @@ plug#end()
 
 # LSP
 
+if executable('jdtls')
+    lsp#lsp#AddServer([{
+            name: 'jdtls',
+            filetype: 'java',
+            path: 'jdtls',
+            args: [],
+            initializationOptions: {
+                'settings': {
+                    'java': {
+                        'completion': {
+                            'filteredTypes': [
+                                "com.sun.*", 
+                                "java.awt.*", 
+                                "jdk.*", 
+                                "org.graalvm.*", 
+                                "sun.*", 
+                                "javax.awt.*", 
+                                "javax.swing.*"
+                            ]
+                        }
+                    } 
+                }
+            }
+        }])
+endif
+
 if executable('vim-language-server')
     lsp#lsp#AddServer([{
         name: 'vimls',
