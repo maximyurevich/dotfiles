@@ -118,32 +118,6 @@ plug#end()
 
 # LSP
 
-if executable('jdtls')
-    silent! lsp#lsp#AddServer([{
-            name: 'jdtls',
-            filetype: 'java',
-            path: 'jdtls',
-            args: [],
-            initializationOptions: {
-                'settings': {
-                    'java': {
-                        'completion': {
-                            'filteredTypes': [
-                                "com.sun.*", 
-                                "java.awt.*", 
-                                "jdk.*", 
-                                "org.graalvm.*", 
-                                "sun.*", 
-                                "javax.awt.*", 
-                                "javax.swing.*"
-                            ]
-                        }
-                    } 
-                }
-            }
-        }])
-endif
-
 if executable('vim-language-server')
     silent! lsp#lsp#AddServer([{
         name: 'vimls',
@@ -457,31 +431,31 @@ endif
 
 if executable('bunx') && executable('typescript-language-server')
     silent! lsp#lsp#AddServer([{
-          name: 'bun-typescript-language-server',
-          filetype: [
-              'javascript',
-              'typescript',
-              'javascriptreact',
-              'typescriptreact'
-          ],
-          path: 'bunx',
-          args: ['--bun', 'typescript-language-server', '--stdio'],
-          runIfSearch: ['bun.lockb'],
+        name: 'bun-typescript-language-server',
+        filetype: [
+            'javascript',
+            'typescript',
+            'javascriptreact',
+            'typescriptreact'
+        ],
+        path: 'bunx',
+        args: ['--bun', 'typescript-language-server', '--stdio'],
+        runIfSearch: ['bun.lockb'],
     }])
 endif
 
 if executable('typescript-language-server')
     silent! lsp#lsp#AddServer([{
-          name: 'tsserver',
-          filetype: [
-              'javascript',
-              'typescript',
-              'javascriptreact',
-              'typescriptreact'
-          ],
-          path: 'typescript-language-server',
-          args: ['--stdio'],
-          runIfSearch: ['yarn.lock', 'package-lock.json'],
+        name: 'tsserver',
+        filetype: [
+            'javascript',
+            'typescript',
+            'javascriptreact',
+            'typescriptreact'
+        ],
+        path: 'typescript-language-server',
+        args: ['--stdio'],
+        runIfSearch: ['yarn.lock', 'package-lock.json'],
         }])
 endif
 
@@ -701,9 +675,35 @@ if executable('svelteserver')
     }])
 endif
 
+if executable('jdtls')
+    silent! lsp#lsp#AddServer([{
+        name: 'jdtls',
+        filetype: 'java',
+        path: 'jdtls',
+        args: [],
+        initializationOptions: {
+            'settings': {
+                'java': {
+                    'completion': {
+                        'filteredTypes': [
+                            'com.sun.*', 
+                            'java.awt.*', 
+                            'jdk.*', 
+                            'org.graalvm.*', 
+                            'sun.*', 
+                            'javax.awt.*', 
+                            'javax.swing.*'
+                        ]
+                    }
+                } 
+            }
+        }
+    }])
+endif
+
+
 augroup lsp_options
     autocmd VimEnter * silent! call LspOptionsSet({
-        \   'aleSupport': v:false,
         \   'autoComplete': v:true,
         \   'autoHiglight': v:false,
         \   'autoHigightDiags': v:true,
@@ -758,7 +758,6 @@ augroup lsp_options
         \   'showSignature': v:true,
         \   'snippetSupport': v:true,
         \   'vsnipSupport': v:true,
-        \   'ultisnipsSupport': v:false,
         \   'usePopupInCodeAction': v:false,
         \   'useQuickfixForLocations': v:false,
         \   'useBufferCompletion': v:true,
