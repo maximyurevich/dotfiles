@@ -54,6 +54,7 @@ Plug 'sangdol/mintabline.vim'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'christoomey/vim-system-copy'
+Plug 'ojroques/vim-oscyank', {'branch': 'main'}
 
 Plug 'junegunn/fzf.vim'
 
@@ -997,6 +998,12 @@ nmap <c-=> <plug>(YoinkPostPasteToggleFormat)
 
 nmap y <plug>(YoinkYankPreserveCursorPosition)
 xmap y <plug>(YoinkYankPreserveCursorPosition)
+
+# Oscyank
+
+nmap <leader>c <Plug>OSCYankOperator
+nmap <leader>cc <leader>c_
+vmap <leader>c <Plug>OSCYankVisual
 
 # Golang
 
