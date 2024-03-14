@@ -507,6 +507,41 @@ if executable('vscode-css-language-server')
     }])
 endif
 
+if executable($HOME .. '/.npm/bin/tailwindcss-language-server')
+    silent! lsp#lsp#AddServer([{
+        name: $HOME .. '/.npm/bin/tailwindcss-language-server',
+        filetype: [
+            'astro',
+            'gohtml',
+            'gohtmltmpl',
+            'liquid',
+            'mdx',
+            'css',
+            'less',
+            'postcss',
+            'sass',
+            'scss',
+            'html',
+            'javascriptreact',
+            'typescriptreact',
+            'vue',
+            'svelte'
+        ],
+        path: 'tailwindcss-language-server',
+        args: ['--stdio'],
+        runIfSearch: [
+            'tailwind.config.js',
+            'tailwind.config.ts',
+            'tailwind.config.cjs',
+            'tailwind.config.mjs',
+            'postcss.config.js',
+            'postcss.config.cjs',
+            'postcss.config.mjs',
+            'postcss.config.ts'
+        ]
+    }])
+endif
+
 if executable('stylelint-lsp')
     silent! lsp#lsp#AddServer([{
         name: 'stylelint-lsp',
