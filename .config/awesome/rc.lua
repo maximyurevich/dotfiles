@@ -39,7 +39,7 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "xterm"
-editor = os.getenv("EDITOR") or "nvim"
+editor = os.getenv("EDITOR") or "hx"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -279,7 +279,7 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ modkey }, "Return", function()
 		awful.spawn(terminal)
 	end, { description = "open a terminal", group = "launcher" }),
-	awful.key({ modkey }, "r", function()
+	awful.key({ modkey }, "d", function()
 		awful.util.spawn("rofi -combi-modi window,drun -show combi", false)
 	end, { description = "run rofi", group = "launcher" }),
 	awful.key({ modkey }, "p", function()
