@@ -53,6 +53,8 @@ Plug 'itchyny/lightline.vim'
 Plug 'sangdol/mintabline.vim'
 Plug 'ryanoasis/vim-devicons'
 
+Plug 'christoomey/vim-system-copy'
+
 Plug 'junegunn/fzf.vim'
 
 Plug 'tpope/vim-fugitive'
