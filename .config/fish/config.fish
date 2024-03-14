@@ -2,12 +2,13 @@ set -U fish_greeting ""
 
 fish_vi_key_bindings
 
-alias vi nvim
+alias vi vim
 alias icat "kitty +kitten icat"
 
 set -Ux TOKENIZERS_PARALLELISM false
 set -Ux LD_LIBRARY_PATH /opt/cuda/lib64
 set -Ux VISUAL vim
+set -Ux EDITOR hx
 set -Ux SDL_VIDEODRIVER x11
 set -Ux CHROME_EXECUTABLE /usr/bin/google-chrome-stable
 set -Ux JAVA_HOME /usr/lib/jvm/java-21-openjdk
