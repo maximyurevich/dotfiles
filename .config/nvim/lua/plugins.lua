@@ -390,10 +390,11 @@ return {
 	"dstein64/vim-startuptime",
 	"pearofducks/ansible-vim",
 	{
-		"otavioschwanck/arrow.nvim",
-		opts = {
-			show_icons = true,
-			leader_key = ";",
-		},
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("maxim.harpoon")
+		end,
 	},
 }
