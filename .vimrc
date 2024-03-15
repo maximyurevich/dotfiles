@@ -1,8 +1,8 @@
 vim9script
 set guifont=JetBrainsMono\ NFM\ 13
 if has("gui_running")
-    set guioptions -=m
-    set guioptions -=T
+    set guioptions-=m
+    set guioptions-=T
 endif
 set encoding=utf-8
 scriptencoding utf-8
@@ -423,12 +423,12 @@ if executable('bin/tapioca')
     }])
 endif
 
-if executable('standardrb')
+if executable('bin/standardrb')
     silent! lsp#lsp#AddServer([{
         name: 'standardrb',
         filetype: ['ruby'],
-        path: 'standardrb',
-        args: ['standardrb', '--lsp'],
+        path: 'bundle',
+        args: ['exec', 'standardrb', '--lsp'],
     }])
 endif
 
