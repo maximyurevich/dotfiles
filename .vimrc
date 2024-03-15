@@ -802,8 +802,8 @@ augroup END
 
 
 def OnLspBufferAttached()
-    nmap <buffer> ca :LspCodeAction<CR>
-    vmap <buffer> ca :LspCodeAction<CR>
+    nmap <buffer> <space>ca :LspCodeAction<CR>
+    vmap <buffer> <space>ca :LspCodeAction<CR>
     nmap <buffer> gr :LspRename<CR>
     nmap <buffer> gp :LspPeekDefinition<CR>
     nmap <buffer> gd :LspGotoDefinition<CR>
