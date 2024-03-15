@@ -39,8 +39,6 @@ Plug '00dani/SchemaStore.vim'
 
 Plug 'girishji/autosuggest.vim'
 
-Plug 'girishji/easyjump.vim'
-
 Plug 'EgZvor/vim-ostroga'
 
 Plug 'puremourning/vimspector'
@@ -1029,7 +1027,7 @@ nmap <silent> <Space>d :tabclose<CR>
 
 # Ostroga
 
-nnoremap <leader>' <cmd>OstrogaJump<cr>
+nnoremap <leader>fe <cmd>OstrogaJump<cr>
 
 # Kitty
 
