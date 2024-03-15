@@ -417,7 +417,7 @@ if executable('bin/tapioca')
         name: 'sorbet',
         filetype: ['ruby'],
         path: 'bundle',
-        args: ['exec', 'srb', 'tc', '--lsp'],
+        args: ['exec', 'srb', 'tc', '--lsp', '--disable-watchman'],
     }])
 endif
 
