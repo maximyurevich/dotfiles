@@ -1,4 +1,34 @@
 // Settings in here override those in "LSP/LSP.sublime-settings"
 {
+	"lsp_code_actions_on_save": {
+		"source.fixAll.ruff": true,
+		"source.addMissingImports.ts": true,
+		"source.fixAll.eslint": true,
+		"source.organizeImports.ruff": true,
+		"source.removeUnused.ts": false,
+	},
 	"lsp_format_on_save": true,
+	"clients": {
+		"ruby": {
+			"enabled": true,
+			"command": [
+				"solargraph",
+				"stdio"
+			],
+			"selector": "source.ruby | text.html.ruby",
+			"initializationOptions": {
+				"diagnostics": false
+			}
+		},
+		"standardrb": {
+			"enabled": true,
+			"command": [
+				"bundle",
+				"exec",
+				"standardrb",
+				"--lsp"
+			],
+			"selector": "source.ruby"
+		}
+	}
 }
