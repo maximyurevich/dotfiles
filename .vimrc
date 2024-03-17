@@ -129,6 +129,15 @@ if executable('vim-language-server')
     }])
 endif
 
+if executable('bash-language-server')
+    silent! lsp#lsp#AddServer([{
+        name: 'bashls',
+        filetype: 'sh',
+        path: 'bash-language-server',
+        args: ['start'],
+    }])
+endif
+
 if executable('awk-language-server')
     silent! lsp#lsp#AddServer([{
         name: 'awkls',
