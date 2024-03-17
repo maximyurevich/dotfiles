@@ -811,8 +811,8 @@ augroup END
 
 
 def OnLspBufferAttached()
-    nmap <buffer> <space>ca :LspCodeAction<CR>
-    vmap <buffer> <space>ca :LspCodeAction<CR>
+    nmap <buffer> <leader>ca :LspCodeAction<CR>
+    vmap <buffer> <leader>ca :LspCodeAction<CR>
     nmap <buffer> gr :LspRename<CR>
     nmap <buffer> gp :LspPeekDefinition<CR>
     nmap <buffer> gd :LspGotoDefinition<CR>
@@ -827,8 +827,8 @@ def OnLspBufferAttached()
     nmap <buffer> sc :LspDiagHere<CR>
     nmap <buffer> [g :LspDiagPrev<CR>
     nmap <buffer> ]g :LspDiagNext<CR>
-    nmap <buffer> [d :LspDiagLast<CR>
-    nmap <buffer> ]d :LspDiagFirst<CR>
+    nmap <buffer> [dl :LspDiagLast<CR>
+    nmap <buffer> ]df :LspDiagFirst<CR>
     nmap <buffer> <space>q :LspDiagShow<CR>
     nmap <buffer> K :LspHover<CR>
     nmap <buffer> <leader>o :LspOutline<CR>
