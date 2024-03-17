@@ -157,6 +157,7 @@ return {
 		config = function()
 			require("maxim.lsp.lspsaga")
 		end,
+		event = "LspAttach",
 		dependencies = {
 			{ "nvim-tree/nvim-web-devicons" },
 			{ "nvim-treesitter/nvim-treesitter" },
