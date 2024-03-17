@@ -40,6 +40,27 @@ local clients = {
 	"jsonls",
 }
 
+local function set_lsp_keymaps(bufnr)
+	local bufopts = { noremap = true, silent = true, buffer = bufnr }
+	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
+	vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
+	vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+	vim.keymap.set("n", "<space>wl", function()
+		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+	end, bufopts)
+	vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
+	vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
+	vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
+	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+	vim.keymap.set("n", "<space>f", function()
+		vim.lsp.buf.format({ async = true })
+	end, bufopts)
+end
+
 local on_attach = function(client, bufnr)
 	for _, c in ipairs(clients) do
 		if client.name == c then
@@ -50,30 +71,11 @@ local on_attach = function(client, bufnr)
 		client.server_capabilities.hoverProvider = false
 	end
 
+	if client.name ~= "standardrb" then
+		set_lsp_keymaps(bufnr)
+	end
+
 	if client.name ~= "stylelint_lsp" and client.name ~= "standardrb" then
-		local bufopts = { noremap = true, silent = true, buffer = bufnr }
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
-		vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-		vim.keymap.set(
-			"n",
-			"<space>wr",
-			vim.lsp.buf.remove_workspace_folder,
-			bufopts
-		)
-		vim.keymap.set("n", "<space>wl", function()
-			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-		end, bufopts)
-		vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
-		vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
-		vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
-		vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-		vim.keymap.set("n", "<space>f", function()
-			vim.lsp.buf.format({ async = true })
-		end, bufopts)
 		lsp_signature.on_attach({
 			bind = true,
 			handler_opts = {
@@ -190,9 +192,11 @@ lspconfig.jsonls.setup({
 })
 
 lspconfig.sorbet.setup({
+	cmd = { "bundle", "exec", "srb", "tc", "--lsp", "--disable-watchman" },
 	on_attach = on_attach,
 	capabilities = capabilities,
 	single_file_support = false,
+	root_dir = lspconfig.util.root_pattern("bin/tapioca"),
 })
 
 lspconfig.solargraph.setup({
@@ -207,6 +211,11 @@ lspconfig.solargraph.setup({
 		formatting = false,
 	},
 	single_file_support = true,
+})
+
+lspconfig.standardrb.setup({
+	on_attach = on_attach,
+	cmd = { "bundle", "exec", "standardrb", "--lsp" },
 })
 
 lspconfig.stimulus_ls.setup({
@@ -259,11 +268,6 @@ lspconfig.yamlls.setup({
 
 lspconfig.ruff_lsp.setup({
 	capabilities = capabilities,
-	init_options = {
-		settings = {
-			args = {},
-		},
-	},
 })
 
 lspconfig.gopls.setup({
@@ -277,7 +281,6 @@ lspconfig.gopls.setup({
 })
 
 lspconfig.stylelint_lsp.setup({
-	on_attach = function() end,
 	capabilities = capabilities,
 	settings = {
 		stylelintplus = {
@@ -341,7 +344,6 @@ local servers = {
 	"svelte",
 	"unocss",
 	"vimls",
-	"standardrb",
 	"htmx",
 	"bufls",
 }
