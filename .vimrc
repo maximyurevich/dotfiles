@@ -60,10 +60,10 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'airblade/vim-gitgutter'
 
-Plug 'lambdalisue/fern.vim'
-Plug 'lambdalisue/fern-hijack.vim'
-Plug 'lambdalisue/fern-renderer-nerdfont.vim'
-Plug 'lambdalisue/fern-git-status.vim'
+Plug 'preservim/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'PhilRunninger/nerdtree-visual-selection'
+Plug 'xuyuanp/nerdtree-git-plugin'
 
 Plug 'lambdalisue/nerdfont.vim'
 
@@ -924,42 +924,12 @@ nmap <silent><leader>fg :Rg<CR>
 nmap <silent><leader>fb :Buffers<CR>
 nmap <silent><leader>fh :Helptags<CR>
 
-# Fern
+# NERDTree
 
-g:fern#renderer = "nerdfont"
-
-nnoremap <silent><C-t> :Fern %:h -drawer -toggle -width=40<CR>
-nnoremap <silent><C-f> :Fern . -drawer -toggle -width=40 -reveal=%<CR>
-
-augroup FernGroup
-    autocmd! *
-    autocmd FileType fern InitFern()
-augroup END
-
-def InitFern()
-    nmap <buffer> o <Plug>(fern-action-open:edit)
-    nmap <buffer> go <Plug>(fern-action-open:edit)<C-w>p
-    nmap <buffer> t <Plug>(fern-action-open:tabedit)
-    nmap <buffer> T <Plug>(fern-action-open:tabedit)gT
-    nmap <buffer> i <Plug>(fern-action-open:split)
-    nmap <buffer> gi <Plug>(fern-action-open:split)<C-w>p
-    nmap <buffer> s <Plug>(fern-action-open:vsplit)
-    nmap <buffer> gs <Plug>(fern-action-open:vsplit)<C-w>p
-    nmap <buffer> ma <Plug>(fern-action-new-path)
-    nmap <buffer> P gg
-
-    nmap <buffer> C <Plug>(fern-action-enter)
-    nmap <buffer> u <Plug>(fern-action-leave)
-    nmap <buffer> r <Plug>(fern-action-reload)
-    nmap <buffer> R gg<Plug>(fern-action-reload)<C-o>
-    nmap <buffer> cd <Plug>(fern-action-cd)
-    nmap <buffer> CD gg<Plug>(fern-action-cd)<C-o>
-
-
-    nmap <buffer> q :<C-u>quit<CR>
-
-    nmap <buffer> <LeftRelease> <Plug>(fern-action-open-or-expand)
-enddef
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
 # Debug
 
