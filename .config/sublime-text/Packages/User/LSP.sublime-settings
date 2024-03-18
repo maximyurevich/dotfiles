@@ -16,19 +16,18 @@
 				"stdio"
 			],
 			"selector": "source.ruby | text.html.ruby",
-			"initializationOptions": {
-				"diagnostics": false
-			}
 		},
-		"standardrb": {
-			"enabled": true,
+		"sorbet": {
+			"enabled": false,
 			"command": [
 				"bundle",
 				"exec",
-				"standardrb",
-				"--lsp"
+				"srb",
+				"tc",
+				"--lsp",
+				"--disable-watchman"
 			],
 			"selector": "source.ruby"
-		}
+		},
 	}
 }
