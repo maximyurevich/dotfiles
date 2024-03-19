@@ -836,7 +836,7 @@ def OnLspBufferAttached()
     nmap <buffer> <leader>co :LspOutgoingCalls<CR>
 
     augroup lsp_format
-      autocmd! BufWritePre *.py,*.sh,*.svelte,*.toml,*.vue,*.rb,*.html,*.json,*.yaml,*.lua,*.css,*.js,*.jsx,*.ts,*.tsx,*.rs,*.go,*.dart,*.md,*.c,*.cpp :LspFormat
+      autocmd! BufWritePre *.py,*.sh,*.svelte,*.toml,*.vue,*.rb,*.html,*.json,*.yaml,*.lua,*.css,*.js,*.jsx,*.ts,*.tsx,*.rs,*.go,*.dart,*.md,*.h,*.c,*.cpp :LspFormat
     augroup END
 enddef
 
