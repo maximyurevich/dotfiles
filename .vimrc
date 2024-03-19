@@ -218,7 +218,16 @@ if executable('clangd')
         name: 'clangd',
         filetype: ['c', 'cpp'],
         path: 'clangd',
-        args: ['--background-index', '--clang-tidy']
+        args: ['--background-index', '--clang-tidy'],
+        runUnlessSearch: ['config.def.h']
+    }])
+    silent! lsp#lsp#AddServer([{
+        name: 'clangd',
+        filetype: ['cpp'],
+        path: 'clangd',
+        args: ['--background-index'],
+        features: {'diagnostics': v:false},
+        runIfSearch: ['config.def.h']
     }])
 endif
 
