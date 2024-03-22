@@ -9,7 +9,7 @@ astro = { command = "astro-ls", args = [
 awk-language-server = { command = "awk-language-server" }
 bash-language-server = { command = "bash-language-server", args = ["start"] }
 bufls = { command = "bufls", args = ["serve"] }
-clangd = { command = "clangd", args = ["background-index", "--clang-tidy"] }
+clangd = { command = "clangd", args = ["--background-index", "--clang-tidy"] }
 cssmodules-language-server = { command = "cssmodules-language-server" }
 graphql-language-service = { command = "graphql-lsp", args = [
   "server",
