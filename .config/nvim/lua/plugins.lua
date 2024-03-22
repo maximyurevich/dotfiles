@@ -141,18 +141,6 @@ return {
 		end,
 	},
 	{
-		"p00f/clangd_extensions.nvim",
-		config = function()
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			capabilities.offsetEncoding = { "utf-16" }
-			require("clangd_extensions").setup({
-				server = {
-					capabilities = capabilities,
-				},
-			})
-		end,
-	},
-	{
 		"glepnir/lspsaga.nvim",
 		config = function()
 			require("maxim.lsp.lspsaga")

@@ -36,6 +36,7 @@ local clients = {
 	"lemminx",
 	"standardrb",
 	"jsonls",
+	"clangd",
 }
 
 local function set_lsp_keymaps(bufnr)
@@ -119,6 +120,11 @@ lspconfig.ruff_lsp.setup({
 			client.server_capabilities.hoverProvider = false
 		end
 	end,
+})
+
+lspconfig.clangd.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
 })
 
 lspconfig.docker_compose_language_service.setup({
@@ -405,9 +411,7 @@ cmp.setup({
 			cmp.config.compare.offset,
 			cmp.config.compare.exact,
 			cmp.config.compare.score,
-			require("cmp-under-comparator").under,
 			cmp.config.compare.recently_used,
-			require("clangd_extensions.cmp_scores"),
 			cmp.config.compare.kind,
 			cmp.config.compare.sort_text,
 			cmp.config.compare.length,
