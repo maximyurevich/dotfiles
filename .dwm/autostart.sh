@@ -7,6 +7,7 @@ run() {
 }
 
 run nm-applet
+run slstatus
 run feh --bg-scale /usr/share/70fijyp9zyq11.png
 run redshift -P -O 3500
 run picom --config ~/.config/picom.conf
