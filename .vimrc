@@ -27,100 +27,96 @@ set hidden
 setlocal tagfunc=lsp#lsp#TagFunc
 setlocal formatexpr=lsp#lsp#FormatExpr()
 
-plug#begin()
+packadd lsp
 
-Plug 'yegappan/lsp'
+packadd vim-vsnip
+packadd vim-vsnip-integ
+packadd friendly-snippets
 
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'rafamadriz/friendly-snippets'
+packadd SchemaStore.vim
 
-Plug '00dani/SchemaStore.vim'
+packadd autosuggest.vim
 
-Plug 'girishji/autosuggest.vim'
+packadd vim-ostroga
 
-Plug 'EgZvor/vim-ostroga'
+packadd vimspector
 
-Plug 'puremourning/vimspector'
+packadd vim-doge
 
-Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+packadd vim-test
 
-Plug 'vim-test/vim-test'
+packadd lightline.vim
+packadd mintabline.vim
+packadd vim-devicons
 
-Plug 'itchyny/lightline.vim'
-Plug 'sangdol/mintabline.vim'
-Plug 'ryanoasis/vim-devicons'
+packadd vim-system-copy
+packadd vim-oscyank
 
-Plug 'christoomey/vim-system-copy'
-Plug 'ojroques/vim-oscyank', {'branch': 'main'}
+packadd fzf.vim
 
-Plug 'junegunn/fzf.vim'
+packadd vim-fugitive
 
-Plug 'tpope/vim-fugitive'
+packadd vim-gitgutter
 
-Plug 'airblade/vim-gitgutter'
+packadd nerdtree
+packadd vim-nerdtree-syntax-highlight
+packadd nerdtree-visual-selection
+packadd nerdtree-git-plugin
 
-Plug 'preservim/nerdtree'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'PhilRunninger/nerdtree-visual-selection'
-Plug 'xuyuanp/nerdtree-git-plugin'
+packadd nerdfont.vim
 
-Plug 'lambdalisue/nerdfont.vim'
+packadd vim-polyglot
+packadd vim-svelte
+packadd vim-vue-plugin
+packadd ansible-vim
+packadd vim-astro
 
-Plug 'sheerun/vim-polyglot'
-Plug 'evanleck/vim-svelte', {'branch': 'main'}
-Plug 'leafOfTree/vim-vue-plugin'
-Plug 'pearofducks/ansible-vim'
-Plug 'wuelnerdotexe/vim-astro'
+packadd vim-quickrun
 
-Plug 'thinca/vim-quickrun'
+packadd codi.vim
 
-Plug 'metakirby5/codi.vim'
+packadd eunuch
+packadd endwise
 
-Plug 'https://tpope.io/vim/eunuch.git'
-Plug 'https://tpope.io/vim/endwise.git'
+packadd vim-obsession
 
-Plug 'tpope/vim-obsession'
+packadd vim-rails
+packadd vim-rake
+packadd vim-bundler
 
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rake'
-Plug 'tpope/vim-bundler'
+packadd vim-go
 
-Plug 'fatih/vim-go'
+packadd vim-sleuth
 
-Plug 'tpope/vim-sleuth'
+packadd vim-dadbod
 
-Plug 'tpope/vim-dadbod'
+packadd vim-surround
+packadd vim-repeat
+packadd vim-unimpaired
 
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-unimpaired'
+packadd editorconfig-vim
 
-Plug 'editorconfig/editorconfig-vim'
+packadd tcomment_vim
 
-Plug 'tomtom/tcomment_vim'
+packadd vim-cutlass
 
-Plug 'svermeulen/vim-cutlass'
+packadd vim-yoink
 
-Plug 'svermeulen/vim-yoink'
+packadd vim-sneak
 
-Plug 'justinmk/vim-sneak'
+packadd vim-tmux
+packadd vim-tmux-navigator
 
-Plug 'tmux-plugins/vim-tmux'
-Plug 'christoomey/vim-tmux-navigator'
+packadd undotree
 
-Plug 'mbbill/undotree'
+packadd gruvbox-material
 
-Plug 'sainnhe/gruvbox-material'
-
-Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
-
-plug#end()
+packadd vim-pydocstring
 
 # LSP
 
 if executable('vim-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'vimls',
         filetype: 'vim',
         path: 'vim-language-server',
@@ -130,7 +126,7 @@ if executable('vim-language-server')
 endif
 
 if executable('bash-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'bashls',
         filetype: 'sh',
         path: 'bash-language-server',
@@ -139,7 +135,7 @@ if executable('bash-language-server')
 endif
 
 if executable('awk-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'awkls',
         filetype: 'awk',
         path: 'awk-language-server',
@@ -148,7 +144,7 @@ if executable('awk-language-server')
 endif
 
 if executable('astro-ls')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'astro-ls',
         filetype: ['astro'],
         path: 'astro-ls',
@@ -163,7 +159,7 @@ if executable('astro-ls')
 endif
 
 if executable('vue-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'volar',
         filetype: ['vue', 'typescript', 'javascript'],
         path: 'vue-language-server',
@@ -181,7 +177,7 @@ if executable('vue-language-server')
 endif
 
 if executable('graphql-lsp')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'graphql-lsp',
         filetype: ['graphql', 'typescriptreact', 'javascriptreact'],
         path: 'graphql-lsp',
@@ -205,7 +201,7 @@ if executable('graphql-lsp')
 endif
 
 if executable('bufls')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'bufls',
         filetype: 'proto',
         path: 'bufls',
@@ -214,14 +210,14 @@ if executable('bufls')
 endif
 
 if executable('clangd')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'clangd',
         filetype: ['c', 'cpp'],
         path: 'clangd',
         args: ['--background-index', '--clang-tidy'],
         runUnlessSearch: ['config.def.h']
     }])
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'clangd',
         filetype: ['cpp'],
         path: 'clangd',
@@ -232,7 +228,7 @@ if executable('clangd')
 endif
 
 if executable('dart')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'dart',
         filetype: ['dart'],
         path: 'dart',
@@ -241,7 +237,7 @@ if executable('dart')
 endif
 
 if executable('emmet-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'emmet',
         filetype: ['html'],
         path: 'emmet-language-server',
@@ -250,7 +246,7 @@ if executable('emmet-language-server')
 endif
 
 if executable('docker-compose-langserver')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'docker-compose-langserver',
         filetype: ['yaml.docker-compose'],
         path: 'docker-compose-langserver',
@@ -259,7 +255,7 @@ if executable('docker-compose-langserver')
 endif
 
 if executable('docker-langserver')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'docker-langserver',
         filetype: ['dockerfile'],
         path: 'docker-langserver',
@@ -268,7 +264,7 @@ if executable('docker-langserver')
 endif
 
 if executable('yaml-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'yaml-language-server',
         filetype: ['yaml'],
         path: 'yaml-language-server',
@@ -289,7 +285,7 @@ endif
 
 if executable('ansible-language-server')
 
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'ansible-language-server',
         filetype: 'yaml.ansible',
         path: 'ansible-language-server',
@@ -303,7 +299,7 @@ if executable('ansible-language-server')
 endif
 
 if executable('marksman')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'marksman',
         filetype: ['markdown'],
         path: 'marksman',
@@ -313,7 +309,7 @@ if executable('marksman')
 endif
 
 if executable('zk')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'zk',
         filetype: ['markdown'],
         path: 'zk',
@@ -323,7 +319,7 @@ if executable('zk')
 endif
 
 if executable('nginx-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'nginx-language-server',
         filetype: ['nginx'],
         path: 'nginx-language-server',
@@ -332,7 +328,7 @@ if executable('nginx-language-server')
 endif
 
 if executable('gopls')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'gopls',
         filetype: 'go',
         path: 'gopls',
@@ -354,7 +350,7 @@ if executable('gopls')
 endif
 
 if executable('lua-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'luals',
         filetype: 'lua',
         path: 'lua-language-server',
@@ -372,7 +368,7 @@ if executable('lua-language-server')
 endif
 
 if executable('ruff-lsp')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'ruff-lsp',
         filetype: 'python',
         path: 'ruff-lsp',
@@ -382,7 +378,7 @@ if executable('ruff-lsp')
 endif
 
 if executable('pyright-langserver')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'pyright',
         filetype: 'python',
         path: 'pyright-langserver',
@@ -402,7 +398,7 @@ if executable('pyright-langserver')
 endif
 
 if executable('rust-analyzer')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'rustanalyzer',
         filetype: ['rust'],
         path: 'rust-analyzer',
@@ -422,16 +418,25 @@ if executable('rust-analyzer')
 endif
 
 if executable('solargraph')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'solargraph',
         filetype: ['ruby'],
         path: 'solargraph',
         args: ['stdio'],
+        workspaceConfig: {
+            solargraph: {
+                'diagnostics': v:true,
+            },
+        },
+        initializationOptions: {
+            'formatting': v:true,
+        },
+        syncInit: v:true,
     }])
 endif
 
 if executable('bin/tapioca')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'sorbet',
         filetype: ['ruby'],
         path: 'bundle',
@@ -439,17 +444,8 @@ if executable('bin/tapioca')
     }])
 endif
 
-if executable('bin/standardrb')
-    silent! lsp#lsp#AddServer([{
-        name: 'standardrb',
-        filetype: ['ruby'],
-        path: 'bundle',
-        args: ['exec', 'standardrb', '--lsp'],
-    }])
-endif
-
 if executable('bunx') && executable('typescript-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'bun-typescript-language-server',
         filetype: [
             'javascript',
@@ -464,7 +460,7 @@ if executable('bunx') && executable('typescript-language-server')
 endif
 
 if executable('typescript-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'tsserver',
         filetype: [
             'javascript',
@@ -479,7 +475,7 @@ if executable('typescript-language-server')
 endif
 
 if executable('cssmodules-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'cssmodules-language-server',
         filetype: [
             'javascriptreact',
@@ -491,7 +487,7 @@ if executable('cssmodules-language-server')
 endif
 
 if executable('lemminx')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'lemminx',
         filetype: [
             'xml', 'xsd', 'xsl', 'xslt', 'svg'
@@ -502,7 +498,7 @@ if executable('lemminx')
 endif
 
 if executable('sql-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'sql-language-server',
         filetype: ['sql', 'mysql'],
         path: 'sql-language-server',
@@ -511,7 +507,7 @@ if executable('sql-language-server')
 endif
 
 if executable('vscode-css-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'vscode-css-language-server',
         filetype: ['css', 'sass', 'scss', 'less'],
         path: 'vscode-css-language-server',
@@ -525,7 +521,7 @@ if executable('vscode-css-language-server')
 endif
 
 if executable($HOME .. '/.npm/bin/tailwindcss-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: $HOME .. '/.npm/bin/tailwindcss-language-server',
         filetype: [
             'astro',
@@ -560,7 +556,7 @@ if executable($HOME .. '/.npm/bin/tailwindcss-language-server')
 endif
 
 if executable('stylelint-lsp')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'stylelint-lsp',
         filetype: [
             'css',
@@ -584,7 +580,7 @@ if executable('stylelint-lsp')
 endif
 
 if executable('vscode-eslint-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'vscode-eslint-language-server',
         runIfSearch: [
             '.eslintrc',
@@ -630,7 +626,7 @@ if executable('vscode-eslint-language-server')
 endif
 
 if executable('vscode-html-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'vscode-html-language-server',
         filetype: ['html'],
         path: 'vscode-html-language-server',
@@ -647,7 +643,7 @@ if executable('vscode-html-language-server')
 endif
 
 if executable('unocss-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'unocss-language-server',
         filetype: [
             'html',
@@ -672,7 +668,7 @@ const schemata = SchemaStore.schemata
 const schemas  = SchemaStore.schemas
 
 if executable('vscode-json-language-server')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'vscode-json-language-server',
         filetype: ['json', 'jsonc'],
         path: 'vscode-json-language-server',
@@ -689,7 +685,7 @@ if executable('vscode-json-language-server')
 endif
 
 if executable('efm-langserver')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'efm',
         filetype: [
             'javascript',
@@ -720,7 +716,7 @@ if executable('efm-langserver')
 endif
 
 if executable('svelteserver')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'svelteserver',
         filetype: ['svelte'],
         path: 'svelteserver',
@@ -730,7 +726,7 @@ if executable('svelteserver')
 endif
 
 if executable('jdtls')
-    silent! lsp#lsp#AddServer([{
+    silent! call LspAddServer([{
         name: 'jdtls',
         filetype: 'java',
         path: 'jdtls',
@@ -757,7 +753,7 @@ endif
 
 
 augroup lsp_options
-    autocmd VimEnter * silent! call LspOptionsSet({
+    silent! call LspOptionsSet({
         \   'autoComplete': v:true,
         \   'autoHiglight': v:false,
         \   'autoHigightDiags': v:true,
@@ -934,6 +930,10 @@ nmap <silent><leader>fb :Buffers<CR>
 nmap <silent><leader>fh :Helptags<CR>
 
 # NERDTree
+
+if exists('g:loaded_webdevicons')
+    call webdevicons#refresh()
+endif
 
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
