@@ -126,6 +126,11 @@ return {
           end,
           ["eslint"] = function()
             lspconfig.eslint.setup({
+              root_dir = lspconfig.util.root_pattern(
+                "eslint.config.js",
+                "eslint.config.mjs",
+                "eslint.config.cjs"
+              ),
               on_attach = function(_, bufnr)
                 vim.api.nvim_create_autocmd("BufWritePre", {
                   buffer = bufnr,
@@ -136,6 +141,7 @@ return {
           end,
           ["biome"] = function()
             lspconfig.biome.setup({
+              root_dir = lspconfig.util.root_pattern("biome.json", "biome.jsonc"),
               on_attach = function(_, bufnr)
                 vim.api.nvim_create_autocmd("BufWritePre", {
                   buffer = bufnr,
