@@ -10,7 +10,7 @@ icons = "material-nf"
 block = "music"
 format = " $icon $prev $combo.str(max_w:25,rot_interval:0.5) $play $next |"
 seek_step_secs = 5
-player = "spotifyd"
+player = ["ncspot", "spotifyd"]
 [[block.click]]
 button = "up"
 action = "seek_forward"
