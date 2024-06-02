@@ -11,7 +11,6 @@ return {
       "nvim-neotest/neotest-go",
       "rcasia/neotest-bash",
       "rouge8/neotest-rust",
-      "sidlatau/neotest-dart",
       "alfaix/neotest-gtest",
       "marilari88/neotest-vitest",
       "thenbe/neotest-playwright",
@@ -38,11 +37,6 @@ return {
             filter_dir = function(name, _, _)
               return name ~= "node_modules"
             end,
-          }),
-          require("neotest-dart")({
-            command = "flutter",
-            use_lsp = true,
-            custom_test_method_names = {},
           }),
           require("neotest-playwright").adapter({
             options = {
