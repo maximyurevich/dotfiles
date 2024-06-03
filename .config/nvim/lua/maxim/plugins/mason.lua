@@ -57,8 +57,6 @@ return {
 
       lspconfig.nginx_language_server.setup({ capabilities = capabilities })
 
-      lspconfig.dartls.setup({ capabilities = capabilities, single_file_support = true })
-
       lspconfig.css_variables.setup({ capabilities = capabilities })
 
       lspconfig.clangd.setup({
@@ -341,8 +339,6 @@ return {
         },
       })
 
-      require("dap.ext.vscode").load_launchjs()
-
       local dap, dapui = require("dap"), require("dapui")
 
       dap.listeners.before.event_terminated.dapui_config = function()
@@ -353,9 +349,23 @@ return {
       end
 
       require("mason-nvim-dap").setup({
-        ensure_installed = { "python", "js", "bash", "codelldb", "delve" },
+        ensure_installed = { "python", "chrome", "node2", "bash", "codelldb", "delve" },
         automatic_installation = true,
         handlers = {
+          chrome = function(config)
+            config.adapters = {
+              type = "executable",
+              command = vim.fn.exepath("chrome-debug-adapter"),
+            }
+            require("mason-nvim-dap").default_setup(config)
+          end,
+          node2 = function(config)
+            config.adapters = {
+              type = "executable",
+              command = vim.fn.exepath("node-debug2-adapter"),
+            }
+            require("mason-nvim-dap").default_setup(config)
+          end,
           delve = function(config)
             config.adapters = {
               type = "server",
