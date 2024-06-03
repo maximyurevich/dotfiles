@@ -172,6 +172,14 @@ end)
 
 -- dap
 
+map("v", "<space>dk", function()
+  require("dapui").eval()
+end, { silent = true })
+
+map("n", "<leader>d", function()
+  require("dapui").toggle()
+end, { silent = true })
+
 map("n", "<F5>", function()
   require("dap").continue()
 end, { silent = true })
