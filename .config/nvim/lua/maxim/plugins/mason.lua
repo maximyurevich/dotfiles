@@ -23,10 +23,6 @@ return {
     "mfussenegger/nvim-dap",
   },
   {
-    "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
-  },
-  {
     "neovim/nvim-lspconfig",
     dependencies = {
       "williamboman/mason.nvim",
@@ -338,15 +334,6 @@ return {
           { name = "path" },
         },
       })
-
-      local dap, dapui = require("dap"), require("dapui")
-
-      dap.listeners.before.event_terminated.dapui_config = function()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited.dapui_config = function()
-        dapui.close()
-      end
 
       require("mason-nvim-dap").setup({
         ensure_installed = { "python", "chrome", "node2", "bash", "codelldb", "delve" },
