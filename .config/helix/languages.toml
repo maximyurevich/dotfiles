@@ -2,20 +2,11 @@
 # See the languages documentation: https://docs.helix-editor.com/master/languages.html
 
 [language-server]
-astro = { command = "astro-ls", args = [
-  "--stdio",
-], config = { typescript = { tsdk = "/home/maxim/.npm/lib/node_modules/typescript/lib" } } }
 awk-language-server = { command = "awk-language-server" }
 bash-language-server = { command = "bash-language-server", args = ["start"] }
 bufls = { command = "bufls", args = ["serve"] }
 clangd = { command = "clangd", args = ["--background-index", "--clang-tidy"] }
 cssmodules-language-server = { command = "cssmodules-language-server" }
-graphql-language-service = { command = "graphql-lsp", args = [
-  "server",
-  "-m",
-  "stream",
-] }
-dart = { command = "dart", args = ["language-server", "--client-id=helix"] }
 docker-langserver = { command = "docker-langserver", args = ["--stdio"] }
 docker-compose-langserver = { command = "docker-compose-langserver", args = [
   "--stdio",
@@ -25,8 +16,6 @@ marksman = { command = "marksman", args = ["server"] }
 zk = { command = "zk", args = ["lsp"], config = {} }
 pyright = { command = "pyright-langserver", args = ["--stdio"], config = {} }
 ruff-lsp = { command = "ruff-lsp" }
-solargraph = { command = "solargraph", args = ["stdio"] }
-standardrb = { command = "bundle", args = ["exec", "standardrb", "--lsp"] }
 stylelint-lsp = { command = "stylelint-lsp", args = [
   "--stdio",
 ], config = { stylelintplus = { autoFixOnFormat = true, autoFixOnSave = true } } }
@@ -135,31 +124,6 @@ inlayHints.closureReturnTypeHints.enable = "with_block"
 inlayHints.discriminantHints.enable = "fieldless"
 inlayHints.lifetimeElisionHints.enable = "skip_trivial"
 inlayHints.typeHints.hideClosureInitialization = false
-
-
-[language-server.bun-language-server]
-command = "bunx"
-args = ["--bun", "typescript-language-server", "--stdio"]
-config.hostInfo = "helix"
-
-[language-server.bun-language-server.config.typescript.inlayHints]
-includeInlayEnumMemberValueHints = true
-includeInlayFunctionLikeReturnTypeHints = true
-includeInlayFunctionParameterTypeHints = true
-includeInlayParameterNameHints = "all"
-includeInlayParameterNameHintsWhenArgumentMatchesName = true
-includeInlayPropertyDeclarationTypeHints = true
-includeInlayVariableTypeHints = true
-
-[language-server.bun-language-server.config.javascript.inlayHints]
-includeInlayEnumMemberValueHints = true
-includeInlayFunctionLikeReturnTypeHints = true
-includeInlayFunctionParameterTypeHints = true
-includeInlayParameterNameHints = "all"
-includeInlayParameterNameHintsWhenArgumentMatchesName = true
-includeInlayPropertyDeclarationTypeHints = true
-includeInlayVariableTypeHints = true
-
 
 [language-server.typescript-language-server]
 command = "typescript-language-server"
@@ -840,56 +804,6 @@ name = "python"
 source = { git = "https://github.com/tree-sitter/tree-sitter-python", rev = "de221eccf9a221f5b85474a553474a69b4b5784d" }
 
 [[language]]
-name = "ruby"
-scope = "source.ruby"
-injection-regex = "ruby"
-file-types = [
-  "rb",
-  "rake",
-  "irb",
-  "gemspec",
-  "rabl",
-  "jbuilder",
-  "jb",
-  "podspec",
-  "rjs",
-  "rbi",
-  { glob = "rakefile" },
-  { glob = "gemfile" },
-  { glob = "Rakefile" },
-  { glob = "Gemfile" },
-  { glob = "Podfile" },
-  { glob = "Vagrantfile" },
-  { glob = "Brewfile" },
-  { glob = "Guardfile" },
-  { glob = "Capfile" },
-  { glob = "Cheffile" },
-  { glob = "Hobofile" },
-  { glob = "Appraisals" },
-  { glob = "Rantfile" },
-  { glob = "Berksfile" },
-  { glob = "Berksfile.lock" },
-  { glob = "Thorfile" },
-  { glob = "Puppetfile" },
-  { glob = "Fastfile" },
-  { glob = "Appfile" },
-  { glob = "Deliverfile" },
-  { glob = "Matchfile" },
-  { glob = "Scanfile" },
-  { glob = "Snapfile" },
-  { glob = "Gymfile" },
-]
-shebangs = ["ruby"]
-comment-token = "#"
-language-servers = ["solargraph", "standardrb"]
-indent = { tab-width = 2, unit = "  " }
-auto-format = true
-
-[[grammar]]
-name = "ruby"
-source = { git = "https://github.com/tree-sitter/tree-sitter-ruby", rev = "206c7077164372c596ffa8eaadb9435c28941364" }
-
-[[language]]
 name = "bash"
 scope = "source.bash"
 injection-regex = "(shell|bash|zsh|sh)"
@@ -951,34 +865,6 @@ auto-format = true
 [[grammar]]
 name = "bash"
 source = { git = "https://github.com/tree-sitter/tree-sitter-bash", rev = "275effdfc0edce774acf7d481f9ea195c6c403cd" }
-
-[[language]]
-name = "latex"
-scope = "source.tex"
-injection-regex = "tex"
-file-types = ["tex", "sty", "cls", "Rd", "bbx", "cbx"]
-comment-token = "%"
-language-servers = ["texlab"]
-indent = { tab-width = 4, unit = "\t" }
-auto-format = true
-
-[[grammar]]
-name = "latex"
-source = { git = "https://github.com/latex-lsp/tree-sitter-latex", rev = "8c75e93cd08ccb7ce1ccab22c1fbd6360e3bcea6" }
-
-[[language]]
-name = "bibtex"
-scope = "source.bib"
-injection-regex = "bib"
-file-types = ["bib"]
-comment-token = "%"
-language-servers = ["texlab"]
-indent = { tab-width = 4, unit = "\t" }
-auto-format = true
-
-[[grammar]]
-name = "bibtex"
-source = { git = "https://github.com/latex-lsp/tree-sitter-bibtex", rev = "ccfd77db0ed799b6c22c214fe9d2937f47bc8b34" }
 
 [[language]]
 name = "java"
@@ -1105,21 +991,6 @@ name = "markdown_inline"
 source = { git = "https://github.com/MDeiml/tree-sitter-markdown", rev = "fa6bfd51727e4bef99f7eec5f43947f73d64ea7d", subpath = "tree-sitter-markdown-inline" }
 
 [[language]]
-name = "dart"
-scope = "source.dart"
-file-types = ["dart"]
-roots = ["pubspec.yaml"]
-auto-format = true
-comment-token = "//"
-block-comment-tokens = { start = "/*", end = "*/" }
-language-servers = ["dart"]
-indent = { tab-width = 2, unit = "  " }
-
-[[grammar]]
-name = "dart"
-source = { git = "https://github.com/UserNobody14/tree-sitter-dart", rev = "e398400a0b785af3cf571f5a57eccab242f0cdf9" }
-
-[[language]]
 name = "dockerfile"
 scope = "source.dockerfile"
 injection-regex = "docker|dockerfile"
@@ -1223,29 +1094,6 @@ name = "gitignore"
 source = { git = "https://github.com/shunsambongi/tree-sitter-gitignore", rev = "f4685bf11ac466dd278449bcfe5fd014e94aa504" }
 
 [[language]]
-name = "graphql"
-scope = "source.graphql"
-injection-regex = "graphql"
-file-types = ["gql", "graphql", "graphqls"]
-language-servers = ["graphql-language-service"]
-comment-token = "#"
-block-comment-tokens = { start = "\"\"\"", end = "\"\"\"" }
-indent = { tab-width = 2, unit = "  " }
-
-[[grammar]]
-name = "graphql"
-source = { git = "https://github.com/bkegley/tree-sitter-graphql", rev = "5e66e961eee421786bdda8495ed1db045e06b5fe" }
-
-[[language]]
-name = "erb"
-scope = "text.html.erb"
-injection-regex = "erb"
-file-types = ["erb"]
-block-comment-tokens = { start = "<!--", end = "-->" }
-indent = { tab-width = 2, unit = "  " }
-grammar = "embedded-template"
-
-[[language]]
 name = "sql"
 scope = "source.sql"
 file-types = ["sql", "dsql"]
@@ -1258,33 +1106,6 @@ language-servers = ["sql-language-server"]
 [[grammar]]
 name = "sql"
 source = { git = "https://github.com/DerekStride/tree-sitter-sql", rev = "7cbac0472e5b8f8486ce64ffbcf1982d5cd5fc8d" }
-
-
-[[language]]
-name = "astro"
-scope = "source.astro"
-injection-regex = "astro"
-file-types = ["astro"]
-block-comment-tokens = { start = "<!--", end = "-->" }
-indent = { tab-width = 2, unit = "  " }
-language-servers = [
-  "astro",
-  { name = "eslint", only-features = [
-    "diagnostics",
-    "inlay-hints",
-    "code-action",
-  ] },
-  { name = "efm-language-server", only-features = [
-    "format",
-  ] },
-  "tailwindcss",
-]
-auto-format = true
-
-
-[[grammar]]
-name = "astro"
-source = { git = "https://github.com/virchau13/tree-sitter-astro", rev = "5f5c3e73c45967df9aa42f861fad2d77cd4e0900" }
 
 [[language]]
 name = "xml"
@@ -1367,19 +1188,6 @@ auto-format = true
 [[grammar]]
 name = "xml"
 source = { git = "https://github.com/RenjiSann/tree-sitter-xml", rev = "48a7c2b6fb9d515577e115e6788937e837815651" }
-
-
-[[language]]
-name = "rst"
-scope = "source.rst"
-comment-token = ".."
-file-types = ["rst"]
-language-servers = ["efm-language-server"]
-auto-format = true
-
-[[grammar]]
-name = "rst"
-source = { git = "https://github.com/stsewd/tree-sitter-rst", rev = "25e6328872ac3a764ba8b926aea12719741103f1" }
 
 [[language]]
 name = "markdoc"
