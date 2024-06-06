@@ -3,7 +3,8 @@ set -U fish_greeting ""
 fish_vi_key_bindings
 
 alias icat "kitty +kitten icat"
-set -Ux QT_QPA_PLATFORMTHEME "gtk3"
+set -Ux DOCKER_HOST "unix:///run/user/1000/docker.sock"
+set -Ux QT_QPA_PLATFORMTHEME gtk3
 set -Ux TDESKTOP_I_KNOW_ABOUT_GTK_INCOMPATIBILITY 1
 set -Ux TOKENIZERS_PARALLELISM false
 set -Ux LD_LIBRARY_PATH /opt/cuda/lib64
