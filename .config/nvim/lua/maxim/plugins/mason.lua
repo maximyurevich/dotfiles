@@ -60,6 +60,11 @@ return {
         filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
       })
 
+      lspconfig.pbls.setup({
+        filetypes = { "proto" },
+        capabilities = capabilities,
+      })
+
       require("mason-lspconfig").setup({
         ensure_installed = {
           "biome",
@@ -90,6 +95,9 @@ return {
             lspconfig.gopls.setup({
               capabilities = capabilities,
             })
+          end,
+          ["golangci_lint_ls"] = function()
+            lspconfig.golangci_lint_ls.setup({})
           end,
           ["jsonls"] = function()
             lspconfig.jsonls.setup({
