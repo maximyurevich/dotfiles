@@ -33,5 +33,6 @@ return {
     config = true,
   },
   { "mfussenegger/nvim-ansible" },
+  { "uarun/vim-protobuf" },
   { "CRAG666/code_runner.nvim", config = true },
 }
