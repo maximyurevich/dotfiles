@@ -5,7 +5,7 @@ return {
     dependencies = "nvim-tree/nvim-web-devicons",
     opts = {
       options = {
-        mode = "buffers",
+        mode = "tabs",
         diagnostics = "nvim_lsp",
         numbers = "both",
         always_show_bufferline = false,
