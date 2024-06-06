@@ -57,6 +57,7 @@ return {
 
       lspconfig.clangd.setup({
         capabilities = capabilities,
+        filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
       })
 
       require("mason-lspconfig").setup({
