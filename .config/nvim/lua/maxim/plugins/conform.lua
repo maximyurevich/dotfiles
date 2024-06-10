@@ -8,7 +8,7 @@ return {
         yaml = { "yamlfix" },
         sh = { "shfmt" },
         toml = { "taplo" },
-        python = { "ruff" },
+        python = { "ruff_format", "ruff_organize_import" },
       },
     },
   },
