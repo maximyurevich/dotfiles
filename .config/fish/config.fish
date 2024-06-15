@@ -41,6 +41,7 @@ fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/go/bin
 fish_add_path $HOME/bin
+fish_add_path $HOME/.npm/bin
 
 # fzf
 set -Ux FZF_DEFAULT_OPTS "
@@ -61,7 +62,7 @@ function zellij_tab_name_update --on-variable PWD
             set git_root (basename (git rev-parse --show-toplevel))
             set git_prefix (git rev-parse --show-prefix)
             set tab_name "$git_root/$git_prefix"
-            set tab_name (string trim -c / "$tab_name") # Remove trailing slash
+            set tab_name (string trim -c / "$tab_name")
         else
             set tab_name $PWD
             if test "$tab_name" = "$HOME"
