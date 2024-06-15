@@ -40,6 +40,7 @@ fish_add_path $ANDROID_SDK_ROOT/tools/
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/go/bin
+fish_add_path $HOME/bin
 
 # fzf
 set -Ux FZF_DEFAULT_OPTS "
