@@ -7,6 +7,12 @@ info_bg = "#285577"
 icons = "material-nf"
 
 [[block]]
+block = "docker"
+interval = 2
+socket_path = "/run/user/1000/docker.sock"
+format = " $icon $running/$total "
+
+[[block]]
 block = "music"
 format = " $icon $prev $combo.str(max_w:25,rot_interval:0.5) $play $next |"
 seek_step_secs = 5
