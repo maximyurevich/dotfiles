@@ -311,3 +311,21 @@ map({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f)
 map({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
 map({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
 map({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
+
+-- codeium
+
+map("i", "<C-]>", function()
+  return vim.fn["codeium#Accept"]()
+end, { expr = true, silent = true })
+
+map("i", "<M-]>", function()
+  return vim.fn["codeium#CycleCompletions"](1)
+end, { expr = true, silent = true })
+
+map("i", "<M-[>", function()
+  return vim.fn["codeium#CycleCompletions"](-1)
+end, { expr = true, silent = true })
+
+map("i", "<c-x>", function()
+  return vim.fn["codeium#Clear"]()
+end, { expr = true, silent = true })
