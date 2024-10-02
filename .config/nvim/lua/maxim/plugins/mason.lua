@@ -177,8 +177,8 @@ return {
               },
             })
           end,
-          ["tsserver"] = function()
-            lspconfig.tsserver.setup({
+          ["ts_ls"] = function()
+            lspconfig.ts_ls.setup({
               single_file_support = false,
               capabilities = capabilities,
               filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
