@@ -29,4 +29,5 @@ return {
       require("nvim-ts-autotag").setup()
     end,
   },
+  "isobit/vim-caddyfile",
 }
