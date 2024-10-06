@@ -105,9 +105,6 @@ return {
               capabilities = capabilities,
             })
           end,
-          ["golangci_lint_ls"] = function()
-            lspconfig.golangci_lint_ls.setup({})
-          end,
           ["jsonls"] = function()
             lspconfig.jsonls.setup({
               capabilities = capabilities,
