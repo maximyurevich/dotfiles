@@ -13,6 +13,7 @@ autocmd("BufWritePre", {
 
 autocmd("BufWritePre", {
   pattern = {
+    "*.go",
     "*.rs",
     "*.json",
     "*.jsonc",
