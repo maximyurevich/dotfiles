@@ -197,9 +197,6 @@ exec --no-startup-id picom --config ~/.config/picom.conf
 default_border pixel 1
 default_floating_border none
 
-# Wallpaper
-exec_always --no-startup-id feh --bg-scale ~/.config/i3/lofi-girl-listening-3840x2160-14887.jpg
-
 # Screenshots
 bindsym Print exec --no-startup-id xfce4-screenshooter
 bindsym $mod+Print exec --no-startup-id xfce4-screenshooter -w 
