@@ -8,8 +8,8 @@ set -Ux QT_QPA_PLATFORMTHEME gtk3
 set -Ux TDESKTOP_I_KNOW_ABOUT_GTK_INCOMPATIBILITY 1
 set -Ux TOKENIZERS_PARALLELISM false
 set -Ux LD_LIBRARY_PATH /opt/cuda/lib64
-set -Ux VISUAL nvim
-set -Ux EDITOR nvim
+set -Ux VISUAL hx
+set -Ux EDITOR hx
 set -Ux SDL_VIDEODRIVER x11
 set -Ux CHROME_EXECUTABLE /usr/bin/brave
 set -Ux BROWSER /usr/bin/brave
