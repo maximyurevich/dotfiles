@@ -72,3 +72,7 @@ function zellij_tab_name_update --on-variable PWD
         command nohup zellij action rename-tab $tab_name >/dev/null 2>&1 &
     end
 end
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
