@@ -54,17 +54,13 @@ return {
       lspconfig.solargraph.setup({
         capabilities = capabilities,
         init_options = {
-          formatting = false,
+          formatting = true,
         },
         settings = {
           solargraph = {
-            diagnostics = false,
+            diagnostics = true,
           },
         },
-        root_dir = lspconfig.util.root_pattern("Gemfile"),
-      })
-
-      lspconfig.standardrb.setup({
         root_dir = lspconfig.util.root_pattern("Gemfile"),
       })
 
@@ -171,7 +167,7 @@ return {
               single_file_support = false,
               capabilities = capabilities,
               filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
-              root_dir = lspconfig.util.root_pattern("package.json"),
+              root_dir = lspconfig.util.root_pattern("tsconfig.json", "jsconfig.json"),
             })
           end,
           ["svelte"] = function()
@@ -268,7 +264,22 @@ return {
             })
           end,
           ["cssls"] = function()
-            lspconfig.cssls.setup({ capabilities = capabilities })
+            lspconfig.cssls.setup({
+              capabilities = capabilities,
+              settings = {
+                css = {
+                  validate = true,
+                  lint = {
+                    unknownAtRules = "ignore",
+                  },
+                },
+              },
+            })
+          end,
+          ["sqlls"] = function()
+            lspconfig.sqlls.setup({
+              capabilities = capabilities,
+            })
           end,
           ["tailwindcss"] = function()
             lspconfig.tailwindcss.setup({
