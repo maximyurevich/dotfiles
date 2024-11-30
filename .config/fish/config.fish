@@ -22,6 +22,7 @@ set -Ux GOPATH $HOME/go/bin
 set -Ux GLFW_IM_MODULE none
 set -Ux PAGER "less -R"
 set -Ux YAMLFIX_EXPLICIT_START false
+set -Ux PHPRC $HOME/.config/php/php.ini
 
 fish_add_path $HOME/.local/share/nvim/mason/bin
 fish_add_path $GEM_HOME/bin
