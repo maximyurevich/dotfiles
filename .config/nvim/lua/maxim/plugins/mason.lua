@@ -51,6 +51,14 @@ return {
 
       local lspconfig = require("lspconfig")
 
+      lspconfig.intelephense.setup({
+        capabilities = capabilities,
+        single_file_support = true,
+        init_options = {
+          licenceKey = os.getenv("INTELEPHENSE_LICENCE_KEY"),
+        },
+      })
+
       lspconfig.solargraph.setup({
         capabilities = capabilities,
         init_options = {
