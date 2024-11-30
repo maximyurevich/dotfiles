@@ -38,6 +38,7 @@ fish_add_path $HOME/.npm/bin
 fish_add_path $HOME/.deno/bin
 fish_add_path $HOME/.rbenv/bin
 fish_add_path $(go env GOPATH)/bin
+fish_add_path $HOME/.config/composer/vendor/bin
 
 rbenv init - | source
 
