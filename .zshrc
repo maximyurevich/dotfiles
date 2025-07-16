@@ -158,3 +158,7 @@ export NVM_DIR="$HOME/.nvm"
 # mise
 
 eval "$(mise activate zsh)"
+
+# wsl
+
+export GDK_BACKEND="x11"
