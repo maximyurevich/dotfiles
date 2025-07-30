@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+ export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -70,7 +70,10 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  git git-escape-magic fzf gh gitignore kubectl
+  minikube docker docker-compose pip python node nvm mise
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -111,12 +114,12 @@ export BAT_THEME="ansi"
 export BROWSER="/usr/bin/brave-browser"
 
 path=(
-    $HOME/.local/share/nvim/mason/bin
-    $HOME/.local/bin
-    $HOME/.cargo/bin
-    $HOME/bin
-    $HOME/.npm/bin
-    $path
+  $HOME/.local/share/nvim/mason/bin
+  $HOME/.local/bin
+  $HOME/.cargo/bin
+  $HOME/bin
+  $HOME/.npm/bin
+  $path
 )
 
 export PATH
@@ -145,20 +148,22 @@ precmd_functions+=(keep_current_path)
 
 eval "$(zoxide init zsh)"
 
-# rye 
+# rye
 
 eval "$(rye self completion -s zsh)"
 
 # nvm
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # mise
 
 eval "$(mise activate zsh)"
 
-# wsl
+# tmux
 
-export GDK_BACKEND="x11"
+if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
+  tmux attach-session -t default || tmux new-session -s default
+fi
