@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
- export ZSH="$HOME/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -73,6 +73,7 @@ ZSH_THEME="robbyrussell"
 plugins=(
   git git-escape-magic fzf gh gitignore kubectl
   minikube docker docker-compose pip python node nvm mise
+  tmux zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -155,15 +156,31 @@ eval "$(rye self completion -s zsh)"
 # nvm
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # mise
 
 eval "$(mise activate zsh)"
 
+# venv
+
+activate_venv_on_cd() {
+    local venv_dir=".venv"
+    if [[ -d "$PWD/$venv_dir" ]]; then
+        source "$PWD/$venv_dir/bin/activate"
+    fi
+}
+ 
+autoload -U add-zsh-hook
+add-zsh-hook chpwd activate_venv_on_cd
+
 # tmux
 
 if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
-  tmux attach-session -t default || tmux new-session -s default
+  tmux || tmux new-session -s default
 fi
+
+# yamlfix
+
+export YAMLFIX_EXPLICIT_START="false"
