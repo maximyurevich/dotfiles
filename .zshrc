@@ -73,7 +73,7 @@ ZSH_THEME="robbyrussell"
 plugins=(
   git git-escape-magic fzf gh gitignore kubectl
   minikube docker docker-compose pip python node nvm mise
-  tmux zsh-autosuggestions
+  tmux zsh-autosuggestions zsh-vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -175,12 +175,14 @@ activate_venv_on_cd() {
 autoload -U add-zsh-hook
 add-zsh-hook chpwd activate_venv_on_cd
 
-# tmux
-
-if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
-  tmux || tmux new-session -s default
-fi
-
 # yamlfix
 
 export YAMLFIX_EXPLICIT_START="false"
+
+# tmux 
+
+if [ -n "$PS1" ] && [ -z "$TMUX" ]; then
+  # Adapted from https://unix.stackexchange.com/a/176885/347104
+  # Create session 'main' or attach to 'main' if already exists.
+  tmux new-session -A -s main
+fi
